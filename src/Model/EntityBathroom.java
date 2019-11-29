@@ -1,5 +1,6 @@
 package Model;
 
+<<<<<<< Updated upstream
 public class EntityBathroom extends AbstractLocal{
 
     /* Attributes */
@@ -52,5 +53,8 @@ public class EntityBathroom extends AbstractLocal{
         this.nbWaterPoint = nbWaterPoint;
     }
 
+=======
+public class EntityBathroom extends AbstractLocal {
+>>>>>>> Stashed changes
 
 }
