@@ -2,24 +2,12 @@ package Model;
 
 public class EntityKitchen {
 
-    /* Attribute*/
+    /* Attributes*/
 
     /**
      * The number of gas point in the kitchen
      */
     private int nbGasPoint;
-
-<<<<<<< Updated upstream
-    /**
-     * Default Constructor
-     */
-    public EntityKitchen(){
-    }
-
-    /**
-     * A copy Constructor for Kitchen object
-=======
-    /* Constructor*/
 
     /**
      * The default constructor
@@ -28,7 +16,6 @@ public class EntityKitchen {
 
     /**
      * The copy constructor
->>>>>>> Stashed changes
      * @param nbGasPoint
      */
     public EntityKitchen(int nbGasPoint){
