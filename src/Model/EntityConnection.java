@@ -6,12 +6,12 @@ public class EntityConnection {
     /**
      * Premier local impliqué dans la liaison
      */
-    AbstractLocal LocalA;
+    AbstractEntityLocal LocalA;
 
     /**
      * Second local impliqué dans la liaison
      */
-    AbstractLocal LocalB;
+    AbstractEntityLocal LocalB;
 
     /**
      * Type de local du LocalA
@@ -30,7 +30,7 @@ public class EntityConnection {
      * @param typeLocalA
      * @param typeLocalB
      */
-    public EntityConnection(AbstractLocal localA, AbstractLocal localB, String typeLocalA, String typeLocalB) {
+    public EntityConnection(AbstractEntityLocal localA, AbstractEntityLocal localB, String typeLocalA, String typeLocalB) {
         LocalA = localA;
         LocalB = localB;
         this.typeLocalA = typeLocalA;
@@ -43,19 +43,19 @@ public class EntityConnection {
     public EntityConnection() {
     }
 
-    public AbstractLocal getLocalA() {
+    public AbstractEntityLocal getLocalA() {
         return LocalA;
     }
 
-    public void setLocalA(AbstractLocal localA) {
+    public void setLocalA(AbstractEntityLocal localA) {
         LocalA = localA;
     }
 
-    public AbstractLocal getLocalB() {
+    public AbstractEntityLocal getLocalB() {
         return LocalB;
     }
 
-    public void setLocalB(AbstractLocal localB) {
+    public void setLocalB(AbstractEntityLocal localB) {
         LocalB = localB;
     }
 

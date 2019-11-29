@@ -70,10 +70,12 @@ public abstract class DAO<T> {
 
     /*Getters & Setters*/
     public Connection getConn() {
+
         return conn;
     }
 
     public void setConn(Connection conn) {
+
         this.conn = conn;
     }
 

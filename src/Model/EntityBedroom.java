@@ -1,6 +1,6 @@
 package Model;
 
-public class EntityBedroom extends AbstractLocal{
+public class EntityBedroom extends AbstractEntityLocal {
 
     /*Attribute*/
 

@@ -1,7 +1,7 @@
 package Model;
 
 <<<<<<< Updated upstream
-public class EntityBathroom extends AbstractLocal{
+public class EntityBathroom extends AbstractEntityLocal {
 
     /* Attributes */
 
@@ -54,7 +54,7 @@ public class EntityBathroom extends AbstractLocal{
     }
 
 =======
-public class EntityBathroom extends AbstractLocal {
+public class EntityBathroom extends AbstractEntityLocal {
 >>>>>>> Stashed changes
 
 }

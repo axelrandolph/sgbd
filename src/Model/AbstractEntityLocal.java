@@ -1,6 +1,6 @@
 package Model;
 
-public class AbstractLocal {
+public abstract class AbstractEntityLocal {
 
     /*Attributes*/
 
@@ -32,7 +32,7 @@ public class AbstractLocal {
      * @param description
      * @param area
      */
-    public AbstractLocal(int idLocal, EntityAppartment appartment, String description, float area) {
+    public AbstractEntityLocal(int idLocal, EntityAppartment appartment, String description, float area) {
         this.idLocal = idLocal;
         this.appartment = appartment;
         this.description = description;
@@ -43,14 +43,14 @@ public class AbstractLocal {
      * A copy local Constructor
      * @param appartment
      */
-    public AbstractLocal(EntityAppartment appartment) {
+    public AbstractEntityLocal(EntityAppartment appartment) {
         this.appartment = appartment;
     }
 
     /**
      * Default Local Constructor
      */
-    public AbstractLocal() {
+    public AbstractEntityLocal() {
     }
 
     /* ---------------- Getters & Setters ---------------------*/
