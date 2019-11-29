@@ -2,14 +2,16 @@ package Model;
 
 public class EntityUser {
 
-    /**
-     * The id of User
-     */
-    private int idUser;
+
     /**
      * The userName of User
      */
     private String userName;
+
+    /**
+     * The userName of User
+     */
+    private int password;
     /**
      * The lastName of User
      */
@@ -30,16 +32,15 @@ public class EntityUser {
 
     /**
      * The Copy Constructor
-     * @param idUser : int
      * @param userName : String
      * @param lastName : String
      * @param firstName : String
      * @param functionUser : String
      */
-    public EntityUser(int idUser, String userName, String lastName, String firstName,String functionUser){
+    public EntityUser( String userName, int password,String lastName, String firstName,String functionUser){
 
-        this.idUser =idUser;
         this.userName = userName;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.functionUser = functionUser;
@@ -47,13 +48,6 @@ public class EntityUser {
     }
 
     /*Getters & Setters*/
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
 
     public String getUserName() {
         return userName;
@@ -87,10 +81,26 @@ public class EntityUser {
         this.functionUser = functionUser;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+
+    public String getFunctionUser() {
+        return functionUser;
+    }
+
+    public void setFunctionUser(String functionUser) {
+        this.functionUser = functionUser;
+    }
+
+
     @Override
     public String toString() {
-        return "EntityUser{" +
-                "idUser=" + idUser +
+        return "EntityUser{"+
                 ", userName='" + userName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
