@@ -1,5 +1,6 @@
 package Model;
 
 public class EntityAppartment {
-    unsigned int idAppartment;
+    int idAppartment;
+    String adress;
 }
