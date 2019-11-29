@@ -25,7 +25,7 @@ public abstract class DAO<T> {
         }
         try {
             String serverName = "localhost";
-            String mydatabase = "bdtpnote";
+            String mydatabase = "tpbdnote";
             String url = "jdbc:mysql://" + serverName + "/" + mydatabase+"?serverTimezone=UTC";
 
             String username = "root";

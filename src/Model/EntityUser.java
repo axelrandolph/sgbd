@@ -37,7 +37,7 @@ public class EntityUser {
      * @param firstName : String
      * @param functionUser : String
      */
-    public EntityUser( String userName, int password,String lastName, String firstName,String functionUser){
+    public EntityUser( String userName,String firstName, String lastName,String functionUser,int password){
 
         this.userName = userName;
         this.password = password;
