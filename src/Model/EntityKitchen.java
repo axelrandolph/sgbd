@@ -7,8 +7,16 @@ public class EntityKitchen {
      */
     private int nbGasPoint;
 
-    public EntityKitchen(){}
+    /**
+     * Default Constructor
+     */
+    public EntityKitchen(){
+    }
 
+    /**
+     * A copy Constructor for Kitchen object
+     * @param nbGasPoint
+     */
     public EntityKitchen(int nbGasPoint){
 
         this.nbGasPoint = nbGasPoint;

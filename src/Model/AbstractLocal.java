@@ -24,6 +24,7 @@ public class AbstractLocal {
      */
     protected float area;
 
+    /* ---------------- Constructors ---------------------*/
     /**
      * A copy Local Constructor
      * @param idLocal
@@ -51,6 +52,8 @@ public class AbstractLocal {
      */
     public AbstractLocal() {
     }
+
+    /* ---------------- Getters & Setters ---------------------*/
 
     public int getIdLocal() {
         return idLocal;

@@ -4,7 +4,7 @@ package Model;
 public class EntityAppartment {
 
 
-    /* Attribute*/
+    /* Attributes*/
 
     /**
      * The appartment id
@@ -44,6 +44,8 @@ public class EntityAppartment {
         this.description = description;
         this.state = state;
     }
+
+
     /* Getters & Setters*/
     public int getIdAppartment() {
         return idAppartment;

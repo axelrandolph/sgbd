@@ -2,11 +2,16 @@ package Model;
 
 public class EntityBathroom extends AbstractLocal{
 
+    /* Attributes */
+
     /**
      * Number of water point in the bathroom
      */
     private int nbWaterPoint;
 
+
+    /* Constructors*/
+    
     /**
      * A copy Bathroom Constructor
      * @param idLocal
