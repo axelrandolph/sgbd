@@ -16,7 +16,7 @@ public class UserDAO extends  DAO<EntityUser> {
                 + " firstName,"
                 + " lastName,"
                 + " fonction,"
-                + " password," + ") VALUES ("
+                + " password" + ") VALUES ("
                 + " ?, ?, ?, ?, ?)";
         try {
 
