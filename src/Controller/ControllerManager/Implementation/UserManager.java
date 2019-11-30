@@ -7,6 +7,7 @@ import Model.EntityUser;
 public class UserManager {
 
         private IUserDAO userDAO;
+        private EntityUser currentUser;
 
         public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password){
 
@@ -19,7 +20,8 @@ public class UserManager {
 
         public  void LogUser(String username, String password){
 
-                EntityUser user =  new EntityUser(username,password);
+               /* currentUser =  (select dans la base de données
+               (prepared statement) l'utilisateur correspondant à username et password*/
         }
 
 }
