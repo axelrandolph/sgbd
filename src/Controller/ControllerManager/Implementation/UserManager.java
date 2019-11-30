@@ -1,0 +1,23 @@
+package Controller.ControllerManager.Implementation;
+
+import Controller.ControllerDAO.Implementaion.UserDAO;
+import Controller.ControllerDAO.Interfaces.IUserDAO;
+import Model.EntityUser;
+
+public class UserManager {
+
+        private IUserDAO userDAO;
+
+        public EntityUser createUser(String username, String firstname,String lastname,String function, String password){
+
+                EntityUser user = new EntityUser(username,firstname,lastname,function,password);
+                userDAO.insert(user);
+
+                return user;
+        }
+
+        public  void loginUser(String username,String password){
+
+
+        }
+}

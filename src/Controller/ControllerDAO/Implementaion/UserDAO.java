@@ -1,12 +1,12 @@
-package Controller.ControllerDAO;
+package Controller.ControllerDAO.Implementaion;
 
+import Controller.ControllerDAO.Interfaces.IUserDAO;
 import Model.EntityUser;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class UserDAO extends  DAO<EntityUser> {
+public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
     @Override
     public boolean insert(EntityUser user) {
@@ -39,6 +39,21 @@ public class UserDAO extends  DAO<EntityUser> {
 
 
         return false;
+    }
+
+    @Override
+    public boolean delete(EntityUser obj) {
+        return false;
+    }
+
+    @Override
+    public boolean update(EntityUser obj) {
+        return false;
+    }
+
+    @Override
+    public EntityUser find(int id) {
+        return null;
     }
 
 
