@@ -24,6 +24,11 @@ public abstract class AbstractEntityLocal {
      */
     protected float area;
 
+    /**
+     *
+     */
+    protected String typeLocal;
+
     /* ---------------- Constructors ---------------------*/
     /**
      * A copy Local Constructor
