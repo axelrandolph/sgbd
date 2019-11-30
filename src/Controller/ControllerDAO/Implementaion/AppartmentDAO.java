@@ -33,20 +33,19 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM appartment WHERE idAppartment = " + id);
             if(result.first())
-                appartment = new EntityUser(
-                        result.getString("username"),
-                        result.getString("firstName"),
-                        result.getString("lastName"),
-                        result.getString("fonction"),
-                        result.getString("password")
+                appartment = new EntityAppartment(
+                        result.getInt("idAppartment"),
+                        result.getString("description"),
+                        result.getString("adress"),
+                        result.getBoolean("state")
 
                 );
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return appartment;
     }
 
 }
 
-}
+

@@ -82,16 +82,6 @@ public class EntityAppartment {
         this.state = state;
     }
 
-    public boolean appartmentState(boolean state){
-
-
-        if(state = true){
-           System.out.println("Appartment is ready");
-        }else if(state = false ){
-            System.out.println("Appartment is in construction");
-     }
-        return false;
-    }
     @Override
     public String toString() {
         return "EntityAppartment{" +
