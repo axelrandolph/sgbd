@@ -1,4 +1,6 @@
+import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Implementaion.UserDAO;
+import Model.EntityAppartment;
 import Model.EntityUser;
 
 public class Main {
@@ -19,7 +21,10 @@ public class Main {
 
 
        // us.insert(en);
-        us.update(en1);
+       // us.update(en1);
+
+        AppartmentDAO ap = new AppartmentDAO();
+        ap.find(1);
     }
 
 }

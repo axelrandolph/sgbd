@@ -9,11 +9,20 @@ public class EntityKitchen extends AbstractEntityLocal{
      */
     private int nbGasPoint;
 
-    /**
-     * A copy Constructor for Kitchen object
-=======
     /* Constructor*/
 
+    /**
+     * A copy Bathroom Constructor
+     * @param idLocal
+     * @param appartment
+     * @param description
+     * @param area
+     * @param nbGasPoint
+     */
+    public EntityKitchen(int idLocal, EntityAppartment appartment, String description, float area, int nbGasPoint,String typeLocal) {
+        super(idLocal, appartment, description, area,typeLocal);
+        this.nbGasPoint = nbGasPoint;
+    }
     /**
      * The default constructor
      */

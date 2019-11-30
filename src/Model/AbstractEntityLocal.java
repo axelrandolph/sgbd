@@ -25,7 +25,7 @@ public abstract class AbstractEntityLocal {
     protected float area;
 
     /**
-     *
+     * the local type
      */
     protected String typeLocal;
 
@@ -37,11 +37,12 @@ public abstract class AbstractEntityLocal {
      * @param description
      * @param area
      */
-    public AbstractEntityLocal(int idLocal, EntityAppartment appartment, String description, float area) {
+    public AbstractEntityLocal(int idLocal, EntityAppartment appartment, String description, float area,String typeLocal) {
         this.idLocal = idLocal;
         this.appartment = appartment;
         this.description = description;
         this.area = area;
+        this.typeLocal = typeLocal;
     }
 
     /**
@@ -90,6 +91,14 @@ public abstract class AbstractEntityLocal {
 
     public void setArea(float area) {
         this.area = area;
+    }
+
+    public String getTypeLocal() {
+        return typeLocal;
+    }
+
+    public void setTypeLocal(String typeLocal) {
+        this.typeLocal = typeLocal;
     }
 
     @Override

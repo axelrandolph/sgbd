@@ -37,8 +37,20 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     }
 
     @Override
-    public boolean delete(EntityAppartment obj) {
+    public boolean delete(int idAppartment) {
+
+        String query = "delete from appartment where idAppartment= ?";
+        try {
+            PreparedStatement preparedStmt = getConn().prepareStatement(query);
+            preparedStmt.setInt(1, idAppartment);
+            preparedStmt.execute();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
+
     }
 
     @Override

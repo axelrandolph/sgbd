@@ -5,12 +5,12 @@ import Model.EntityBedroom;
 
 public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
     @Override
-    public boolean insert(EntityBedroom obj) {
-        return false;
+    public EntityBedroom insert(EntityBedroom obj) {
+        return null;
     }
 
     @Override
-    public boolean delete(EntityBedroom obj) {
+    public boolean delete(int obj) {
         return false;
     }
 

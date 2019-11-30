@@ -5,7 +5,12 @@ import Model.EntityBathroom;
 
 public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     @Override
-    public boolean insert(EntityBathroom obj) {
+    public EntityBathroom insert(EntityBathroom obj) {
+        return null;
+    }
+
+    @Override
+    public boolean delete(int obj) {
         return false;
     }
 

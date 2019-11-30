@@ -6,11 +6,11 @@ import Model.EntityConnection;
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
     @Override
     public EntityConnection insert(EntityConnection obj) {
-        return obj;
+        return null;
     }
 
     @Override
-    public boolean delete(EntityConnection obj) {
+    public boolean delete(int obj) {
         return false;
     }
 

@@ -5,12 +5,12 @@ import Model.EntityKitchen;
 
 public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
     @Override
-    public boolean insert(EntityKitchen obj) {
-        return false;
+    public EntityKitchen insert(EntityKitchen obj) {
+        return null;
     }
 
     @Override
-    public boolean delete(EntityKitchen obj) {
+    public boolean delete(int obj) {
         return false;
     }
 

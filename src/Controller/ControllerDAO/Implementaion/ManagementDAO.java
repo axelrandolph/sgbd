@@ -5,12 +5,12 @@ import Model.EntityManagement;
 
 public class ManagementDAO extends DAO<EntityManagement> implements IManagementDAO {
     @Override
-    public boolean insert(EntityManagement obj) {
-        return false;
+    public EntityManagement insert(EntityManagement obj) {
+        return null;
     }
 
     @Override
-    public boolean delete(EntityManagement obj) {
+    public boolean delete(int obj) {
         return false;
     }
 
