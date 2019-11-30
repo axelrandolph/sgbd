@@ -110,7 +110,7 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
     }
 
     @Override
-    public EntityUser find(int id) {
+    public EntityUser getById(int id) {
 
 
          EntityUser user = new EntityUser();

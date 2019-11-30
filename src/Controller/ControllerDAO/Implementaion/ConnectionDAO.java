@@ -20,7 +20,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public EntityConnection find(int id) {
+    public EntityConnection getById(int id) {
         return null;
     }
 }

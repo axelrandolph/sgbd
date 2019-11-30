@@ -59,7 +59,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     }
 
     @Override
-    public EntityAppartment find(int id) {
+    public EntityAppartment getById(int id) {
 
         EntityAppartment appartment = new EntityAppartment();
 

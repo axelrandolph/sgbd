@@ -25,7 +25,7 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     }
 
     @Override
-    public EntityBathroom find(int id) {
+    public EntityBathroom getById(int id) {
         return null;
     }
 }

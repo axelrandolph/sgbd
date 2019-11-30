@@ -59,6 +59,9 @@ public abstract class AbstractEntityLocal {
     public AbstractEntityLocal() {
     }
 
+    public AbstractEntityLocal(EntityAppartment entityAppartment, String description, float area) {
+    }
+
     /* ---------------- Getters & Setters ---------------------*/
 
     public int getIdLocal() {

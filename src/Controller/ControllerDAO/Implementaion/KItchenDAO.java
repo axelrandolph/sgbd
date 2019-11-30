@@ -20,7 +20,7 @@ public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
     }
 
     @Override
-    public EntityKitchen find(int id) {
+    public EntityKitchen getById(int id) {
         return null;
     }
 }

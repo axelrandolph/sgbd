@@ -21,9 +21,17 @@ public class AppartmentManager implements IAppartmentManager {
         return entityAppartment;
     }
 
-    public void displayAppartment( int idAppartment){
+    @Override
+    public EntityAppartment getAppartmentById(int idAppartment) {
 
-        appartmentDAO.find(idAppartment);
+        appartmentDAO.getById(idAppartment);
+        return null;
+    }
+
+    @Override
+    public void DisplayAppartment(int idAppartment){
+
+        appartmentDAO.getById(idAppartment);
     }
 
 }

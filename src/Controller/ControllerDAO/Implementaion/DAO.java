@@ -64,7 +64,7 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param id
      * @return T
      */
-    public abstract T find(int id);
+    public abstract T getById(int id);
 
 
     /*Getters & Setters*/

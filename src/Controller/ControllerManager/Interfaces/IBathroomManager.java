@@ -1,9 +1,12 @@
 package Controller.ControllerManager.Interfaces;
 
+import Model.EntityAppartment;
 import Model.EntityBathroom;
+
+import java.sql.SQLException;
 
 public interface IBathroomManager {
 
-    public EntityBathroom CreateBathroom(int idAppartment, String description, float area, int nbwaterpoint);
+    public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException;
 
 }

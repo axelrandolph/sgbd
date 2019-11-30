@@ -20,7 +20,7 @@ public class ManagementDAO extends DAO<EntityManagement> implements IManagementD
     }
 
     @Override
-    public EntityManagement find(int id) {
+    public EntityManagement getById(int id) {
         return null;
     }
 }

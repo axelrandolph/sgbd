@@ -33,8 +33,13 @@ public class EntityKitchen extends AbstractEntityLocal{
      * @param nbGasPoint
      */
     public EntityKitchen(int nbGasPoint){
-
+        super();
         this.nbGasPoint = nbGasPoint;
+    }
+
+    public EntityKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) {
+        super(entityAppartment, description, area);
+
     }
 
 

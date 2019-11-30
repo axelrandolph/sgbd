@@ -27,11 +27,11 @@ public class EntityBathroom extends AbstractEntityLocal {
 
     /**
      *A copy Constructor
-     * @param appartment
+     * @param entityAppartment
      * @param nbWaterPoint
      */
-    public EntityBathroom(EntityAppartment appartment, int nbWaterPoint) {
-        super(appartment);
+    public EntityBathroom(EntityAppartment entityAppartment, int nbWaterPoint) {
+        super(entityAppartment);
         this.nbWaterPoint = nbWaterPoint;
     }
 
@@ -39,6 +39,11 @@ public class EntityBathroom extends AbstractEntityLocal {
      * Default Bathroom Constructor
      */
     public EntityBathroom() {
+    }
+
+    public EntityBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) {
+        super(entityAppartment, description, area);
+        this.nbWaterPoint = nbWaterPoint;
     }
 
     /*

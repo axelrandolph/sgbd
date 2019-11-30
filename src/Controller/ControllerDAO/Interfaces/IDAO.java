@@ -8,7 +8,7 @@ public interface IDAO<T> {
     public abstract T insert(T obj) throws SQLException;
     public abstract boolean delete(int obj);
     public abstract boolean update(T obj);
-    public abstract T find(int id);
+    public abstract T getById(int id);
     public Connection getConn();
     public void setConn(Connection conn);
 

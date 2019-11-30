@@ -1,17 +1,20 @@
 package Controller.ControllerManager.Interfaces;
 
+import Model.EntityAppartment;
 import Model.EntityKitchen;
+
+import java.sql.SQLException;
 
 public interface IKitchenManager {
 
     /**
-     * @param idAppartment
+     * @param entityAppartment
      * @param description
      * @param area
      * @param nbgaspoint
      * @return
      */
-    public EntityKitchen CreateKitchen(int idAppartment, String description, float area, int nbgaspoint);
+    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException;
 
 
 }

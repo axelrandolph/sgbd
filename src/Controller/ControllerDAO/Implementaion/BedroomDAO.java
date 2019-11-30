@@ -20,7 +20,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
     }
 
     @Override
-    public EntityBedroom find(int id) {
+    public EntityBedroom getById(int id) {
         return null;
     }
 }
