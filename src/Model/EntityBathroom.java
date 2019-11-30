@@ -20,8 +20,8 @@ public class EntityBathroom extends AbstractEntityLocal {
      * @param area
      * @param nbWaterPoint
      */
-    public EntityBathroom(int idLocal, EntityAppartment appartment, String description, float area, int nbWaterPoint) {
-        super(idLocal, appartment, description, area);
+    public EntityBathroom(int idLocal, EntityAppartment appartment, String description, float area, int nbWaterPoint,String typeLocal) {
+      super(idLocal, appartment, description, area,typeLocal);
         this.nbWaterPoint = nbWaterPoint;
     }
 

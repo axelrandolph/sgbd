@@ -24,6 +24,19 @@ public class EntityBedroom extends AbstractEntityLocal {
         this.typeBedroom = typeBedroom;
     }
 
+    /**
+     * A copy Bathroom Constructor
+     * @param idLocal
+     * @param appartment
+     * @param description
+     * @param area
+     * @param type
+     */
+    public EntityBedroom(int idLocal, EntityAppartment appartment, String description, float area, String type,String typeLocal) {
+        super(idLocal, appartment, description, area,typeLocal);
+        this.typeBedroom = type;
+    }
+
     /*Getters & Setters*/
     public String getTypeBedroom() {
         return typeBedroom;
