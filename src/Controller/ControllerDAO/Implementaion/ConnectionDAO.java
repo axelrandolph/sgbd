@@ -5,8 +5,8 @@ import Model.EntityConnection;
 
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
     @Override
-    public boolean insert(EntityConnection obj) {
-        return false;
+    public EntityConnection insert(EntityConnection obj) {
+        return obj;
     }
 
     @Override

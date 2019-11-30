@@ -18,7 +18,6 @@ public class AppartmentManager implements IAppartmentManager {
         EntityAppartment entityAppartment = new EntityAppartment(description,adresse, false);
         entityAppartment = appartmentDAO.insert(entityAppartment);
 
-
         return entityAppartment;
     }
 

@@ -1,6 +1,6 @@
 package Model;
 
-public class EntityKitchen {
+public class EntityKitchen extends AbstractEntityLocal{
 
     /* Attributes*/
 
