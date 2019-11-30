@@ -47,6 +47,10 @@ public class EntityUser {
 
     }
 
+    public EntityUser(String username, String password){
+        this.userName = username;
+        this.password = password;
+    }
     /*Getters & Setters*/
 
     public String getUserName() {

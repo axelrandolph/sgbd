@@ -8,14 +8,18 @@ public class Main {
         UserDAO us = new UserDAO();
 
         String userNam= "lol";
-        int password = 123;
+        String password = "123";
         String lastName = "toi";
         String firstName = "moi";
         String functionUser = "lio";
+        String firstName1 = "Divine";
+
         EntityUser en = new EntityUser(userNam,firstName,lastName,functionUser,password);
+        EntityUser en1 = new EntityUser(userNam,firstName1,lastName,functionUser,password);
 
 
-        us.insert(en);
+       // us.insert(en);
+        us.update(en1);
     }
 
 }

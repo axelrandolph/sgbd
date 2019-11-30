@@ -16,7 +16,10 @@ public class UserManager {
                 return user;
         }
 
+
         public  void LogUser(String username, String password){
 
+                EntityUser user =  new EntityUser(username,password);
         }
+
 }
