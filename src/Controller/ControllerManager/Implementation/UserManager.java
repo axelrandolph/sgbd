@@ -8,7 +8,7 @@ public class UserManager {
 
         private IUserDAO userDAO;
 
-        public EntityUser createUser(String username, String firstname,String lastname,String function, String password){
+        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password){
 
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
                 userDAO.insert(user);
@@ -16,8 +16,7 @@ public class UserManager {
                 return user;
         }
 
-        public  void loginUser(String username,String password){
-
+        public  void LogUser(String username, String password){
 
         }
 }
