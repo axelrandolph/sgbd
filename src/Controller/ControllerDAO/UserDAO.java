@@ -26,7 +26,7 @@ public class UserDAO extends  DAO<EntityUser> {
             preparedStmt.setString(2,user.getFirstName());
             preparedStmt.setString(3,user.getLastName());
             preparedStmt.setString(4,user.getFunction());
-            preparedStmt.setInt(5,user.getPassword());
+            preparedStmt.setString(5,user.getPassword());
 
             // execute the preparedstatement insert
             preparedStmt.executeUpdate();

@@ -5,10 +5,11 @@ import Model.EntityUser;
 
 public class UserManager {
 
-        public void createUser(EntityUser entityUser){
+        public void createUser(String username, String firstname,String lastname,String function, String password){
 
-                UserDAO user = new UserDAO();
-                user.insert(entityUser);
+                EntityUser user = new EntityUser(username,firstname,lastname,function,password);
+                UserDAO userDAO = new UserDAO();
+                userDAO.insert(user);
         }
 
         public  void loginUser(String username,String password){

@@ -9,9 +9,9 @@ public class EntityUser {
     private String userName;
 
     /**
-     * The userName of User
+     * The password of User
      */
-    private int password;
+    private String password;
     /**
      * The lastName of User
      */
@@ -37,7 +37,7 @@ public class EntityUser {
      * @param firstName : String
      * @param functionUser : String
      */
-    public EntityUser( String userName,String firstName, String lastName,String functionUser,int password){
+    public EntityUser( String userName,String firstName, String lastName,String functionUser,String password){
 
         this.userName = userName;
         this.password = password;
@@ -81,11 +81,11 @@ public class EntityUser {
         this.functionUser = functionUser;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
