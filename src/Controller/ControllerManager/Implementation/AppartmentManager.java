@@ -34,4 +34,9 @@ public class AppartmentManager implements IAppartmentManager {
         appartmentDAO.getById(idAppartment);
     }
 
+    public void deleteAppartment(int idAppartment){
+
+        appartmentDAO.delete(idAppartment);
+    }
+
 }

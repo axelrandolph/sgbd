@@ -7,6 +7,7 @@ import Controller.ControllerManager.Interfaces.IUserManager;
 import Model.AbstractEntityLocal;
 import Model.EntityUser;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserManager implements IUserManager{
@@ -16,7 +17,7 @@ public class UserManager implements IUserManager{
         private IAppartmentManager appartmentManager;
 
         @Override
-        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password){
+        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException {
 
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
                 userDAO.insert(user);
@@ -30,10 +31,21 @@ public class UserManager implements IUserManager{
         }
 
         @Override
+        public EntityUser UpdateAppartment(String username,String firstName, String lastName, String function, String password) {
+
+                EntityUser user = new EntityUser(username,firstName,lastName,function,password);
+                userDAO.update(user);
+
+                return user;
+        }
+
+        @Override
         public  void LogUser(String username, String password){
 
                /* currentUser =  (select dans la base de données
                (prepared statement) l'utilisateur correspondant à username et password*/
         }
+
+
 
 }
