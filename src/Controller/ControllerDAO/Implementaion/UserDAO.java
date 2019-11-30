@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
     @Override
-    public boolean insert(EntityUser user) {
+    public EntityUser insert(EntityUser user) {
 
         String query = "INSERT INTO user ("
                 + " username,"
@@ -39,11 +39,11 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
         }
 
 
-        return false;
+        return user;
     }
 
     @Override
-    public boolean delete(EntityUser obj) {
+    public boolean delete(int obj) {
         return false;
     }
 

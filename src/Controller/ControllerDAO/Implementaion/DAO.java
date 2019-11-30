@@ -50,7 +50,7 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract boolean delete(T obj);
+    public abstract boolean delete(int obj);
 
     /**
      * Update Method
