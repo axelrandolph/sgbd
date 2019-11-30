@@ -4,13 +4,36 @@ import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Model.EntityAppartment;
 import Model.EntityUser;
 
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentDAO {
+    public AppartmentDAO() {
+        super();
+    }
+
+    /**
+     * register an appartment object
+     * @param entityAppartment
+     * @return the appartment registred otherwise null
+     */
     @Override
-    public boolean insert(EntityAppartment obj) {
-        return false;
+    public EntityAppartment insert(EntityAppartment entityAppartment) throws SQLException {
+
+        String sql = "INSERT INTO appartment(description, adress, state) VALUES(?, ?, ?);";
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
+        pst.setString(1, entityAppartment.getDescription());
+        pst.setString(2, entityAppartment.getAdress());
+        pst.setBoolean(3, entityAppartment.getState());
+        pst.executeUpdate();
+        ResultSet resultSet = pst.getGeneratedKeys();
+        pst.close();
+
+        entityAppartment.setIdAppartment(resultSet.getInt(1));
+
+        return entityAppartment;
     }
 
     @Override

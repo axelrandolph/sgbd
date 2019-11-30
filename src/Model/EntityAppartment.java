@@ -47,6 +47,12 @@ public class EntityAppartment {
         this.state = state;
     }
 
+    public EntityAppartment(String description, String adress, boolean state) {
+        this.address = adress;
+        this.description = description;
+        this.state = state;
+    }
+
 
     /* Getters & Setters*/
     public int getIdAppartment() {
@@ -74,7 +80,7 @@ public class EntityAppartment {
         this.description = description;
     }
 
-    public boolean isState() {
+    public boolean getState() {
         return state;
     }
 

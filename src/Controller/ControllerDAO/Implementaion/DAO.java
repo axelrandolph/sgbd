@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public abstract class DAO<T> implements IDAO<T> {
 
-    private Connection conn;
+    protected Connection conn;
 
     /*Constructor*/
 
@@ -21,7 +21,6 @@ public abstract class DAO<T> implements IDAO<T> {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex1) {
-            System.out.println("Pilote non trouve!");
             System.exit(1);
         }
         try {
@@ -33,7 +32,6 @@ public abstract class DAO<T> implements IDAO<T> {
             String password = "";
             conn=DriverManager.getConnection(url,username,password);
         }catch (SQLException ex2) {
-            System.out.println("Erreur JDBC: "+ex2);
             System.exit(1);
         }
     }
@@ -45,7 +43,7 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract boolean insert(T obj);
+    public abstract T insert(T obj) throws SQLException;
 
     /**
      * Delete Method
