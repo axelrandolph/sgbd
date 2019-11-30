@@ -1,5 +1,6 @@
 package Controller.ControllerManager.Implementation;
 
+import Controller.ControllerDAO.Implementaion.BathroomDAO;
 import Controller.ControllerDAO.Interfaces.IBathroomDAO;
 import Controller.ControllerManager.Interfaces.IBathroomManager;
 import Model.EntityAppartment;
@@ -15,5 +16,12 @@ public class BathroomManager extends LocalManager implements IBathroomManager {
 
         EntityBathroom entityBathroom = new EntityBathroom(entityAppartment, description, area, nbwaterpoint);
         return bathroomDAO.insert(entityBathroom);
+    }
+
+    public void delete(int idAppartment, int idBathroom){
+
+        BathroomDAO  bathroomdao = new BathroomDAO();
+        bathroomdao.deleteBY(idAppartment,idBathroom);
+
     }
 }
