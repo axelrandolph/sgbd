@@ -51,21 +51,21 @@ public abstract class DAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract boolean delete(T obj);
+    //public abstract boolean delete(T obj);
 
     /**
      * Update Method
      * @param obj
      * @return boolean
      */
-    public abstract boolean update(T obj);
+   // public abstract boolean update(T obj);
 
     /**
      * Find Method
      * @param id
      * @return T
      */
-    public abstract T find(int id);
+    //public abstract T find(int id);
 
 
     /*Getters & Setters*/

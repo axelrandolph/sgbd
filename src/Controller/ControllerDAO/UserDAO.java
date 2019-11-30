@@ -42,18 +42,4 @@ public class UserDAO extends  DAO<EntityUser> {
     }
 
 
-    @Override
-    public boolean delete(EntityUser obj) {
-        return false;
-    }
-
-    @Override
-    public boolean update(EntityUser obj) {
-        return false;
-    }
-
-    @Override
-    public EntityUser find(int id) {
-        return null;
-    }
 }
