@@ -19,6 +19,12 @@ public class UserManager implements IUserManager{
         private IAppartmentManager appartmentManager;
         private IConnectionManager connectionManager;
 
+        public UserManager() {
+                userDAO = new UserDAO();
+                appartmentManager = new AppartmentManager();
+                connectionManager = new ConnectionManager();
+        }
+
         @Override
         public EntityUser getCurrentUser() {
                 return currentUser;
@@ -61,9 +67,14 @@ public class UserManager implements IUserManager{
         }
 
         @Override
+<<<<<<< HEAD
         public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) {
                 //return connectionManager.CreateLocalConnection( idLocalA,  idLocalB,  typeLocalA,  typeLocalB,  idAppartment);
                 return  null;
+=======
+        public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws SQLException {
+                return connectionManager.CreateLocalConnection( idLocalA,  idLocalB,  typeLocalA,  typeLocalB,  idAppartment);
+>>>>>>> master
         }
 
         @Override

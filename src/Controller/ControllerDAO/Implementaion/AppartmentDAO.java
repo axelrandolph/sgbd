@@ -31,7 +31,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         ResultSet resultSet = pst.getGeneratedKeys();
         pst.close();
 
-        entityAppartment.setIdAppartment(resultSet.getInt(1));
+        entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
 
         return entityAppartment;
     }
@@ -68,7 +68,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
         PreparedStatement pst = null;
         pst = conn.prepareStatement(sql);
-        pst.setInt(1, (int)id);
+        pst.setInt(1, (Integer) id);
         ResultSet result = pst.executeQuery();
         if(result.first())
             appartment = new EntityAppartment(

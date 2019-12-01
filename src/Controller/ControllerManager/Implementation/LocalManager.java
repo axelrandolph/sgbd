@@ -18,7 +18,7 @@ public class LocalManager implements ILocalManager {
 
         EntityAppartment entityAppartment = appartmentManager.getAppartmentById(idAppartment);
         if(typeLocal == "Bathroom"){
-            return bathroomManager.CreateBathroom(entityAppartment, description, area, (int)localCaracterisc);
+            return bathroomManager.CreateBathroom(entityAppartment, description, area, (Integer) localCaracterisc);
 
         }
         else if (typeLocal == "Bedroom"){
@@ -26,7 +26,7 @@ public class LocalManager implements ILocalManager {
 
         }
         else if (typeLocal == "Kitchen"){
-            return kitchenManager.CreateKitchen(entityAppartment, description, area, (int)localCaracterisc);
+            return kitchenManager.CreateKitchen(entityAppartment, description, area, (Integer) localCaracterisc);
         }
         return null;
     }
