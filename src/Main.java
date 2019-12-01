@@ -1,13 +1,14 @@
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Implementaion.UserDAO;
+import Controller.ControllerManager.Implementation.UserManager;
 import Model.EntityUser;
+
+import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        UserDAO us = new UserDAO();
-
+/*
         String userNam= "lol";
         String password = "123";
         String lastName = "toi";
@@ -17,13 +18,14 @@ public class Main {
 
         EntityUser en = new EntityUser(userNam,firstName,lastName,functionUser,password);
         EntityUser en1 = new EntityUser(userNam,firstName1,lastName,functionUser,password);
+       */
 
-
-       // us.insert(en);
-       // us.update(en1);
-
-        AppartmentDAO ap = new AppartmentDAO();
-       // ap.getByPrimaryKey(1);
+        UserManager userManager = new UserManager();
+        try {
+            userManager.CreateUser("axel","test","pasfacilelestests","testeur","bon cest bon");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

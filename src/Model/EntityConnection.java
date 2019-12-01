@@ -43,6 +43,9 @@ public class EntityConnection {
     public EntityConnection() {
     }
 
+
+    /*------------------------------------ Getters & Setters -------------------------------*/
+
     public AbstractEntityLocal getLocalA() {
         return LocalA;
     }
