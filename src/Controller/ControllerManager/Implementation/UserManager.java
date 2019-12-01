@@ -17,6 +17,16 @@ public class UserManager implements IUserManager{
         private IAppartmentManager appartmentManager;
 
         @Override
+        public EntityUser getCurrentUser() {
+                return currentUser;
+        }
+
+        @Override
+        public void setCurrentUser(EntityUser currentUser) {
+                this.currentUser = currentUser;
+        }
+
+        @Override
         public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException {
 
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
@@ -31,19 +41,27 @@ public class UserManager implements IUserManager{
         }
 
         @Override
-        public EntityUser UpdateAppartment(String username,String firstName, String lastName, String function, String password) {
+        public EntityUser UpdateUser(String username,String firstName, String lastName, String function, String password) {
 
-                EntityUser user = new EntityUser(username,firstName,lastName,function,password);
-                userDAO.update(user);
+                if (getCurrentUser() != null) {
+                        EntityUser user = new EntityUser(username, firstName, lastName, function, password);
+                        userDAO.update(user);
 
-                return user;
+                        return user;
+                }
+                return null;
         }
 
         @Override
-        public  void LogUser(String username, String password){
+        public void LogOut() {
+                currentUser = null;
+        }
 
-               /* currentUser =  (select dans la base de données
-               (prepared statement) l'utilisateur correspondant à username et password*/
+        @Override
+        public  void LogUser(String username, String password) throws SQLException {
+
+                EntityUser entityUser = userDAO.IdentifiedUser(username,password);
+                currentUser = entityUser;
         }
 
 

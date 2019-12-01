@@ -20,7 +20,7 @@ public class ManagementDAO extends DAO<EntityManagement> implements IManagementD
     }
 
     @Override
-    public EntityManagement getById(int id) {
+    public <L> EntityManagement getByPrimaryKey(L id) {
         return null;
     }
 }

@@ -22,19 +22,20 @@ public class AppartmentManager implements IAppartmentManager {
     }
 
     @Override
-    public EntityAppartment getAppartmentById(int idAppartment) {
+    public EntityAppartment getAppartmentById(int idAppartment) throws SQLException {
 
-        appartmentDAO.getById(idAppartment);
+        appartmentDAO.getByPrimaryKey(idAppartment);
         return null;
     }
 
     @Override
-    public void DisplayAppartment(int idAppartment){
+    public void DisplayAppartment(int idAppartment) throws SQLException {
 
-        appartmentDAO.getById(idAppartment);
+        appartmentDAO.getByPrimaryKey(idAppartment);
     }
 
-    public void deleteAppartment(int idAppartment){
+    @Override
+    public void DeleteAppartment(int idAppartment){
 
         appartmentDAO.delete(idAppartment);
     }

@@ -59,25 +59,26 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     }
 
     @Override
-    public EntityAppartment getById(int id) {
+    public <L> EntityAppartment getByPrimaryKey(L id) throws SQLException {
 
         EntityAppartment appartment = new EntityAppartment();
 
-        try {
-            ResultSet result = this.getConn().createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM appartment WHERE idAppartment = " + id);
-            if(result.first())
-                appartment = new EntityAppartment(
-                        result.getInt("idAppartment"),
-                        result.getString("description"),
-                        result.getString("adress"),
-                        result.getBoolean("state")
 
-                );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = "SELECT * FROM appartment WHERE idAppartment = ?;";
+
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, (int)id);
+        ResultSet result = pst.executeQuery();
+        if(result.first())
+            appartment = new EntityAppartment(
+                    result.getInt("idAppartment"),
+                    result.getString("description"),
+                    result.getString("adress"),
+                    result.getBoolean("state")
+
+            );
+
         return appartment;
     }
 

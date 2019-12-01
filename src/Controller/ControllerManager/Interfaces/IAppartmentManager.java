@@ -22,7 +22,7 @@ public interface IAppartmentManager {
      *
      * @param idAppartment
      */
-    public void DisplayAppartment(int idAppartment);
+    public void DisplayAppartment(int idAppartment) throws SQLException;
 
         /*----------------------- Getters & Setters ---------------------- */
 
@@ -31,5 +31,7 @@ public interface IAppartmentManager {
      * @param idAppartment
      * @return
      */
-    public EntityAppartment getAppartmentById(int idAppartment);
+    public EntityAppartment getAppartmentById(int idAppartment) throws SQLException;
+
+    void DeleteAppartment(int idAppartment);
 }

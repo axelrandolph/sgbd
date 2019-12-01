@@ -59,12 +59,6 @@ public abstract class DAO<T> implements IDAO<T> {
      */
     public abstract boolean update(T obj);
 
-    /**
-     * Find Method
-     * @param id
-     * @return T
-     */
-    public abstract T getById(int id);
 
 
     /*Getters & Setters*/

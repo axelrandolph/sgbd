@@ -79,6 +79,7 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
     }
 
+
     private boolean validateUsername(String username) {
         return username.length() > 3;
     }
@@ -110,30 +111,41 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
     }
 
     @Override
-    public EntityUser getById(int id) {
-
+    public <L> EntityUser getByPrimaryKey(L username) throws SQLException {
 
          EntityUser user = new EntityUser();
+         String sql = "SELECT * FROM user WHERE username = ?;";
 
-        try {
-            ResultSet result = this.getConn().createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Associe WHERE idAssocie = " + id);
-            if(result.first())
-                user = new EntityUser(
-                        result.getString("username"),
-                        result.getString("firstName"),
-                        result.getString("lastName"),
-                        result.getString("fonction"),
-                        result.getString("password")
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, (String)username);
+        ResultSet result = pst.executeQuery();
+         if(result.first())
+            user = new EntityUser(
+                    result.getString("username"),
+                    result.getString("firstName"),
+                    result.getString("lastName"),
+                    result.getString("fonction"),
+                    result.getString("password")
 
-                        );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                    );
+
         return user;
     }
 
+    @Override
+    public EntityUser IdentifiedUser(String username, String password) throws SQLException {
+
+        String sql = "SELECT * FROM user WHERE username = ? AND password = ?;";
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
+        pst.setString(1, username);
+        pst.setString(2, password);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next())
+            return getByPrimaryKey(rs.getString("username"));
+        return null;
+    }
 }
 
 
