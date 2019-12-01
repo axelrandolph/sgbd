@@ -1,6 +1,8 @@
 package Controller.ControllerManager.Implementation;
 
+import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
+import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Model.AbstractEntityLocal;
 import Model.EntityAppartment;
@@ -12,6 +14,12 @@ public class AppartmentManager implements IAppartmentManager {
 
     private IAppartmentDAO appartmentDAO;
 
+    public AppartmentManager() throws UserException {
+        if(UserManager.getCurrentUser() != null)
+            this.appartmentDAO = new AppartmentDAO();
+        else throw new UserException();
+    }
+
     @Override
     public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException {
 
@@ -21,7 +29,6 @@ public class AppartmentManager implements IAppartmentManager {
         return entityAppartment;
     }
 
-    @Override
     public EntityAppartment getAppartmentById(int idAppartment) throws SQLException {
 
         appartmentDAO.getByPrimaryKey(idAppartment);

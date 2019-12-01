@@ -12,6 +12,7 @@ public class Main {
 
         UserManager userManager = new UserManager();
         try {
+            // Test user Manager
             userManager.CreateUser("leslie","test","pasfacilelestests","testeur","bon cest bon");
             userManager.CreateUser("axel","test","pasfacilelestests","testeur","bon cest bon");
             userManager.LogUser("axel","bon cest bon");

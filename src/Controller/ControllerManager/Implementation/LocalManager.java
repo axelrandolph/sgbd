@@ -1,5 +1,8 @@
 package Controller.ControllerManager.Implementation;
 
+import Controller.ControllerDAO.Implementaion.AppartmentDAO;
+import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
+import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.*;
 import Model.AbstractEntityLocal;
 import Model.EntityAppartment;
@@ -11,12 +14,22 @@ public class LocalManager implements ILocalManager {
     private IKitchenManager kitchenManager;
     private IBathroomManager bathroomManager;
     private IBedroomManager bedroomManager;
-    private IAppartmentManager appartmentManager;
+    private IAppartmentDAO appartmentDAO;
+
+    public LocalManager() throws UserException {
+        if (UserManager.getCurrentUser() != null){
+            this.appartmentDAO = new AppartmentDAO();
+            this.bathroomManager = new BathroomManager();
+            this.bedroomManager = new BedroomManager();
+            this.kitchenManager = new KitchenManager();
+        }
+        else throw new UserException();
+    }
 
     @Override
     public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws SQLException {
 
-        EntityAppartment entityAppartment = appartmentManager.getAppartmentById(idAppartment);
+        EntityAppartment entityAppartment = appartmentDAO.getByPrimaryKey(idAppartment);
         if(typeLocal == "Bathroom"){
             return bathroomManager.CreateBathroom(entityAppartment, description, area, (Integer) localCaracterisc);
 

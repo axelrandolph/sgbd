@@ -1,6 +1,8 @@
 package Controller.ControllerManager.Implementation;
 
+import Controller.ControllerDAO.Implementaion.ConnectionDAO;
 import Controller.ControllerDAO.Interfaces.IConnectionDAO;
+import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;
@@ -10,6 +12,13 @@ import java.sql.SQLException;
 public class ConnectionManager implements IConnectionManager {
 
     private IConnectionDAO connectionDAO;
+
+    public ConnectionManager() throws UserException {
+        if (UserManager.getCurrentUser() != null){
+            this.connectionDAO = new ConnectionDAO();
+        }
+        else throw new UserException();
+    }
 
     @Override
     public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws SQLException {

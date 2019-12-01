@@ -14,25 +14,19 @@ import java.util.ArrayList;
 
 public class UserManager implements IUserManager{
 
+        private static EntityUser currentUser;
         private IUserDAO userDAO;
-        private EntityUser currentUser;
-        private IAppartmentManager appartmentManager;
-        private IConnectionManager connectionManager;
 
         public UserManager() {
-                userDAO = new UserDAO();
-                appartmentManager = new AppartmentManager();
-                connectionManager = new ConnectionManager();
+                this.userDAO = new UserDAO();
         }
 
-        @Override
-        public EntityUser getCurrentUser() {
+        public static EntityUser getCurrentUser() {
                 return currentUser;
         }
 
-        @Override
         public void setCurrentUser(EntityUser currentUser) {
-                this.currentUser = currentUser;
+                UserManager.currentUser = currentUser;
         }
 
         @Override
