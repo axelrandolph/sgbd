@@ -7,7 +7,7 @@ import Model.EntityBedroom;
 
 import java.sql.SQLException;
 
-public class BedroomManager extends LocalManager implements IBedroomManager {
+public class BedroomManager implements IBedroomManager {
 
     private IBedroomDAO bedroomDAO;
 
@@ -16,5 +16,10 @@ public class BedroomManager extends LocalManager implements IBedroomManager {
 
         EntityBedroom entityBedroom = new EntityBedroom(entityAppartment, description, area, typeBedroom);
         return bedroomDAO.insert(entityBedroom);
+    }
+
+    @Override
+    public void DeleteBedroom(int idAppartment, int idLocal) {
+
     }
 }

@@ -1,6 +1,5 @@
 package Controller.ControllerManager.Implementation;
 
-import Controller.ControllerDAO.Implementaion.BathroomDAO;
 import Controller.ControllerDAO.Interfaces.IBathroomDAO;
 import Controller.ControllerManager.Interfaces.IBathroomManager;
 import Model.EntityAppartment;
@@ -8,9 +7,10 @@ import Model.EntityBathroom;
 
 import java.sql.SQLException;
 
-public class BathroomManager extends LocalManager implements IBathroomManager {
+public class BathroomManager implements IBathroomManager {
 
     private IBathroomDAO bathroomDAO;
+
     @Override
     public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException {
 
@@ -18,10 +18,10 @@ public class BathroomManager extends LocalManager implements IBathroomManager {
         return bathroomDAO.insert(entityBathroom);
     }
 
-    public void delete(int idAppartment, int idBathroom){
+    @Override
+    public void DeleteBathroom(int idAppartment, int idBathroom){
 
-        BathroomDAO  bathroomdao = new BathroomDAO();
-        bathroomdao.deleteBY(idAppartment,idBathroom);
+        bathroomDAO.deleteById(idAppartment,idBathroom);
 
     }
 }

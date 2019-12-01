@@ -37,8 +37,8 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
         return false;
     }
 
-
-    public boolean deleteBY(int idAppartment, int idBathroom) {
+    @Override
+    public boolean deleteById(int idAppartment, int idBathroom) {
         String query = "delete from appartment where idAppartment= ? AND idBathroom = ?";
         try {
             PreparedStatement preparedStmt = getConn().prepareStatement(query);

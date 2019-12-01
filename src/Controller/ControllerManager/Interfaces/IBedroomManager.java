@@ -10,4 +10,5 @@ public interface IBedroomManager {
 
     public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException;
 
+    void DeleteBedroom(int idAppartment, int idLocal);
 }

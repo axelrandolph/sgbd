@@ -7,4 +7,7 @@ import java.sql.SQLException;
 public interface ILocalManager {
 
     public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws SQLException;
+
+    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal);
+
 }

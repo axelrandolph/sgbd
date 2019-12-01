@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public interface IBathroomManager {
 
     public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException;
-        public void delete(int idAppartment, int idBathroom);
 
-    }
+    public void DeleteBathroom(int idAppartment, int idBathroom);
+
+}

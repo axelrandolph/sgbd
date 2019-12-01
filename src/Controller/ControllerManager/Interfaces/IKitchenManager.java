@@ -17,4 +17,5 @@ public interface IKitchenManager {
     public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException;
 
 
+    void DeleteKitchen(int idAppartment, int idLocal);
 }

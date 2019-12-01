@@ -11,7 +11,7 @@ public class LocalManager implements ILocalManager {
     private IKitchenManager kitchenManager;
     private IBathroomManager bathroomManager;
     private IBedroomManager bedroomManager;
-    protected IAppartmentManager appartmentManager;
+    private IAppartmentManager appartmentManager;
 
     @Override
     public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws SQLException {
@@ -29,5 +29,21 @@ public class LocalManager implements ILocalManager {
             return kitchenManager.CreateKitchen(entityAppartment, description, area, (int)localCaracterisc);
         }
         return null;
+    }
+
+    @Override
+    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal) {
+
+        if(typeLocal == "Bathroom"){
+            bathroomManager.DeleteBathroom(idAppartment, idLocal);
+
+        }
+        else if (typeLocal == "Bedroom"){
+            bedroomManager.DeleteBedroom(idAppartment, idLocal);
+
+        }
+        else if (typeLocal == "Kitchen"){
+            kitchenManager.DeleteKitchen(idAppartment, idLocal);
+        }
     }
 }

@@ -7,7 +7,7 @@ import Model.EntityKitchen;
 
 import java.sql.SQLException;
 
-public class KitchenManager extends LocalManager implements IKitchenManager {
+public class KitchenManager implements IKitchenManager {
 
     private IKitchenDAO kitchenDAO;
 
@@ -16,5 +16,10 @@ public class KitchenManager extends LocalManager implements IKitchenManager {
 
         EntityKitchen entityKitchen = new EntityKitchen(entityAppartment, description, area, nbgaspoint);
        return kitchenDAO.insert(entityKitchen);
+    }
+
+    @Override
+    public void DeleteKitchen(int idAppartment, int idLocal) {
+
     }
 }
