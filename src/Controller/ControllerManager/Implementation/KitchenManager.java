@@ -31,4 +31,9 @@ public class KitchenManager implements IKitchenManager {
     public void DeleteKitchen(int idAppartment, int idLocal) {
 
     }
+
+    @Override
+    public void AppartmentViewByCaracteristics(int nbKitchen, int nbGasPointByKitchen, String appartmentView) throws SQLException {
+        kitchenDAO.AppartmentViewByCaracteristics(nbKitchen,nbGasPointByKitchen, appartmentView);
+    }
 }

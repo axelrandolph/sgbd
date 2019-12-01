@@ -4,6 +4,7 @@ import Model.EntityAppartment;
 import Model.EntityKitchen;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface IKitchenManager {
 
@@ -18,4 +19,6 @@ public interface IKitchenManager {
 
 
     void DeleteKitchen(int idAppartment, int idLocal);
+
+    public void AppartmentViewByCaracteristics(int nbKitchen, int nbGasPointByKitchen, String appartmentView) throws SQLException;
 }

@@ -17,12 +17,12 @@ public interface IAppartmentManager {
      */
     public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
 
-    /**
-     *
-     * @param idAppartment
-     */
-    public void DisplayAppartment(int idAppartment) throws SQLException;
-
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom,
+                                                                        int nbBedroom,
+                                                                        int nbKitchen,
+                                                                        int nbWaterPointByBathroom,
+                                                                        int nbGasPointByKitchen,
+                                                                        String bedroomType) throws SQLException;
 
     void DeleteAppartment(int idAppartment);
 }

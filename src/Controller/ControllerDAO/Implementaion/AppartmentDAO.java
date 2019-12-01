@@ -7,6 +7,7 @@ import Model.EntityUser;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentDAO {
     public AppartmentDAO() {
@@ -82,6 +83,45 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         return appartment;
     }
 
+    @Override
+    public void CreateOrReplaceAppartmentView(String appartmentView) throws SQLException {
+
+        String sql = "CREATE OR REPLACE VIEW ? " +
+                "AS SELECT * " +
+                "FROM appartment " +
+                "FULL JOIN bathroom ON appartment.idAppartment = bathroom.idAppartment" +
+                "FULL JOIN bedroom on appartment.idAppartment = bedroom.idAppartment" +
+                "FULL JOIN kitchen on appartment.idAppartment = kitchen.idAppartment;";
+
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, appartmentView);
+        pst.execute();
+    }
+
+    @Override
+    public ArrayList<EntityAppartment> DisplayAppartmentView(String appartmentView) throws SQLException {
+
+        ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
+
+        String sql = "SELECT appartment.idAppartment, appartment.description, appartment.adress, appartment.state" +
+                "FROM ?";
+
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, appartmentView);
+        ResultSet resultSet = pst.executeQuery();
+        while(resultSet.next()){
+            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("appartment.idAppartement"),
+                    resultSet.getString("appartment.description"),
+                    resultSet.getString("appartment.adress"),
+                    resultSet.getBoolean("appartment.state"));
+
+            entityAppartments.add(entityAppartment);
+        }
+
+        return entityAppartments;
+    }
 }
 
 
