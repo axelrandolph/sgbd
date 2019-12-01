@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerManager.Implementation.UserManager">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Connexion">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="408.0" prefWidth="647.0">
+                     <children>
+                        <TextField fx:id="usernameField" layoutX="78.0" layoutY="29.0" prefHeight="25.0" prefWidth="131.0" />
+                        <PasswordField fx:id="passwordField" layoutX="300.0" layoutY="29.0" prefHeight="25.0" prefWidth="131.0" />
+                        <Label fx:id="usernameLabel" layoutX="14.0" layoutY="33.0" text="Username" />
+                        <Label fx:id="passwordLabel" layoutX="237.0" layoutY="33.0" text="Password" />
+                        <Button fx:id="LogInButton" layoutX="466.0" layoutY="29.0" mnemonicParsing="false" text="LogIn" />
+                        <Label layoutX="27.0" layoutY="91.0" text="Lob In :" />
+                        <Label fx:id="usernameLabel_1" layoutX="33.0" layoutY="131.0" text="Username : " />
+                        <TextField fx:id="usernameField_1" layoutX="126.0" layoutY="127.0" />
+                        <Label fx:id="firstNameLabel" layoutX="33.0" layoutY="169.0" text="Firstname : " />
+                        <TextField fx:id="firstNameField" layoutX="126.0" layoutY="165.0" />
+                        <Label fx:id="lastNameLabel" layoutX="34.0" layoutY="215.0" text="Lastname : " />
+                        <TextField fx:id="lastNameField" layoutX="126.0" layoutY="211.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableAppartement" layoutX="29.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="idAppartment" prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

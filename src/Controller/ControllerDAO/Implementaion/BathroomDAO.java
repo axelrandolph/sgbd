@@ -17,7 +17,8 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
             pst = getConn().prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
             pst.setString(1, entityBathroom.getDescription());
             pst.setFloat(2, entityBathroom.getArea());
-            pst.setInt(3, entityBathroom.getNbWaterPoint());
+          //  pst.setInt(3, entityBathroom.getIdAppartment()); /* appartment ou non idAppartment*/
+
 
             pst.executeUpdate();
             ResultSet resultSet = pst.getGeneratedKeys();

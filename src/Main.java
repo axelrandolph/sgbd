@@ -23,7 +23,7 @@ public class Main {
        // us.update(en1);
 
         AppartmentDAO ap = new AppartmentDAO();
-        ap.getByPrimaryKey(1);
+       // ap.getByPrimaryKey(1);
     }
 
 }
