@@ -3,8 +3,10 @@ package Controller.ControllerManager.Implementation;
 import Controller.ControllerDAO.Implementaion.UserDAO;
 import Controller.ControllerDAO.Interfaces.IUserDAO;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
+import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Controller.ControllerManager.Interfaces.IUserManager;
 import Model.AbstractEntityLocal;
+import Model.EntityConnection;
 import Model.EntityUser;
 
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ public class UserManager implements IUserManager{
         private IUserDAO userDAO;
         private EntityUser currentUser;
         private IAppartmentManager appartmentManager;
+        private IConnectionManager connectionManager;
 
         @Override
         public EntityUser getCurrentUser() {
@@ -55,6 +58,11 @@ public class UserManager implements IUserManager{
         @Override
         public void LogOut() {
                 currentUser = null;
+        }
+
+        @Override
+        public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) {
+                return connectionManager.CreateLocalConnection( idLocalA,  idLocalB,  typeLocalA,  typeLocalB,  idAppartment);
         }
 
         @Override

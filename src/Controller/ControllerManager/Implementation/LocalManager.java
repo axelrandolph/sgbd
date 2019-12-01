@@ -46,4 +46,5 @@ public class LocalManager implements ILocalManager {
             kitchenManager.DeleteKitchen(idAppartment, idLocal);
         }
     }
+
 }
