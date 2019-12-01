@@ -62,7 +62,8 @@ public class UserManager implements IUserManager{
 
         @Override
         public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) {
-                return connectionManager.CreateLocalConnection( idLocalA,  idLocalB,  typeLocalA,  typeLocalB,  idAppartment);
+                //return connectionManager.CreateLocalConnection( idLocalA,  idLocalB,  typeLocalA,  typeLocalB,  idAppartment);
+                return  null;
         }
 
         @Override

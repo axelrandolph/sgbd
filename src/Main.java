@@ -19,11 +19,9 @@ public class Main {
         EntityUser en1 = new EntityUser(userNam,firstName1,lastName,functionUser,password);
 
 
-       // us.insert(en);
+       //us.insert(en);
        // us.update(en1);
 
-        AppartmentDAO ap = new AppartmentDAO();
-       // ap.getByPrimaryKey(1);
     }
 
 }
