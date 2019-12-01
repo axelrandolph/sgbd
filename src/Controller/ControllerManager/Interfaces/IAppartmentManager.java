@@ -12,11 +12,10 @@ public interface IAppartmentManager {
      *
      * @param description
      * @param adresse
-     * @param listLocals
      * @return
      * @throws SQLException
      */
-    public EntityAppartment CreateAppartment(String description, String adresse, ArrayList<AbstractEntityLocal> listLocals) throws SQLException;
+    public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
 
     /**
      *

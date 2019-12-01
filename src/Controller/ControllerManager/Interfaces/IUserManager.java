@@ -15,9 +15,7 @@ public interface IUserManager {
 
     public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException;
     public  void LogUser(String username,String password) throws SQLException;
-    public void CreateAppartment(String description, String adresse, ArrayList<AbstractEntityLocal> listLocals);
     public EntityUser UpdateUser(String username, String firstName, String lastName, String function, String password);
     public void LogOut();
-    public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws SQLException;
 
 }

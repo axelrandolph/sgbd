@@ -23,6 +23,7 @@ public class Main {
         UserManager userManager = new UserManager();
         try {
             userManager.CreateUser("axel","test","pasfacilelestests","testeur","bon cest bon");
+            userManager.LogUser("axel","bon cest bon");
         } catch (SQLException e) {
             e.printStackTrace();
         }

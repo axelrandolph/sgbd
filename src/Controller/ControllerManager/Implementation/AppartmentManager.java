@@ -13,7 +13,7 @@ public class AppartmentManager implements IAppartmentManager {
     private IAppartmentDAO appartmentDAO;
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse, ArrayList<AbstractEntityLocal> listLocals) throws SQLException {
+    public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException {
 
         EntityAppartment entityAppartment = new EntityAppartment(description,adresse, false);
         entityAppartment = appartmentDAO.insert(entityAppartment);
