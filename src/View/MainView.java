@@ -36,7 +36,7 @@ public class MainView extends  JFrame implements ActionListener{
 
         add(panel1);
         setTitle("Manage Appartment");
-        setSize(500,500);
+        setSize(600,500);
 
         SIGNINButton = new JButton();
         SIGNINButton.addActionListener(this);
