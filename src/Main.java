@@ -19,15 +19,12 @@ public class Main {
             userManager.LogUser("axel","bon cest bon");
         } catch (SQLException e) {
             e.printStackTrace();
-<<<<<<< Updated upstream
-        }
-=======
+<
         }*/
 
         MainView mainView = new MainView();
         mainView.setVisible(true);
 
->>>>>>> Stashed changes
     }
 
 }
