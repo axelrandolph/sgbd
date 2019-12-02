@@ -8,6 +8,7 @@ import Controller.ControllerManager.Interfaces.IUserManager;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;
 import Model.EntityUser;
+import View.MainView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class UserManager implements IUserManager{
 
         private static EntityUser currentUser;
         private IUserDAO userDAO;
+        private MainView mainView;
 
         public UserManager() {
                 this.userDAO = new UserDAO();
