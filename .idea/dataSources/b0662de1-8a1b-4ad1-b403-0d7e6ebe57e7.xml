@@ -948,310 +948,314 @@
     <table id="241" parent="11" name="user">
       <Engine>InnoDB</Engine>
     </table>
-    <column id="242" parent="234" name="idAppartment">
+    <view id="242" parent="11" name="appartmentview">
+      <SourceTextLength>1097</SourceTextLength>
+      <Definer>root@localhost</Definer>
+    </view>
+    <column id="243" parent="234" name="idAppartment">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="243" parent="234" name="description">
+    <column id="244" parent="234" name="descriptionAppartment">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="234" name="adress">
+    <column id="245" parent="234" name="adress">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="234" name="state">
+    <column id="246" parent="234" name="state">
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="246" parent="234" name="PRIMARY">
+    <key id="247" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idAppartment</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="247" parent="235" name="idBathroom">
+    <column id="248" parent="235" name="idBathroom">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="235" name="description">
+    <column id="249" parent="235" name="description">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="235" name="area">
+    <column id="250" parent="235" name="area">
       <Position>3</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="235" name="nbWaterPoint">
+    <column id="251" parent="235" name="nbWaterPoint">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="235" name="idAppartment">
+    <column id="252" parent="235" name="idAppartment">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="252" parent="235" name="Bathroom_Appartment_FK">
+    <index id="253" parent="235" name="Bathroom_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="253" parent="235" name="PRIMARY">
+    <key id="254" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idBathroom</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="254" parent="235" name="Bathroom_Appartment_FK">
+    <foreign-key id="255" parent="235" name="Bathroom_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <RefTableName>appartment</RefTableName>
       <RefColNames>idAppartment</RefColNames>
     </foreign-key>
-    <column id="255" parent="236" name="idBedroom">
+    <column id="256" parent="236" name="idBedroom">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="236" name="description">
+    <column id="257" parent="236" name="description">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="236" name="area">
+    <column id="258" parent="236" name="area">
       <Position>3</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="236" name="bedroomType">
+    <column id="259" parent="236" name="bedroomType">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="236" name="idAppartment">
+    <column id="260" parent="236" name="idAppartment">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="260" parent="236" name="Bedroom_Appartment_FK">
+    <index id="261" parent="236" name="Bedroom_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="261" parent="236" name="PRIMARY">
+    <key id="262" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idBedroom</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="262" parent="236" name="Bedroom_Appartment_FK">
+    <foreign-key id="263" parent="236" name="Bedroom_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <RefTableName>appartment</RefTableName>
       <RefColNames>idAppartment</RefColNames>
     </foreign-key>
-    <column id="263" parent="237" name="idConnectedLocal">
+    <column id="264" parent="237" name="idConnectedLocal">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="237" name="LocalType">
+    <column id="265" parent="237" name="LocalType">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="237" name="idAppartment">
+    <column id="266" parent="237" name="idAppartment">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="266" parent="237" name="ConnectedLocal_Appartment_FK">
+    <index id="267" parent="237" name="ConnectedLocal_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="267" parent="237" name="PRIMARY">
+    <key id="268" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idConnectedLocal
 LocalType</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="268" parent="237" name="ConnectedLocal_Appartment_FK">
+    <foreign-key id="269" parent="237" name="ConnectedLocal_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <RefTableName>appartment</RefTableName>
       <RefColNames>idAppartment</RefColNames>
     </foreign-key>
-    <column id="269" parent="238" name="idConnection">
+    <column id="270" parent="238" name="idConnection">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="238" name="idConnectedLocal">
+    <column id="271" parent="238" name="idConnectedLocal">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="238" name="LocalType">
+    <column id="272" parent="238" name="LocalType">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="238" name="idConnectedLocal_2">
+    <column id="273" parent="238" name="idConnectedLocal_2">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="238" name="LocalType_2">
+    <column id="274" parent="238" name="LocalType_2">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="274" parent="238" name="Connection_ConnectedLocal_FK">
+    <index id="275" parent="238" name="Connection_ConnectedLocal_FK">
       <ColNames>idConnectedLocal
 LocalType
 idConnectedLocal_2
 LocalType_2</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="275" parent="238" name="PRIMARY">
+    <key id="276" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idConnection</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="276" parent="239" name="idKitchen">
+    <column id="277" parent="239" name="idKitchen">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="239" name="area">
+    <column id="278" parent="239" name="area">
       <Position>2</Position>
       <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="239" name="description">
+    <column id="279" parent="239" name="description">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="239" name="nbGasPoint">
+    <column id="280" parent="239" name="nbGasPoint">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="239" name="idAppartment">
+    <column id="281" parent="239" name="idAppartment">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="281" parent="239" name="Kitchen_Appartment_FK">
+    <index id="282" parent="239" name="Kitchen_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="282" parent="239" name="PRIMARY">
+    <key id="283" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idKitchen</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="283" parent="239" name="Kitchen_Appartment_FK">
+    <foreign-key id="284" parent="239" name="Kitchen_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <RefTableName>appartment</RefTableName>
       <RefColNames>idAppartment</RefColNames>
     </foreign-key>
-    <column id="284" parent="240" name="idAppartment">
+    <column id="285" parent="240" name="idAppartment">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="240" name="username">
+    <column id="286" parent="240" name="username">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="286" parent="240" name="Management_User0_FK">
+    <index id="287" parent="240" name="Management_User0_FK">
       <ColNames>username</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="287" parent="240" name="PRIMARY">
+    <key id="288" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idAppartment
 username</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="288" parent="240" name="Management_Appartment_FK">
+    <foreign-key id="289" parent="240" name="Management_Appartment_FK">
       <ColNames>idAppartment</ColNames>
       <RefTableName>appartment</RefTableName>
       <RefColNames>idAppartment</RefColNames>
     </foreign-key>
-    <foreign-key id="289" parent="240" name="Management_User0_FK">
+    <foreign-key id="290" parent="240" name="Management_User0_FK">
       <ColNames>username</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>username</RefColNames>
     </foreign-key>
-    <column id="290" parent="241" name="username">
+    <column id="291" parent="241" name="username">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="241" name="firstName">
+    <column id="292" parent="241" name="firstName">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="241" name="lastName">
+    <column id="293" parent="241" name="lastName">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="241" name="fonction">
+    <column id="294" parent="241" name="fonction">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="241" name="password">
+    <column id="295" parent="241" name="password">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="295" parent="241" name="PRIMARY">
+    <key id="296" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
