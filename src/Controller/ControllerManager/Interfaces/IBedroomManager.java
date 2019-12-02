@@ -9,9 +9,30 @@ import java.util.ArrayList;
 public interface IBedroomManager {
 
 
+    /**
+     *
+     * @param entityAppartment
+     * @param description
+     * @param area
+     * @param typeBedroom
+     * @return
+     * @throws SQLException
+     */
     public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException;
 
+    /**
+     *
+     * @param idAppartment
+     * @param idLocal
+     */
     void DeleteBedroom(int idAppartment, int idLocal);
 
+    /**
+     *
+     * @param nbBedroom
+     * @param bedroomType
+     * @param appartmentView
+     * @throws SQLException
+     */
     public void AppartmentViewByCaracteristics(int nbBedroom, String bedroomType, String appartmentView) throws SQLException;
 }

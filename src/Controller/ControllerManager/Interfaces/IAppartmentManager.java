@@ -17,6 +17,17 @@ public interface IAppartmentManager {
      */
     public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
 
+    /**
+     *
+     * @param nbBathroom
+     * @param nbBedroom
+     * @param nbKitchen
+     * @param nbWaterPointByBathroom
+     * @param nbGasPointByKitchen
+     * @param bedroomType
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom,
                                                                         int nbBedroom,
                                                                         int nbKitchen,
@@ -24,5 +35,9 @@ public interface IAppartmentManager {
                                                                         int nbGasPointByKitchen,
                                                                         String bedroomType) throws SQLException;
 
+    /**
+     *
+     * @param idAppartment
+     */
     void DeleteAppartment(int idAppartment);
 }

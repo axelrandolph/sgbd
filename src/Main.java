@@ -20,7 +20,7 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
+
 
         MainView mainView = new MainView();
         mainView.setVisible(true);
