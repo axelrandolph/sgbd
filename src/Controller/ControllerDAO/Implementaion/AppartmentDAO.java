@@ -127,6 +127,20 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
                 "FROM kitchen" +
                 "WHERE nbGasPoint = ?) ";
 
+        String sqlnbBathroomZero = "AND idAppartment NOT IN" +
+                "(SELECT idAppartment" +
+                "FROM bathroom) ";
+
+        String sqlnbKitchenZero = "AND idAppartment NOT IN" +
+                "(SELECT idAppartment" +
+                "FROM kitchen) ";
+
+        String sqlnbBedroomZero = "AND idAppartment NOT IN" +
+                "(SELECT idAppartment" +
+                "FROM bedroom) ";
+
+
+
 
         if (nbBathroom > (-1)) {
             sql = sql.concat(sqlnbBathroom);
@@ -147,34 +161,47 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             sql = sql.concat(sqlnbGasPoint);
         }
 
+        if (nbBathroom == 0){
+            sql = sql.concat(sqlnbBathroomZero);
+        }
+        if (nbBedroom == 0){
+            sql = sql.concat(sqlnbBedroom);
+        }
+        if (nbKitchen == 0){
+            sql = sql.concat(sqlnbKitchen);
+        }
+
+        sql = sql.concat(";");
+
         PreparedStatement pst = conn.prepareStatement(sql);
 
         int indexParam = 0;
 
-        if (nbBathroom > (-1)) {
+        if (nbBathroom > (0)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbBathroom);
+            pst.setInt(indexParam, nbBathroom);
         }
-        if (nbBedroom > (-1)) {
+        if (nbBedroom > (0)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbBedroom);
+            pst.setInt(indexParam, nbBedroom);
         }
-        if (nbKitchen > (-1)) {
+        if (nbKitchen > (0)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbKitchen);
+            pst.setInt(indexParam , nbKitchen);
         }
-        if (nbWaterPointByBathroom > (-1)) {
+        if (nbWaterPointByBathroom > (0)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbWaterPointByBathroom);
+            pst.setInt(indexParam , nbWaterPointByBathroom);
         }
         if (bedroomType != null) {
             ++indexParam;
-            pst.setString(indexParam + 1, bedroomType);
+            pst.setString(indexParam , bedroomType);
         }
-        if (nbGasPointByKitchen > (-1)) {
+        if (nbGasPointByKitchen > (0)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbGasPointByKitchen);
+            pst.setInt(indexParam , nbGasPointByKitchen);
         }
+
 
         ResultSet resultSet = pst.executeQuery();
         return DisplayAppartmentByResulSet(resultSet);
