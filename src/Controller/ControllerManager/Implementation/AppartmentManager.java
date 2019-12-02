@@ -23,7 +23,7 @@ public class AppartmentManager implements IAppartmentManager {
             this.localManager = new LocalManager();
         }
 
-        else throw new UserException();
+       else throw new UserException();
     }
 
     @Override
