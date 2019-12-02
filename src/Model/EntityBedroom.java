@@ -31,6 +31,7 @@ public class EntityBedroom extends AbstractEntityLocal {
      * @param description
      * @param area
      * @param type
+     * @param typeLocal
      */
     public EntityBedroom(int idLocal, EntityAppartment appartment, String description, float area, String type,String typeLocal) {
         super(idLocal, appartment, description, area,typeLocal);

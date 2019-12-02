@@ -87,77 +87,76 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     @Override
     public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
 
-        ArrayList<EntityAppartment> entityAppartments;
 
         String sql ="SELECT * " +
-                "FROM appartment" +
+                "FROM appartment " +
                 "WHERE idAppartment = idAppartment ";
 
 
         String sqlnbBathroom = "AND idAppartment IN " +
-                "(SELECT idAppartment" +
-                "FROM bathroom" +
-                "GROUP BY idAppartment" +
+                "(SELECT idAppartment " +
+                "FROM bathroom " +
+                "GROUP BY idAppartment " +
                 "HAVING COUNT(*) = ?) ";
 
-        String sqlnbBedroom = "AND idAppartment IN" +
-                "(SELECT idAppartment" +
-                "FROM bedroom" +
-                "GROUP BY idAppartment" +
+        String sqlnbBedroom = "AND idAppartment IN " +
+                "(SELECT idAppartment " +
+                "FROM bedroom " +
+                "GROUP BY idAppartment " +
                 "HAVING COUNT(*) = ?) ";
 
-        String sqlnbKitchen = "AND idAppartment IN" +
-                "(SELECT idAppartment" +
-                "FROM kitchen" +
-                "GROUP BY idAppartment" +
+        String sqlnbKitchen = "AND idAppartment IN " +
+                "(SELECT idAppartment " +
+                "FROM kitchen " +
+                "GROUP BY idAppartment " +
                 "HAVING COUNT(*) = ?) ";
 
-        String sqlnbWaterPoint = "AND idAppartment IN" +
-                "(SELECT idAppartment" +
-                "FROM bathroom" +
+        String sqlnbWaterPoint = "AND idAppartment IN " +
+                "(SELECT idAppartment " +
+                "FROM bathroom " +
                 "WHERE nbWaterPoint = ?) ";
 
-        String sqlTypeBeroom = "AND idAppartment IN" +
-                "(SELECT idAppartment" +
-                "FROM bedroom" +
+        String sqlTypeBedroom = "AND idAppartment IN " +
+                "(SELECT idAppartment " +
+                "FROM bedroom " +
                 "WHERE bedroomType = ?) ";
 
-        String sqlnbGasPoint = "AND idAppartment IN" +
-                "(SELECT idAppartment" +
-                "FROM kitchen" +
+        String sqlnbGasPoint = "AND idAppartment IN " +
+                "(SELECT idAppartment " +
+                "FROM kitchen " +
                 "WHERE nbGasPoint = ?) ";
 
-        String sqlnbBathroomZero = "AND idAppartment NOT IN" +
-                "(SELECT idAppartment" +
+        String sqlnbBathroomZero = "AND idAppartment NOT IN " +
+                "(SELECT idAppartment " +
                 "FROM bathroom) ";
 
-        String sqlnbKitchenZero = "AND idAppartment NOT IN" +
-                "(SELECT idAppartment" +
+        String sqlnbKitchenZero = "AND idAppartment NOT IN " +
+                "(SELECT idAppartment " +
                 "FROM kitchen) ";
 
-        String sqlnbBedroomZero = "AND idAppartment NOT IN" +
-                "(SELECT idAppartment" +
+        String sqlnbBedroomZero = "AND idAppartment NOT IN " +
+                "(SELECT idAppartment " +
                 "FROM bedroom) ";
 
 
 
 
-        if (nbBathroom > (-1)) {
+        if (nbBathroom > 0) {
             sql = sql.concat(sqlnbBathroom);
         }
-        if (nbBedroom > (-1)) {
+        if (nbBedroom > 0) {
             sql = sql.concat(sqlnbBedroom);
         }
-        if (nbKitchen > (-1)) {
+        if (nbKitchen > 0) {
             sql = sql.concat(sqlnbKitchen);
         }
-        if (nbWaterPointByBathroom > (-1)) {
+        if (nbWaterPointByBathroom > 0) {
             sql = sql.concat(sqlnbWaterPoint);
         }
         if (bedroomType != null) {
-            sql = sql.concat(sqlTypeBeroom);
+            sql = sql.concat(sqlTypeBedroom);
         }
-        if (nbGasPointByKitchen > (-1)) {
+        if (nbGasPointByKitchen > 0) {
             sql = sql.concat(sqlnbGasPoint);
         }
 
@@ -165,10 +164,10 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             sql = sql.concat(sqlnbBathroomZero);
         }
         if (nbBedroom == 0){
-            sql = sql.concat(sqlnbBedroom);
+            sql = sql.concat(sqlnbBedroomZero);
         }
         if (nbKitchen == 0){
-            sql = sql.concat(sqlnbKitchen);
+            sql = sql.concat(sqlnbKitchenZero);
         }
 
         sql = sql.concat(";");
@@ -177,19 +176,19 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
         int indexParam = 0;
 
-        if (nbBathroom > (0)) {
+        if (nbBathroom > 0) {
             ++indexParam;
             pst.setInt(indexParam, nbBathroom);
         }
-        if (nbBedroom > (0)) {
+        if (nbBedroom > 0) {
             ++indexParam;
             pst.setInt(indexParam, nbBedroom);
         }
-        if (nbKitchen > (0)) {
+        if (nbKitchen > 0) {
             ++indexParam;
             pst.setInt(indexParam , nbKitchen);
         }
-        if (nbWaterPointByBathroom > (0)) {
+        if (nbWaterPointByBathroom > 0) {
             ++indexParam;
             pst.setInt(indexParam , nbWaterPointByBathroom);
         }
@@ -197,14 +196,26 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             ++indexParam;
             pst.setString(indexParam , bedroomType);
         }
-        if (nbGasPointByKitchen > (0)) {
+        if (nbGasPointByKitchen > 0) {
             ++indexParam;
             pst.setInt(indexParam , nbGasPointByKitchen);
         }
 
 
         ResultSet resultSet = pst.executeQuery();
-        return DisplayAppartmentByResulSet(resultSet);
+        ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
+
+        while (resultSet.next()) {
+            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
+                    resultSet.getString("adress"),
+                    resultSet.getString("descriptionAppartment"),
+
+                    resultSet.getBoolean("state"));
+
+            entityAppartments.add(entityAppartment);
+        }
+
+        return entityAppartments;
 
 
     }
@@ -213,17 +224,31 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
         ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
 
-        while(resultSet.next()){
-            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("appartment.idAppartement"),
-                    resultSet.getString("appartment.description"),
-                    resultSet.getString("appartment.adress"),
-                    resultSet.getBoolean("appartment.state"));
+        while (resultSet.next()) {
+            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
+                    resultSet.getString("adress"),
+                    resultSet.getString("descriptionAppartment"),
+
+                    resultSet.getBoolean("state"));
 
             entityAppartments.add(entityAppartment);
         }
 
         return entityAppartments;
     }
-}
+    @Override
+        public ArrayList<EntityAppartment> DisplayAppartmentResulSet() throws SQLException {
+            String  sql ="SELECT * " +
+                "FROM appartment" +
+                    " WHERE idAppartment = idAppartment; " ;
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+
+        ResultSet resultSet = pst.executeQuery();
+
+        return DisplayAppartmentByResulSet(resultSet);
+        }
+    }
+
 
 
