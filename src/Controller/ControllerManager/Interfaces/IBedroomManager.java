@@ -27,12 +27,4 @@ public interface IBedroomManager {
      */
     void DeleteBedroom(int idAppartment, int idLocal);
 
-    /**
-     *
-     * @param nbBedroom
-     * @param bedroomType
-     * @param appartmentView
-     * @throws SQLException
-     */
-    public void AppartmentViewByCaracteristics(int nbBedroom, String bedroomType, String appartmentView) throws SQLException;
 }

@@ -31,8 +31,4 @@ public class BedroomManager implements IBedroomManager {
 
     }
 
-    @Override
-    public void AppartmentViewByCaracteristics(int nbBedroom, String bedroomType, String appartmentView) throws SQLException {
-        bedroomDAO.AppartmentViewByCaracteristics(nbBedroom,bedroomType, appartmentView);
-    }
 }

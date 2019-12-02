@@ -33,8 +33,4 @@ public class BathroomManager implements IBathroomManager {
 
     }
 
-    @Override
-    public void AppartmentViewByCaracteristics(int nbBathroom, int nbWaterPointByBathroom, String appartmentView) throws SQLException {
-        bathroomDAO.AppartmentViewByCaracteristics(nbBathroom,nbWaterPointByBathroom, appartmentView);
-    }
 }

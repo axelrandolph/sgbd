@@ -26,13 +26,4 @@ public interface IBathroomManager {
      */
     public void DeleteBathroom(int idAppartment, int idBathroom);
 
-    /**
-     *
-     * @param nbBathroom
-     * @param nbWaterPointByBathroom
-     * @param appartmentView
-     * @throws SQLException
-     */
-    public void AppartmentViewByCaracteristics(int nbBathroom, int nbWaterPointByBathroom, String appartmentView) throws SQLException;
-
 }
