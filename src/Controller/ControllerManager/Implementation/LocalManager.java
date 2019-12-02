@@ -66,11 +66,4 @@ public class LocalManager implements ILocalManager {
         return  null;
     }
 
-    @Override
-    public void AppartmentViewByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType, String appartmentView) throws SQLException {
-        bedroomManager.AppartmentViewByCaracteristics(nbBedroom,bedroomType, appartmentView);
-        bathroomManager.AppartmentViewByCaracteristics(nbBathroom,nbWaterPointByBathroom, appartmentView);
-        kitchenManager.AppartmentViewByCaracteristics(nbKitchen,nbGasPointByKitchen, appartmentView);
-    }
-
 }

@@ -83,34 +83,109 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         return appartment;
     }
 
+
     @Override
-    public void CreateOrReplaceAppartmentView(String appartmentView) throws SQLException {
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
 
-        String sql = "CREATE OR REPLACE VIEW ? " +
-                "AS SELECT * " +
-                "FROM appartment " +
-                "FULL JOIN bathroom ON appartment.idAppartment = bathroom.idAppartment" +
-                "FULL JOIN bedroom on appartment.idAppartment = bedroom.idAppartment" +
-                "FULL JOIN kitchen on appartment.idAppartment = kitchen.idAppartment;";
+        ArrayList<EntityAppartment> entityAppartments;
 
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        pst.execute();
+        String sql ="SELECT * " +
+                "FROM appartment" +
+                "WHERE idAppartment = idAppartment ";
+
+
+        String sqlnbBathroom = "AND idAppartment IN " +
+                "(SELECT idAppartment" +
+                "FROM bathroom" +
+                "GROUP BY idAppartment" +
+                "HAVING COUNT(*) = ?) ";
+
+        String sqlnbBedroom = "AND idAppartment IN" +
+                "(SELECT idAppartment" +
+                "FROM bedroom" +
+                "GROUP BY idAppartment" +
+                "HAVING COUNT(*) = ?) ";
+
+        String sqlnbKitchen = "AND idAppartment IN" +
+                "(SELECT idAppartment" +
+                "FROM kitchen" +
+                "GROUP BY idAppartment" +
+                "HAVING COUNT(*) = ?) ";
+
+        String sqlnbWaterPoint = "AND idAppartment IN" +
+                "(SELECT idAppartment" +
+                "FROM bathroom" +
+                "WHERE nbWaterPoint = ?) ";
+
+        String sqlTypeBeroom = "AND idAppartment IN" +
+                "(SELECT idAppartment" +
+                "FROM bedroom" +
+                "WHERE bedroomType = ?) ";
+
+        String sqlnbGasPoint = "AND idAppartment IN" +
+                "(SELECT idAppartment" +
+                "FROM kitchen" +
+                "WHERE nbGasPoint = ?) ";
+
+
+        if (nbBathroom > (-1)) {
+            sql = sql.concat(sqlnbBathroom);
+        }
+        if (nbBedroom > (-1)) {
+            sql = sql.concat(sqlnbBedroom);
+        }
+        if (nbKitchen > (-1)) {
+            sql = sql.concat(sqlnbKitchen);
+        }
+        if (nbWaterPointByBathroom > (-1)) {
+            sql = sql.concat(sqlnbWaterPoint);
+        }
+        if (bedroomType != null) {
+            sql = sql.concat(sqlTypeBeroom);
+        }
+        if (nbGasPointByKitchen > (-1)) {
+            sql = sql.concat(sqlnbGasPoint);
+        }
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+
+        int indexParam = 0;
+
+        if (nbBathroom > (-1)) {
+            ++indexParam;
+            pst.setInt(indexParam + 1, nbBathroom);
+        }
+        if (nbBedroom > (-1)) {
+            ++indexParam;
+            pst.setInt(indexParam + 1, nbBedroom);
+        }
+        if (nbKitchen > (-1)) {
+            ++indexParam;
+            pst.setInt(indexParam + 1, nbKitchen);
+        }
+        if (nbWaterPointByBathroom > (-1)) {
+            ++indexParam;
+            pst.setInt(indexParam + 1, nbWaterPointByBathroom);
+        }
+        if (bedroomType != null) {
+            ++indexParam;
+            pst.setString(indexParam + 1, bedroomType);
+        }
+        if (nbGasPointByKitchen > (-1)) {
+            ++indexParam;
+            pst.setInt(indexParam + 1, nbGasPointByKitchen);
+        }
+
+        ResultSet resultSet = pst.executeQuery();
+        return DisplayAppartmentByResulSet(resultSet);
+
+
     }
 
-    @Override
-    public ArrayList<EntityAppartment> DisplayAppartmentView(String appartmentView) throws SQLException {
+    private ArrayList<EntityAppartment> DisplayAppartmentByResulSet(ResultSet resultSet) throws SQLException {
 
         ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
 
-        String sql = "SELECT appartment.idAppartment, appartment.description, appartment.adress, appartment.state" +
-                "FROM ?";
-
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        ResultSet resultSet = pst.executeQuery();
         while(resultSet.next()){
             EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("appartment.idAppartement"),
                     resultSet.getString("appartment.description"),

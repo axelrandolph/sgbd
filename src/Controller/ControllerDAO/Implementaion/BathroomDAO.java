@@ -56,45 +56,6 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
 
     }
 
-    private void AppartmentViewByNumberOfBathroom(int nbBathroom, String appartmentView) throws SQLException {
-        String sql = "CREATE OR REPLACE VIEW ? " +
-                "AS SELECT * " +
-                "FROM ? " +
-                "GROUP BY bathroom.idBathroom" +
-                "HAVING COUNT(*) = ?;";
-
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        pst.setString(2, appartmentView);
-        pst.setInt(3, nbBathroom);
-        pst.execute();
-    }
-
-    private void AppartmentViewByNumberOfWaterPoint(int nbWaterPointByBathroom, String appartmentView) throws SQLException {
-        String sql = "CREATE OR REPLACE VIEW ? " +
-                "AS SELECT * " +
-                "FROM ? " +
-                "WHERE bathroom.nbWaterPoint = ?;";
-
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        pst.setString(2, appartmentView);
-        pst.setInt(3, nbWaterPointByBathroom);
-        pst.execute();
-    }
-
-
-
-    @Override
-    public void AppartmentViewByCaracteristics(int nbBathroom, int nbWaterPointByBathroom, String appartmentView) throws SQLException {
-        if (nbBathroom > (-1))
-            AppartmentViewByNumberOfBathroom(nbBathroom,appartmentView);
-        if (nbWaterPointByBathroom > (-1))
-            AppartmentViewByNumberOfWaterPoint(nbWaterPointByBathroom,appartmentView);
-    }
-
 
     @Override
     public boolean update(EntityBathroom obj) {

@@ -38,10 +38,7 @@ public class AppartmentManager implements IAppartmentManager {
     @Override
     public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
 
-        String appartmentView = "AppartmentView";
-        appartmentDAO.CreateOrReplaceAppartmentView(appartmentView);
-        localManager.AppartmentViewByCaracteristics(nbBathroom,nbBedroom,nbKitchen,nbWaterPointByBathroom,nbGasPointByKitchen,bedroomType, appartmentView);
-        return appartmentDAO.DisplayAppartmentView(appartmentView);
+        return appartmentDAO.SearchAppartmentByCaracteristics(nbBathroom,nbBedroom,nbKitchen,nbWaterPointByBathroom,nbGasPointByKitchen,bedroomType);
 
     }
 

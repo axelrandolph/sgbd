@@ -27,40 +27,4 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
         return null;
     }
 
-    private void AppartmentViewByNumberOfBedroom(int nbBedroom, String appartmentView) throws SQLException {
-        String sql = "CREATE OR REPLACE VIEW ? " +
-                "AS SELECT * " +
-                "FROM ? " +
-                "GROUP BY bedroom.idBedroom" +
-                "HAVING COUNT(*) = ?;";
-
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        pst.setString(2, appartmentView);
-        pst.setInt(3, nbBedroom);
-        pst.execute();
-    }
-    private void AppartmentViewByTypeOfBedroom(String bedroomType, String appartmentView) throws SQLException {
-        String sql = "CREATE OR REPLACE VIEW ? " +
-                "AS SELECT * " +
-                "FROM ? " +
-                "WHERE bedroom.bedroomType = ?;";
-
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
-        pst.setString(2, appartmentView);
-        pst.setString(3, bedroomType);
-        pst.execute();
-    }
-
-    @Override
-    public void AppartmentViewByCaracteristics(int nbBedroom, String bedroomType, String appartmentView) throws SQLException {
-        if (nbBedroom > (-1))
-            AppartmentViewByNumberOfBedroom(nbBedroom,appartmentView);
-        if (bedroomType != null)
-            AppartmentViewByTypeOfBedroom(bedroomType,appartmentView);
-
-    }
 }

@@ -13,7 +13,4 @@ public interface ILocalManager {
 
     public ArrayList<AbstractEntityLocal> DisplayLocalByAppartment (int idAppartment);
 
-    public void AppartmentViewByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType, String appartmentView) throws SQLException;
-
-
     }
