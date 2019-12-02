@@ -30,4 +30,9 @@ public class BedroomManager implements IBedroomManager {
     public void DeleteBedroom(int idAppartment, int idLocal) {
 
     }
+
+    @Override
+    public void AppartmentViewByCaracteristics(int nbBedroom, String bedroomType, String appartmentView) throws SQLException {
+        bedroomDAO.AppartmentViewByCaracteristics(nbBedroom,bedroomType, appartmentView);
+    }
 }

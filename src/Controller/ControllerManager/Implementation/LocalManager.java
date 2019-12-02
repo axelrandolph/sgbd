@@ -8,6 +8,7 @@ import Model.AbstractEntityLocal;
 import Model.EntityAppartment;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LocalManager implements ILocalManager {
 
@@ -58,6 +59,18 @@ public class LocalManager implements ILocalManager {
         else if (typeLocal == "Kitchen"){
             kitchenManager.DeleteKitchen(idAppartment, idLocal);
         }
+    }
+
+    @Override
+    public ArrayList<AbstractEntityLocal> DisplayLocalByAppartment(int idAppartment) {
+        return  null;
+    }
+
+    @Override
+    public void AppartmentViewByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType, String appartmentView) throws SQLException {
+        bedroomManager.AppartmentViewByCaracteristics(nbBedroom,bedroomType, appartmentView);
+        bathroomManager.AppartmentViewByCaracteristics(nbBathroom,nbWaterPointByBathroom, appartmentView);
+        kitchenManager.AppartmentViewByCaracteristics(nbKitchen,nbGasPointByKitchen, appartmentView);
     }
 
 }

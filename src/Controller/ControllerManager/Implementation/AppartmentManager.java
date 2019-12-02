@@ -4,6 +4,8 @@ import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
+import Controller.ControllerManager.Interfaces.IBathroomManager;
+import Controller.ControllerManager.Interfaces.ILocalManager;
 import Model.AbstractEntityLocal;
 import Model.EntityAppartment;
 
@@ -13,10 +15,14 @@ import java.util.ArrayList;
 public class AppartmentManager implements IAppartmentManager {
 
     private IAppartmentDAO appartmentDAO;
-
+    private ILocalManager localManager;
     public AppartmentManager() throws UserException {
-        if(UserManager.getCurrentUser() != null)
+
+        if(UserManager.getCurrentUser() != null) {
             this.appartmentDAO = new AppartmentDAO();
+            this.localManager = new LocalManager();
+        }
+
         else throw new UserException();
     }
 
@@ -29,17 +35,17 @@ public class AppartmentManager implements IAppartmentManager {
         return entityAppartment;
     }
 
-    public EntityAppartment getAppartmentById(int idAppartment) throws SQLException {
-
-        appartmentDAO.getByPrimaryKey(idAppartment);
-        return null;
-    }
-
     @Override
-    public void DisplayAppartment(int idAppartment) throws SQLException {
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
 
-        appartmentDAO.getByPrimaryKey(idAppartment);
+        String appartmentView = "AppartmentView";
+        appartmentDAO.CreateOrReplaceAppartmentView(appartmentView);
+        localManager.AppartmentViewByCaracteristics(nbBathroom,nbBedroom,nbKitchen,nbWaterPointByBathroom,nbGasPointByKitchen,bedroomType, appartmentView);
+        return appartmentDAO.DisplayAppartmentView(appartmentView);
+
     }
+
+
 
     @Override
     public void DeleteAppartment(int idAppartment){
