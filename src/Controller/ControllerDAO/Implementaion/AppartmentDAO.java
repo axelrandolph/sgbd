@@ -86,7 +86,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     @Override
     public void CreateOrReplaceAppartmentView(String appartmentView) throws SQLException {
 
-        String sql = "CREATE OR REPLACE VIEW ? " +
+        String sql = "CREATE OR REPLACE VIEW appartmentView " +
                 "AS SELECT * " +
                 "FROM appartment " +
                 "FULL JOIN bathroom ON appartment.idAppartment = bathroom.idAppartment" +
@@ -95,7 +95,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
         PreparedStatement pst = null;
         pst = conn.prepareStatement(sql);
-        pst.setString(1, appartmentView);
+       // pst.setString(1, appartmentView);
         pst.execute();
     }
 
