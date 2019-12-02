@@ -51,7 +51,7 @@ public class MainView extends  JFrame {
             }
 
         });
-        
+
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 try {
