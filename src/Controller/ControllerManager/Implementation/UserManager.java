@@ -2,6 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.UserDAO;
 import Controller.ControllerDAO.Interfaces.IUserDAO;
+import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Controller.ControllerManager.Interfaces.IUserManager;
@@ -60,10 +61,15 @@ public class UserManager implements IUserManager{
 
 
         @Override
-        public  void LogUser(String username, String password) throws SQLException {
+        public  void LogUser(String username, String password) throws UserException {
 
-                EntityUser entityUser = userDAO.IdentifiedUser(username,password);
-                currentUser = entityUser;
+                try {
+                        EntityUser entityUser = userDAO.IdentifiedUser(username,password);
+                        currentUser = entityUser;
+                }catch (SQLException e){
+                        throw new UserException("You don't have an account ") ;
+                }
+
         }
 
 

@@ -18,7 +18,7 @@ public class AppartmentManagerTest {
     public void TestSearch() throws UserException, SQLException {
 
         UserManager userManager = new UserManager() ;
-        userManager.CreateUser("userName","lol","moi","toi","firstname");
+      //  userManager.CreateUser("userName","lol","moi","toi","firstname");
         userManager.LogUser("userName","firstName");
         ArrayList<EntityAppartment> listAppart = new ArrayList<EntityAppartment>();
         EntityAppartment appart = new EntityAppartment(1, "address", "description",true);

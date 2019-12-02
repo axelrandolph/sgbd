@@ -146,34 +146,34 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         if (nbGasPointByKitchen > (-1)) {
             sql = sql.concat(sqlnbGasPoint);
         }
-
+        sql = sql.concat(";");
         PreparedStatement pst = conn.prepareStatement(sql);
 
         int indexParam = 0;
 
         if (nbBathroom > (-1)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbBathroom);
+            pst.setInt(indexParam , nbBathroom);
         }
         if (nbBedroom > (-1)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbBedroom);
+            pst.setInt(indexParam, nbBedroom);
         }
         if (nbKitchen > (-1)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbKitchen);
+            pst.setInt(indexParam, nbKitchen);
         }
         if (nbWaterPointByBathroom > (-1)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbWaterPointByBathroom);
+            pst.setInt(indexParam, nbWaterPointByBathroom);
         }
         if (bedroomType != null) {
             ++indexParam;
-            pst.setString(indexParam + 1, bedroomType);
+            pst.setString(indexParam, bedroomType);
         }
         if (nbGasPointByKitchen > (-1)) {
             ++indexParam;
-            pst.setInt(indexParam + 1, nbGasPointByKitchen);
+            pst.setInt(indexParam, nbGasPointByKitchen);
         }
 
         ResultSet resultSet = pst.executeQuery();
