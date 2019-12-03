@@ -19,11 +19,5 @@ public interface IBathroomManager {
      */
     public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException;
 
-    /**
-     *
-     * @param idAppartment
-     * @param idBathroom
-     */
-    public void DeleteBathroom(int idAppartment, int idBathroom);
-
+    void DeleteBathroom(int idAppartment, int idLocal);
 }

@@ -4,10 +4,11 @@ import Model.AbstractEntityLocal;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import Exception.*;
 
 public interface ILocalManager {
 
-    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws SQLException;
+    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws Exception, LocalException, AppartmentException, ConnectionException;
 
     public void DeleteLocal(int idAppartment, int idLocal, String typeLocal);
 

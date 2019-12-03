@@ -32,7 +32,7 @@ public class BathroomManager implements IBathroomManager {
 
             e.printStackTrace();
         }
-        return
+        return entityBathroom;
     }
 
 

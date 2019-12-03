@@ -7,9 +7,8 @@ import Model.EntityBathroom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Exception.*;
 
-import Exception.LocalException;
-import Exception.AppartmentException;
 import Static.StaticName;
 
 
@@ -83,10 +82,15 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
                entityBathroom = new EntityBathroom((Integer)idBathroom, resultSet.getString("description"), resultSet.getFloat("area"), resultSet.getInt("nbWaterPoint"), appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
            }
 
-        } catch (SQLException | AppartmentException e) {
+        } catch (SQLException | Exception.AppartmentException | Exception.ConnectionException e) {
             throw new LocalException("Echec lors de l'obtention de la salle de bain due à l'erreur suivante : " + e.getMessage());
         }
 
         return entityBathroom;
+    }
+
+    @Override
+    public EntityBathroom updateAppartment(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) {
+        return null;
     }
 }
