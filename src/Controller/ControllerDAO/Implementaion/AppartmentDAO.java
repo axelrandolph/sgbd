@@ -1,6 +1,7 @@
 package Controller.ControllerDAO.Implementaion;
 
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
+import Controller.ControllerManager.Implementation.UserManager;
 import Model.EntityAppartment;
 
 import java.sql.*;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Exception.AppartmentException;
+import Model.EntityUser;
 
 public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentDAO {
     public AppartmentDAO() {
@@ -35,6 +37,9 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             ResultSet resultSet = pst.getGeneratedKeys();
 
             entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
+
+            insertInManagementTable (entityAppartment);
+
             pst.close();
 
             pst.close();
@@ -45,16 +50,27 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         return entityAppartment;
     }
 
+    private void insertInManagementTable(EntityAppartment entityAppartment) throws SQLException {
+        String sql = "INSERT INTO management(idAppartment, username) VALUES(?, ?);";
+        PreparedStatement pst = null;
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, entityAppartment.getIdAppartment());
+        pst.setString(2, UserManager.getCurrentUser().getUserName());
+        pst.executeUpdate();
+
+        pst.close();
+    }
+
     @Override
     public void delete(EntityAppartment entityAppartment) throws AppartmentException {
         try {
 
             int idAppartment = entityAppartment.getIdAppartment();
 
-            deleteConnectionDependencies(idAppartment);
             deleteBathroomDependencies(idAppartment);
             deleteBedroomDependencies(idAppartment);
             deleteKitchenDependencies(idAppartment);
+            deleteConnectedLocalDependencies(idAppartment);
 
             String query = "delete from appartment where idAppartment= ?";
 

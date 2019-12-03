@@ -4,7 +4,6 @@ import Model.EntityAppartment;
 
 import Exception.AppartmentException;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IAppartmentDAO extends IDAO<EntityAppartment> {

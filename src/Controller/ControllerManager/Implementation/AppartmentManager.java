@@ -54,10 +54,6 @@ public class AppartmentManager implements IAppartmentManager {
 
     }
 
-    @Override
-    public ArrayList<EntityAppartment> getAllAppartment() throws AppartmentException {
-        return SearchAppartmentByCaracteristics(-1,-1,-1,-1,-1,null);
-    }
 
 
     @Override
