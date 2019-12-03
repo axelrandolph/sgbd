@@ -44,9 +44,13 @@ public class AppartmentManager implements IAppartmentManager {
 
 
     @Override
-    public void DeleteAppartment(int idAppartment) throws Exception {
+    public void DeleteAppartment(int idAppartment) throws AppartmentException{
 
-        appartmentDAO.delete(idAppartment);
+        try {
+            appartmentDAO.delete(appartmentDAO.getByPrimaryKey(idAppartment));
+        } catch (LocalException | SQLException | ConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
 }
