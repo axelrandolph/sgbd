@@ -2,7 +2,7 @@ package Controller.ControllerManager.UnitTests;
 
 
 
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Implementation.AppartmentManager;
 import Controller.ControllerManager.Implementation.UserManager;
 import Model.EntityAppartment;

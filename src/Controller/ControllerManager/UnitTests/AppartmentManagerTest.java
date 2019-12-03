@@ -2,7 +2,7 @@ package Controller.ControllerManager.UnitTests;
 
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Implementation.AppartmentManager;
 import Controller.ControllerManager.Implementation.UserManager;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class AppartmentManagerTest {
 
     @Test
-    public void TestSearch() throws UserException, SQLException {
+    public void TestSearch() throws Exception {
 
         UserManager userManager = new UserManager() ;
       //  userManager.CreateUser("userName","lol","moi","toi","firstname");
