@@ -13,15 +13,15 @@ public class ConnectionManager implements IConnectionManager {
 
     private IConnectionDAO connectionDAO;
 
-    public ConnectionManager() throws UserException {
+    public ConnectionManager() throws ConnectionException {
         if (UserManager.getCurrentUser() != null){
             this.connectionDAO = new ConnectionDAO();
         }
-        else throw new UserException("Connection mal faite");
+        else throw new ConnectionException(" Veuillez vous authentifier");
     }
 
     @Override
-    public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws Exception {
+    public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws ConnectionException {
 
         if (!connectionDAO.IsConnectedLocal(idAppartment,idLocalA,typeLocalA)) {
             connectionDAO.AddLocalToConnectedLocal(idAppartment, idLocalA, typeLocalA);
@@ -37,7 +37,11 @@ public class ConnectionManager implements IConnectionManager {
 
             EntityConnection entityConnection = new EntityConnection(localA,localB,typeLocalA,typeLocalB);
 
-            return connectionDAO.insert(entityConnection);
+            try {
+                return connectionDAO.insert(entityConnection);
+            } catch (AppartmentException |LocalException | UserException e) {
+                throw new ConnectionException("La connection n'est pas créer");
+            }
         }
 
         return null;

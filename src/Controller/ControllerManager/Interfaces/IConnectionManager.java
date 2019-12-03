@@ -7,5 +7,5 @@ import Exception.*;
 
 public interface IConnectionManager {
 
-    EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws SQLException, ConnectionException, LocalException, AppartmentException, Exception;
+    EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws  ConnectionException;
 }

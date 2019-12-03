@@ -21,10 +21,14 @@ public class KitchenManager implements IKitchenManager {
     }
 
     @Override
-    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException, LocalException, ConnectionException, AppartmentException {
+    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws  LocalException {
 
         EntityKitchen entityKitchen = new EntityKitchen(entityAppartment, description, area, nbgaspoint);
-       return kitchenDAO.insert(entityKitchen);
+        try {
+            return kitchenDAO.insert(entityKitchen);
+        } catch (AppartmentException | ConnectionException |  UserException e) {
+            throw new LocalException("Ce local n'est pas créer");
+        }
     }
 
     @Override

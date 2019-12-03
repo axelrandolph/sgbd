@@ -31,21 +31,28 @@ public class UserManager implements IUserManager{
         }
 
         @Override
-        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException, LocalException, AppartmentException, ConnectionException {
+        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws UserException {
 
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
-                userDAO.insert(user);
-
+                try {
+                        userDAO.insert(user);
+                } catch (AppartmentException | LocalException | ConnectionException e) {
+                        e.printStackTrace();
+                }
                 return user;
         }
 
 
         @Override
-        public EntityUser UpdateUser(String username,String firstName, String lastName, String function, String password) {
+        public EntityUser UpdateUser(String username,String firstName, String lastName, String function, String password) throws UserException {
 
                 if (getCurrentUser() != null) {
                         EntityUser user = new EntityUser(username, firstName, lastName, function, password);
-                        userDAO.update(user);
+                        try {
+                                userDAO.update(user,firstName,lastName,function,password);
+                        } catch (UserException e) {
+                                throw new UserException("L'utilisateur n'est pas udpatée");
+                        }
 
                         return user;
                 }
@@ -61,12 +68,8 @@ public class UserManager implements IUserManager{
         @Override
         public  void LogUser(String username, String password) throws UserException {
 
-                try {
-                        EntityUser entityUser = userDAO.IdentifiedUser(username,password);
-                        currentUser = entityUser;
-                }catch (SQLException e){
-                        throw new UserException("You don't have an account ") ;
-                }
+                EntityUser entityUser = userDAO.IdentifiedUser(username,password);
+                currentUser = entityUser;
 
         }
 

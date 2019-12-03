@@ -5,6 +5,7 @@ import Model.EntityBathroom;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import Exception.LocalException;
 
 public interface IBathroomManager {
 
@@ -17,7 +18,6 @@ public interface IBathroomManager {
      * @return
      * @throws SQLException
      */
-    public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException;
+    public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws LocalException;
 
-    void DeleteBathroom(int idAppartment, int idLocal);
 }

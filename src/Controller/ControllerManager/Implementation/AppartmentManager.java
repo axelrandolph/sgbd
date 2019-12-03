@@ -11,20 +11,25 @@ import java.util.ArrayList;
 public class AppartmentManager implements IAppartmentManager {
 
     private IAppartmentDAO appartmentDAO;
-    public AppartmentManager() throws UserException {
+    public AppartmentManager() throws AppartmentException {
 
         if(UserManager.getCurrentUser() != null) {
             this.appartmentDAO = new AppartmentDAO();
         }
 
-        else throw new UserException("");
+        else throw new AppartmentException(" Veuillez connecter un utilisateur :");
     }
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse) throws Exception {
+    public EntityAppartment CreateAppartment(String description, String adresse) throws AppartmentException {
 
         EntityAppartment entityAppartment = new EntityAppartment(description, adresse, false);
-        entityAppartment = appartmentDAO.insert(entityAppartment);
+        try {
+            entityAppartment = appartmentDAO.insert(entityAppartment);
+        } catch (Exception.LocalException e) {
+            e.printStackTrace();
+        }
+
 
         return entityAppartment;
     }

@@ -16,7 +16,7 @@ public interface IKitchenManager {
      * @param nbgaspoint
      * @return
      */
-    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException, LocalException, AppartmentException, ConnectionException;
+    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws  LocalException;
 
 
     void DeleteKitchen(int idAppartment, int idLocal);
