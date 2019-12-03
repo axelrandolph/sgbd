@@ -14,15 +14,13 @@ public class mainView {
     private IUserManager iUserManager = new UserManager();
     private IAppartmentManager iAppartmentManager ;
 
-    private String username, password;
-    private String username1, firstname, lastname, function, password1;
+    private String username1, firstname, lastname, function, password,password1;
     private String description, addresse;
 
     public mainView() throws AppartmentException {
     }
 
     public void Affichage() throws UserException, AppartmentException {
-
 
         System.out.println("Bienvenue dans l'application\n Tapez 1 : si vous voulez vous vous connecter \n Tapez 2 : si vous " +
                 "voulez créer un compte\n ");
@@ -34,14 +32,17 @@ public class mainView {
 
        if (j == 1) {
             System.out.println("Username : \n");
-            username = sc.nextLine();
+            String username = sc.nextLine();
            sc.nextLine();
 
             System.out.println("Password : ");
-           password = sc.nextLine();
+          String password2 = sc.nextLine();
 
             try {
-                iUserManager.LogUser(username, password);
+                iUserManager.LogUser("Donald45", "lol");
+
+                iAppartmentManager = new AppartmentManager();
+
                 System.out.println("Vous etes connecté : ");
 
                 System.out.println("Bienvenue dans l'onglet Appartment: ");
@@ -88,13 +89,21 @@ public class mainView {
 
             System.out.println("Username : ");
             username1 = sc.nextLine();
-            System.out.println("Firstname : ");
+           sc.nextLine();
+
+           System.out.println("Firstname : ");
             firstname = sc.nextLine();
-            System.out.println("Lastname : ");
+           sc.nextLine();
+
+           System.out.println("Lastname : ");
             lastname = sc.nextLine();
-            System.out.println("Function : ");
+           sc.nextLine();
+
+           System.out.println("Function : ");
             function = sc.nextLine();
-            System.out.println("Password : ");
+           sc.nextLine();
+
+           System.out.println("Password : ");
             password1 = sc.nextLine();
 
             try {
