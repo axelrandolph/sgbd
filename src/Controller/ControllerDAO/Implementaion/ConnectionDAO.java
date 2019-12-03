@@ -46,7 +46,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
 
             pst.executeUpdate();
             pst.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new ConnectionException("Connexion impossible due à l'erreur suivante : " + e.getMessage());
         }
 
@@ -86,7 +86,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
 
     @Override
     public <L> EntityConnection getByPrimaryKey(L id) throws ConnectionException {
-        throw new ConnectionException ("Erreur : Impossible de récupérer l'objet connection à partir d'une clef. Essayer plutôt IsConnection()");
+        throw new ConnectionException("Erreur : Impossible de récupérer l'objet connection à partir d'une clef. Essayer plutôt IsConnection()");
     }
 
     @Override
@@ -101,14 +101,13 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             pst.setInt(3, idAppartment);
             pst.executeUpdate();
             pst.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new ConnectionException("Ajout dans la table connected local impossible due à l'erreur suivante : " + e.getMessage());
         }
 
     }
 
     /**
-     *
      * @param idAppartment
      * @param idLocal
      * @param typeLocal
@@ -131,7 +130,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
                 if (resultSet.wasNull())
                     return false;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new ConnectionException("Aucun résultat rendu du à l'erreur suivante : " + e.getMessage());
         }
 
@@ -139,7 +138,6 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     /**
-     *
      * @param idLocalA
      * @param idLocalB
      * @param typeLocalA
@@ -174,7 +172,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
                 if (resultSet.wasNull() || resultSet2.wasNull())
                     return false;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new ConnectionException("Aucun résultat rendu du à l'erreur suivante : " + e.getMessage());
         }
 
@@ -192,12 +190,27 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             } else if (typeLocal == StaticName.localBedroomType) {
                 return bedroomDAO.getByPrimaryKey(idLocal);
             }
-        }catch (LocalException | AppartmentException | UserException | ManagementException e){
-            throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : "+ e.getMessage());
+        } catch (LocalException | AppartmentException | UserException | ManagementException e) {
+            throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : " + e.getMessage());
         }
 
         return null;
     }
 
+    @Override
+    public void delete(int idLocal, String typeLocal) throws ConnectionException {
+        String query = "delete from connection where idConnectedLocal = ? and LocalType = ?;";
+        try {
+            PreparedStatement preparedStmt = getConn().prepareStatement(query);
+            preparedStmt.setInt(1, idLocal);
+            preparedStmt.setString(2, typeLocal);
 
+            preparedStmt.executeUpdate();
+            preparedStmt.close();
+        } catch (SQLException e) {
+            throw new ConnectionException("Impossible de suprimé les connection du local " + idLocal + " erreur  : " + e.getMessage());
+        }
+
+
+    }
 }
