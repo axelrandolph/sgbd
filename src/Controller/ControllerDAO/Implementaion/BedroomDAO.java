@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import Exception.AppartmentException;
 import Exception.ConnectionException;
 import Exception.LocalException;
+import Exception.UserException;
 
 import Static.StaticName;
 
@@ -83,7 +84,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
                         StaticName.localBedroomType);
             }
 
-        } catch (SQLException | AppartmentException | ConnectionException e) {
+        } catch (UserException | AppartmentException | ConnectionException | SQLException e) {
             throw new LocalException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
         }
 

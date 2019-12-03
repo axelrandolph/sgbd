@@ -34,6 +34,7 @@ public interface IAppartmentManager {
                                                                         int nbWaterPointByBathroom,
                                                                         int nbGasPointByKitchen,
                                                                         String bedroomType) throws AppartmentException, SQLException;
+    ArrayList<EntityAppartment> getAllAppartment() throws AppartmentException;
 
     /**
      *

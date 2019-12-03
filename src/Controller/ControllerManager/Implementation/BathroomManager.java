@@ -8,8 +8,6 @@ import Model.EntityAppartment;
 import Model.EntityBathroom;
 import Exception.*;
 
-import java.sql.SQLException;
-
 public class BathroomManager implements IBathroomManager {
 
     private IBathroomDAO bathroomDAO;
@@ -26,16 +24,27 @@ public class BathroomManager implements IBathroomManager {
         EntityBathroom entityBathroom = new EntityBathroom(entityAppartment, description, area, nbwaterpoint);
         try {
                 return bathroomDAO.insert(entityBathroom);
-            } catch (LocalException | ConnectionException | AppartmentException | UserException  e) {
+            } catch (LocalException | ConnectionException | AppartmentException | UserException | ManagementException e) {
             throw  new LocalException("Cette sdb n'est pas créer");
         }
 
     }
 
     @Override
-    public void DeleteBathroom(int idAppartment, int idLocal) {
+    public void DeleteBathroom(int idAppartment, int idLocal) throws LocalException {
 
+        try {
+
+            if (bathroomDAO.getByPrimaryKey(idLocal).getAppartment().getIdAppartment() == idAppartment)
+                bathroomDAO.delete(bathroomDAO.getByPrimaryKey(idLocal));
+            else{
+                throw new LocalException("Suppression de cette salle de bain impossible, le local n'est probablement pas une cuisine");
+            }
+        }catch (AppartmentException | ConnectionException | LocalException | UserException |ManagementException e){
+            throw new LocalException("Supression du local impossible : " + e.getMessage());
+        }
     }
 
-
 }
+
+

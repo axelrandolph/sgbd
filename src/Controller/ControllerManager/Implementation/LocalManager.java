@@ -44,14 +44,14 @@ public class LocalManager implements ILocalManager {
             } else if (typeLocal == "Kitchen") {
                 return kitchenManager.CreateKitchen(entityAppartment, description, area, (Integer) localCaracterisc);
             }
-        }catch (AppartmentException | ConnectionException | UserException e){
+        }catch (AppartmentException | ConnectionException | UserException | ManagementException e){
 
         }
         return null;
     }
 
     @Override
-    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal) {
+    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal) throws LocalException {
 
         if(typeLocal == "Bathroom"){
             bathroomManager.DeleteBathroom(idAppartment, idLocal);

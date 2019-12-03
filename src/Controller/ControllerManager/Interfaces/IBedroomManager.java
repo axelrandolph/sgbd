@@ -26,6 +26,6 @@ public interface IBedroomManager {
      * @param idAppartment
      * @param idLocal
      */
-    void DeleteBedroom(int idAppartment, int idLocal);
+    void DeleteBedroom(int idAppartment, int idLocal) throws LocalException;
 
 }

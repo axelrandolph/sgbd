@@ -39,7 +39,7 @@ public class ConnectionManager implements IConnectionManager {
 
             try {
                 return connectionDAO.insert(entityConnection);
-            } catch (AppartmentException |LocalException | UserException e) {
+            } catch (AppartmentException |LocalException | UserException | ManagementException e) {
                 throw new ConnectionException("La connection n'est pas créer");
             }
         }

@@ -26,14 +26,23 @@ public class KitchenManager implements IKitchenManager {
         EntityKitchen entityKitchen = new EntityKitchen(entityAppartment, description, area, nbgaspoint);
         try {
             return kitchenDAO.insert(entityKitchen);
-        } catch (AppartmentException | ConnectionException |  UserException e) {
-            throw new LocalException("Ce local n'est pas créer");
+        } catch (AppartmentException | ConnectionException |  UserException | ManagementException e) {
+            throw new LocalException("Impossible de créer une cuisine : "  + e.getMessage());
         }
     }
 
     @Override
-    public void DeleteKitchen(int idAppartment, int idLocal) {
+    public void DeleteKitchen(int idAppartment, int idLocal) throws LocalException {
+        try {
 
+            if (kitchenDAO.getByPrimaryKey(idLocal).getAppartment().getIdAppartment() == idAppartment)
+                kitchenDAO.delete(kitchenDAO.getByPrimaryKey(idLocal));
+            else{
+                throw new LocalException("Suppression de cette cuisin impossible, le local n'est probablement pas une cuisine");
+            }
+        }catch (AppartmentException | ConnectionException | LocalException | UserException |ManagementException e){
+            throw new LocalException("Supression du local impossible : " + e.getMessage());
+        }
     }
 
 }

@@ -5,7 +5,6 @@ import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Model.EntityAppartment;
 import Exception.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AppartmentManager implements IAppartmentManager {
@@ -27,7 +26,7 @@ public class AppartmentManager implements IAppartmentManager {
         EntityAppartment entityAppartment = new EntityAppartment(description, adresse, false);
         try {
             entityAppartment = appartmentDAO.insert(entityAppartment);
-        } catch (LocalException | ConnectionException | UserException e) {
+        } catch (LocalException | ConnectionException | UserException | ManagementException e) {
             throw new AppartmentException("Création de l'apparmtement impossible : " + e.getMessage());
         }
 
@@ -39,7 +38,7 @@ public class AppartmentManager implements IAppartmentManager {
         EntityAppartment entityAppartment = new EntityAppartment(description, adresse, state);
         try {
             entityAppartment = appartmentDAO.insert(entityAppartment);
-        } catch (LocalException | ConnectionException | UserException e) {
+        } catch (LocalException | ConnectionException | UserException | ManagementException e) {
             throw new AppartmentException("Création de l'apparmtement impossible : " + e.getMessage());
         }
 
@@ -55,6 +54,10 @@ public class AppartmentManager implements IAppartmentManager {
 
     }
 
+    @Override
+    public ArrayList<EntityAppartment> getAllAppartment() throws AppartmentException {
+        return SearchAppartmentByCaracteristics(-1,-1,-1,-1,-1,null);
+    }
 
 
     @Override
@@ -62,7 +65,7 @@ public class AppartmentManager implements IAppartmentManager {
 
         try {
             appartmentDAO.delete(appartmentDAO.getByPrimaryKey(idAppartment));
-        } catch (LocalException | ConnectionException | UserException e) {
+        } catch (LocalException | ConnectionException | UserException | ManagementException e) {
             throw new AppartmentException("Votre appart n'est pas suuprimé");
         }
 

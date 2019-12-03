@@ -33,9 +33,10 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             pst.setBoolean(3, entityAppartment.getState());
             pst.executeUpdate();
             ResultSet resultSet = pst.getGeneratedKeys();
-            pst.close();
 
             entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
+
+            pst.close();
 
         }catch (SQLException e) {
             throw new AppartmentException("Echec lors de la l'insertion de l'appartement " + entityAppartment.getIdAppartment()+ "due à l'erreur suivante  : "  + e.getMessage());
@@ -45,10 +46,11 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
     @Override
     public void delete(EntityAppartment entityAppartment) throws AppartmentException {
-
-        int idAppartment = entityAppartment.getIdAppartment();
-        String query = "delete from appartment where idAppartment= ?";
         try {
+
+            int idAppartment = entityAppartment.getIdAppartment();
+            String query = "delete from appartment where idAppartment= ?";
+
             PreparedStatement preparedStmt = getConn().prepareStatement(query);
             preparedStmt.setInt(1, idAppartment);
             preparedStmt.execute();

@@ -2,7 +2,6 @@ import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Implementaion.UserDAO;
 import Controller.ControllerManager.Implementation.UserManager;
 import Model.EntityUser;
-import View.MainView;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -22,9 +21,6 @@ public class Main {
             e.printStackTrace();
         }*/
 
-        MainView mainView = new MainView();
-        mainView.setVisible(true);
-        mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
 

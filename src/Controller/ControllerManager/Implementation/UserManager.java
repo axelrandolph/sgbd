@@ -36,7 +36,7 @@ public class UserManager implements IUserManager{
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
                 try {
                         userDAO.insert(user);
-                } catch (AppartmentException | LocalException | ConnectionException e) {
+                } catch (AppartmentException | LocalException | ConnectionException | ManagementException e) {
                         e.printStackTrace();
                 }
                 return user;
