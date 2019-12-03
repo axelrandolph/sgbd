@@ -228,10 +228,6 @@ public class mainApp extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 try {
                     iAppartmentManager.CreateAppartment(textField_1.getText(),addresstextField_2.getText());
-                    table.setValueAt(idApparttextField_2,0,0);
-                    table.setValueAt(textField_1, 1, 0);
-                    table.setValueAt(addresstextField_2, 2, 0);
-                    table.setValueAt(radioButton, 3, 0);
 
                 } catch (AppartmentException e) {
                     e.printStackTrace();
@@ -245,8 +241,6 @@ public class mainApp extends JFrame {
         panel_2.add(scrollPane_1, BorderLayout.CENTER);
 
         table = new JTable();
-        table.setModel(model);
-        //contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
         scrollPane_1.setViewportView(table);
 
         JPanel panel_3 = new JPanel();

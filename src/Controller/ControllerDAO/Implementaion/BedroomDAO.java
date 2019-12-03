@@ -8,7 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Exception.*;
+import Exception.AppartmentException;
+import Exception.ConnectionException;
+import Exception.LocalException;
+import Exception.UserException;
+import Exception.ManagementException;
+
 
 import Static.StaticName;
 
