@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class mainView {
 
     private IUserManager iUserManager = new UserManager();
-    private IAppartmentManager iAppartmentManager = new AppartmentManager();
+    private IAppartmentManager iAppartmentManager ;
 
     private String username, password;
     private String username1, firstname, lastname, function, password1;
@@ -28,19 +28,58 @@ public class mainView {
                 "voulez créer un compte\n ");
         Scanner sc = new Scanner(System.in);
         int j = sc.nextInt();
-        sc.close();
 
         System.out.println("Vous avez choisi : " + j);
 
-        if (j == 1) {
-            System.out.println("Username : ");
+
+       if (j == 1) {
+            System.out.println("Username : \n");
             username = sc.nextLine();
+           sc.nextLine();
 
             System.out.println("Password : ");
-            password = sc.nextLine();
+           password = sc.nextLine();
 
             try {
                 iUserManager.LogUser(username, password);
+                System.out.println("Vous etes connecté : ");
+
+                System.out.println("Bienvenue dans l'onglet Appartment: ");
+
+                System.out.println("  tapez 1 : Si vous voulez Afficher les appartements \n tapez 2 : Si vous voulez Ajouter un appartment ");
+
+                int i = sc.nextInt();
+                System.out.println("Vous avez choisi : " + i);
+
+                if (i == 1) {
+
+                    try {
+
+                        iAppartmentManager.getAllAppartment();
+
+                    } catch (AppartmentException e) {
+                        e.printStackTrace();
+                    }
+
+                } else if (i == 2) {
+
+                    System.out.println("description : ");
+                    description = sc.nextLine();
+                    sc.nextLine();
+                    System.out.println("addresse : ");
+                    addresse = sc.nextLine();
+                    try {
+
+                        iAppartmentManager.CreateAppartment(description, addresse);
+                        System.out.println("Appartement Ajoute : ");
+
+                    } catch (AppartmentException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
             } catch (UserException e) {
                 e.printStackTrace();
             }
@@ -67,37 +106,6 @@ public class mainView {
                 e.printStackTrace();
             }
 
-
-            System.out.println("Bienvenue dans l'onglet Appartment: ");
-
-            System.out.println("  tapez 1 : Si vous voulez Afficher les appartements \n tapez 2 : Si vous voulez Ajouter un appartment ");
-
-            int i = sc.nextInt();
-            System.out.println("Vous avez choisi : " + i);
-
-            if (i == 1) {
-
-                try {
-
-                    iAppartmentManager.getAllAppartment();
-
-                } catch (AppartmentException e) {
-                    e.printStackTrace();
-                }
-
-            } else if (i == 2) {
-                description = sc.nextLine();
-                addresse = sc.nextLine();
-                try {
-
-                    iAppartmentManager.CreateAppartment(description, addresse);
-
-                } catch (AppartmentException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
 
         }
 
