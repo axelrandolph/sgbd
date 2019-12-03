@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import Exception.LocalException;
 import Exception.ConnectionException;
 import Exception.UserException;
+import Exception.ManagementException;
 
 
 public abstract class DAO<T> implements IDAO<T> {
@@ -49,13 +50,13 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract T insert(T obj) throws AppartmentException, LocalException, ConnectionException, UserException;
+    public abstract T insert(T obj) throws AppartmentException, LocalException, ConnectionException, UserException, ManagementException;
 
     /**
      * Delete Method
      * @param obj
      */
-    public abstract void delete(T obj) throws AppartmentException, LocalException;
+    public abstract void delete(T obj) throws AppartmentException, LocalException, ManagementException;
 
 
     /*Getters & Setters*/

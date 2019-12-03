@@ -6,44 +6,37 @@ public class EntityManagement {
     /**
      * The id of the Appartment
      */
-    private int idAppartment;
+    private EntityAppartment entityAppartment;
 
     /**
      * The id of the user who manage the appartment
      */
-    private int idUser;
+    private EntityUser entityUser;
 
+
+    public EntityManagement(EntityAppartment entityAppartment, EntityUser entityUser) {
+        this.entityAppartment = entityAppartment;
+        this.entityUser = entityUser;
+    }
 
     /**
      * The default consctructor
      */
     public EntityManagement(){}
 
-    /**
-     * The default consctructor
-     */
-    public EntityManagement(int idAppartment, int idUser){
-
-        this.idAppartment = idAppartment;
-        this.idUser = idUser;
+    public EntityAppartment getEntityAppartment() {
+        return entityAppartment;
     }
 
-    /*Getters & Setters*/
-    public int getIdAppartment() {
-        return idAppartment;
+    public void setEntityAppartment(EntityAppartment entityAppartment) {
+        this.entityAppartment = entityAppartment;
     }
 
-    public void setIdAppartment(int idAppartment) {
-        this.idAppartment = idAppartment;
+    public EntityUser getEntityUser() {
+        return entityUser;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public void setEntityUser(EntityUser entityUser) {
+        this.entityUser = entityUser;
     }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-
 }

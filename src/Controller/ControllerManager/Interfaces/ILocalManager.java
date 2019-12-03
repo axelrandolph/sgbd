@@ -10,7 +10,7 @@ public interface ILocalManager {
 
      <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws LocalException;
 
-     void DeleteLocal(int idAppartment, int idLocal, String typeLocal);
+     void DeleteLocal(int idAppartment, int idLocal, String typeLocal) throws LocalException;
 
      ArrayList<AbstractEntityLocal> DisplayLocalByAppartment (int idAppartment);
 

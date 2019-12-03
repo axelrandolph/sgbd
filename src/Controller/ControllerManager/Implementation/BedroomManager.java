@@ -23,14 +23,24 @@ public class BedroomManager implements IBedroomManager {
         EntityBedroom entityBedroom = new EntityBedroom(entityAppartment, description, area, typeBedroom);
         try {
             return bedroomDAO.insert(entityBedroom);
-        }catch (ConnectionException | AppartmentException | UserException e){
+        }catch (ConnectionException | AppartmentException | UserException | ManagementException e){
             throw new LocalException ("Impossible de créer cette salle de bain : " + e.getMessage());
         }
     }
 
     @Override
-    public void DeleteBedroom(int idAppartment, int idLocal) {
+    public void DeleteBedroom(int idAppartment, int idLocal) throws LocalException {
+        try {
 
+            if (bedroomDAO.getByPrimaryKey(idLocal).getAppartment().getIdAppartment() == idAppartment)
+                bedroomDAO.delete(bedroomDAO.getByPrimaryKey(idLocal));
+            else{
+                throw new LocalException("Suppression de cette chambre impossible, le local n'est probablement pas une cuisine");
+            }
+        }catch (AppartmentException | ConnectionException | LocalException | UserException |ManagementException e){
+            throw new LocalException("Supression du local impossible : " + e.getMessage());
+        }
     }
-
 }
+
+
