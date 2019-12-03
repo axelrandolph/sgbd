@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Interfaces.*;
 import Model.AbstractEntityLocal;
 import Model.EntityAppartment;

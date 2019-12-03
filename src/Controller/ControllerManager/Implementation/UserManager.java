@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.UserDAO;
 import Controller.ControllerDAO.Interfaces.IUserDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Controller.ControllerManager.Interfaces.IUserManager;

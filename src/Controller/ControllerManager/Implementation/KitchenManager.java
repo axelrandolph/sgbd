@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.KItchenDAO;
 import Controller.ControllerDAO.Interfaces.IKitchenDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Interfaces.IKitchenManager;
 import Model.EntityAppartment;
 import Model.EntityKitchen;

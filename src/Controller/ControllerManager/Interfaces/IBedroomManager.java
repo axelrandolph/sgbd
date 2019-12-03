@@ -2,6 +2,7 @@ package Controller.ControllerManager.Interfaces;
 
 import Model.EntityAppartment;
 import Model.EntityBedroom;
+import Exception.LocalException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public interface IBedroomManager {
      * @return
      * @throws SQLException
      */
-    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException;
+    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException, LocalException;
 
     /**
      *

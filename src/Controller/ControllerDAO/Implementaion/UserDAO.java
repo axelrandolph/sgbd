@@ -44,11 +44,11 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
     @Override
     public void delete(int obj) {
-        return false;
+
     }
 
     @Override
-    public boolean update(EntityUser user) {
+    public void update(EntityUser user) {
 
         String sqlUpdate = "UPDATE user "
                 + "SET firstName= ?, "
@@ -75,7 +75,6 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
 
     }
 

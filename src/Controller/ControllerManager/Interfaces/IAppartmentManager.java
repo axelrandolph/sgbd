@@ -5,10 +5,10 @@ import Model.EntityAppartment;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import Exception.*;
 public interface IAppartmentManager {
 
-    EntityAppartment CreateAppartment(String description, String adresse) throws SQLException, LocalException, AppartmentException, ConnectionException, Exception.LocalException, Exception;
+    EntityAppartment CreateAppartment(String description, String adresse) throws SQLException, LocalException, AppartmentException, ConnectionException, Exception;
 
     /**
      *
@@ -43,5 +43,5 @@ public interface IAppartmentManager {
      *
      * @param idAppartment
      */
-    void DeleteAppartment(int idAppartment) throws LocalException, AppartmentException, Exception.LocalException, Exception;
+    void DeleteAppartment(int idAppartment) throws LocalException, AppartmentException, Exception;
 }
