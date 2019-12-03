@@ -2,6 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
+import Controller.ControllerDAO.Interfaces.IConnectionDAO;
 import Exception.*;
 import Exception.AppartmentException;
 import Controller.ControllerManager.Interfaces.*;
@@ -17,6 +18,7 @@ public class LocalManager implements ILocalManager {
     private IBathroomManager bathroomManager;
     private IBedroomManager bedroomManager;
     private IAppartmentDAO appartmentDAO;
+    private IConnectionDAO connectionDAO;
 
     public LocalManager() throws LocalException {
         if (UserManager.getCurrentUser() != null){
@@ -51,7 +53,9 @@ public class LocalManager implements ILocalManager {
     }
 
     @Override
-    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal) throws LocalException {
+    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal) throws LocalException, ConnectionException {
+
+        DeleteLocalDependencies(idLocal, typeLocal);
 
         if(typeLocal == "Bathroom"){
             bathroomManager.DeleteBathroom(idAppartment, idLocal);
@@ -64,6 +68,10 @@ public class LocalManager implements ILocalManager {
         else if (typeLocal == "Kitchen"){
             kitchenManager.DeleteKitchen(idAppartment, idLocal);
         }
+    }
+
+    private void DeleteLocalDependencies(int idLocal, String typeLocal) throws ConnectionException {
+        connectionDAO.delete(idLocal, typeLocal);
     }
 
     @Override

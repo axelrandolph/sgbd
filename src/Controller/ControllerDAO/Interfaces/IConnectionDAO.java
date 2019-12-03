@@ -16,4 +16,6 @@ public interface IConnectionDAO extends IDAO<EntityConnection> {
 
     AbstractEntityLocal getByConnectedLocal(int idLocalA, String typeLocalA) throws  ConnectionException;
 
+    void delete(int idLocal, String typeLocal) throws ConnectionException;
+
 }
