@@ -72,11 +72,11 @@ public abstract class AbstractEntityLocal {
         this.idLocal = idLocal;
     }
 
-    public EntityAppartment getIdAppartment() {
+    public EntityAppartment getAppartment() {
         return appartment;
     }
 
-    public void setIdAppartment(EntityAppartment appartment) {
+    public void setAppartment(EntityAppartment appartment) {
         this.appartment = appartment;
     }
 

@@ -30,12 +30,12 @@ public class EntityBedroom extends AbstractEntityLocal {
      * @param appartment
      * @param description
      * @param area
-     * @param type
+     * @param typeBedroom
      * @param typeLocal
      */
-    public EntityBedroom(int idLocal, EntityAppartment appartment, String description, float area, String type,String typeLocal) {
+    public EntityBedroom(int idLocal, String description, float area, String typeBedroom,EntityAppartment appartment,String typeLocal) {
         super(idLocal, appartment, description, area,typeLocal);
-        this.typeBedroom = type;
+        this.typeBedroom = typeBedroom;
     }
 
     /**

@@ -1,14 +1,11 @@
-package Controller.ControllerException;
+package Exception;
 
-public class UserException extends Exception {
+public class AppartmentException extends Exception {
 
     private String message;
 
-    public UserException(String message){
+    public AppartmentException(String message) {
         this.message = message;
-    }
-
-    public UserException(){
     }
 
     @Override

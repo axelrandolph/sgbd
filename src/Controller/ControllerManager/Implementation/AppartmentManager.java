@@ -4,9 +4,6 @@ import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
-import Controller.ControllerManager.Interfaces.IBathroomManager;
-import Controller.ControllerManager.Interfaces.ILocalManager;
-import Model.AbstractEntityLocal;
 import Model.EntityAppartment;
 
 import java.sql.SQLException;
@@ -15,12 +12,10 @@ import java.util.ArrayList;
 public class AppartmentManager implements IAppartmentManager {
 
     private IAppartmentDAO appartmentDAO;
-    private ILocalManager localManager;
     public AppartmentManager() throws UserException {
 
         if(UserManager.getCurrentUser() != null) {
             this.appartmentDAO = new AppartmentDAO();
-            this.localManager = new LocalManager();
         }
 
        else throw new UserException();
@@ -30,7 +25,16 @@ public class AppartmentManager implements IAppartmentManager {
     public EntityAppartment CreateAppartment(String description, String adresse,boolean state) throws SQLException {
 
         EntityAppartment entityAppartment = new EntityAppartment(description,adresse,state);
-        entityAppartment = appartmentDAO.insert(entityAppartment);
+        try {
+            entityAppartment = appartmentDAO.insert(entityAppartment);
+        } catch (Exception.AppartmentException e) {
+            e.printStackTrace();
+
+        } catch (Exception.LocalException e) {
+            e.printStackTrace();
+        } catch (Exception.ConnectionException e) {
+            e.printStackTrace();
+        }
 
         return entityAppartment;
     }

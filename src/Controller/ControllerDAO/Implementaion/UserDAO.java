@@ -43,7 +43,7 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
     }
 
     @Override
-    public boolean delete(int obj) {
+    public void delete(int obj) {
         return false;
     }
 

@@ -16,6 +16,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
     /**
      * register an appartment object
+     *
      * @param entityAppartment
      * @return the appartment registred otherwise null
      */
@@ -208,7 +209,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         while (resultSet.next()) {
             EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
                     resultSet.getString("adress"),
-                    resultSet.getString("description"),
+                    resultSet.getString("descriptionAppartment"),
 
                     resultSet.getBoolean("state"));
 
