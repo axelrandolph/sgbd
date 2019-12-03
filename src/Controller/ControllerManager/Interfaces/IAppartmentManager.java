@@ -35,7 +35,7 @@ public interface IAppartmentManager {
                                                                         int nbKitchen,
                                                                         int nbWaterPointByBathroom,
                                                                         int nbGasPointByKitchen,
-                                                                        String bedroomType) throws SQLException;
+                                                                        String bedroomType) throws SQLException, AppartmentException;
 
     /**
      *
