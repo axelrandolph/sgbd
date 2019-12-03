@@ -2,10 +2,10 @@ package Controller.ControllerDAO.Interfaces;
 
 import Model.EntityBathroom;
 
-import java.sql.SQLException;
+import Exception.LocalException;
 
 public interface IBathroomDAO extends IDAO<EntityBathroom> {
 
-    EntityBathroom updateAppartment(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint);
+    EntityBathroom updateBathroom(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) throws LocalException;
 
 }

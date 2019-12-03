@@ -2,6 +2,8 @@ package Controller.ControllerDAO.Implementaion;
 
 import Controller.ControllerDAO.Interfaces.IManagementDAO;
 import Model.EntityManagement;
+import Exception.LocalException;
+import Exception.AppartmentException;
 
 public class ManagementDAO extends DAO<EntityManagement> implements IManagementDAO {
     @Override
@@ -10,11 +12,7 @@ public class ManagementDAO extends DAO<EntityManagement> implements IManagementD
     }
 
     @Override
-    public void delete(int obj){
-    }
-
-    @Override
-    public void update(EntityManagement obj) {
+    public void delete(EntityManagement entityManagement) throws AppartmentException, LocalException {
 
     }
 

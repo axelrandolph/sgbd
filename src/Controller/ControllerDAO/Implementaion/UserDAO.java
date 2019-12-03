@@ -3,6 +3,8 @@ package Controller.ControllerDAO.Implementaion;
 import Controller.ControllerDAO.Interfaces.IUserDAO;
 import Model.EntityUser;
 
+import Exception.UserException;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
     @Override
-    public EntityUser insert(EntityUser user) {
+    public EntityUser insert(EntityUser user) throws UserException {
 
         String query = "INSERT INTO user ("
                 + " username,"
@@ -35,7 +37,7 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new UserException("Impossible d'insérer cet utilisateur dans la base de donnée : " + e.getMessage());
         }
 
 
@@ -43,28 +45,23 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
     }
 
     @Override
-    public void delete(int obj) {
+    public void delete(EntityUser obj)  {
 
     }
 
-    @Override
-    public void update(EntityUser user) {
 
-        String sqlUpdate = "UPDATE user "
-                + "SET firstName= ?, "
-                + "SET lastName = ?,"
-                + "SET fonction = ?,"
-                + "SET password = ?,"
-                + "WHERE username = ?";
+    @Override
+    public void update(EntityUser user, String firstName, String lastName, String function, String password) throws UserException {
+
 
         String sql = "UPDATE user SET firstName = ?, lastName = ? ,fonction = ?,password = ? WHERE username = ?";
         try{
             PreparedStatement preparedStmt = getConn().prepareStatement(sql);
 
-            preparedStmt.setString(2,user.getFirstName());
-            preparedStmt.setString(3,user.getLastName());
-            preparedStmt.setString(4,user.getFunction());
-            preparedStmt.setString(1,user.getPassword());
+            preparedStmt.setString(1, firstName);
+            preparedStmt.setString(2, lastName);
+            preparedStmt.setString(3, function);
+            preparedStmt.setString(4, password);
             preparedStmt.setString(5,user.getUserName());
 
 
@@ -73,41 +70,12 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new UserException("L'utilisateur ayant pour username : " + user.getUserName() + " n'a pas pus être mis à jour due à l'erreur suivante  : " + e.getMessage());
         }
 
     }
 
 
-    private boolean validateUsername(String username) {
-        return username.length() > 3;
-    }
-
-    private boolean validatePass(String pass) {
-        return pass.length() >= 10 & pass.matches(".*\\d+.*");
-    }
-
-    public int register(String username, String pass) {
-        PreparedStatement prepStmt = null;
-        try {
-            prepStmt = getConn().prepareStatement("SELECT username, password FROM user WHERE username=?");
-            prepStmt.setString(1, username);
-            ResultSet rs = prepStmt.executeQuery();
-            rs.next();
-            if (rs.getInt(1) <= 0) {
-                if (validatePass(pass) && validateUsername(username)) {
-                  //  insertNewUser(username, pass);
-                 //   createAccountForUser(username);
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
 
     @Override
     public <L> EntityUser getByPrimaryKey(L username) throws SQLException {
@@ -133,16 +101,20 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
     }
 
     @Override
-    public EntityUser IdentifiedUser(String username, String password) throws SQLException {
+    public EntityUser IdentifiedUser(String username, String password) throws UserException {
 
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?;";
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
-        pst.setString(1, username);
-        pst.setString(2, password);
-        ResultSet rs = pst.executeQuery();
-        if (rs.next())
-            return getByPrimaryKey(rs.getString("username"));
+        try {
+            String sql = "SELECT * FROM user WHERE username = ? AND password = ?;";
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next())
+                return getByPrimaryKey(rs.getString("username"));
+        }catch (SQLException e){
+            throw new UserException("L'utilisateur ayant pour username : " + username + " n'a pas pus être identifié due à l'erreur  : " + e.getMessage() + " \n Veuillez reiterer l'operation.");
+        }
         return null;
     }
 }

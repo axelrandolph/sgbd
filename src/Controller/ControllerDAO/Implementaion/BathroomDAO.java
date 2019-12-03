@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import Exception.LocalException;
 import Exception.AppartmentException;
+import Exception.ConnectionException;
 import Static.StaticName;
 
 
@@ -65,11 +66,6 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
 
 
     @Override
-    public void update(EntityBathroom obj) {
-
-    }
-
-    @Override
     public <L> EntityBathroom getByPrimaryKey(L idBathroom) throws LocalException {
 
          EntityBathroom entityBathroom = null;
@@ -80,12 +76,43 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
 
            ResultSet resultSet= preparedStmt.executeQuery();
            if (resultSet.next()){
-               entityBathroom = new EntityBathroom((Integer)idBathroom, resultSet.getString("description"), resultSet.getFloat("area"), resultSet.getInt("nbWaterPoint"), appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
+               entityBathroom = new EntityBathroom((Integer)idBathroom, resultSet.getString("description"),
+                       resultSet.getFloat("area"), resultSet.getInt("nbWaterPoint"),
+                       appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
            }
 
-        } catch (SQLException | AppartmentException e) {
+        } catch (SQLException | AppartmentException | ConnectionException e) {
             throw new LocalException("Echec lors de l'obtention de la salle de bain due à l'erreur suivante : " + e.getMessage());
         }
+
+        return entityBathroom;
+    }
+
+    @Override
+    public EntityBathroom updateBathroom(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) throws LocalException {
+        String sql = "UPDATE bathroom " +
+                "SET description = ?, " +
+                "  area = ?, " +
+                "  nbWaterPoint = ? " +
+                "WHERE idBathroom = ?";
+
+        try {
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, description);
+            pst.setFloat(2,  area);
+            pst.setInt(3, nbWaterPoint);
+            pst.setInt(4,  entityBathroom.getIdLocal());
+
+            pst.executeUpdate();
+            pst.close();
+        }catch (SQLException e){
+            throw new LocalException("Impossible de mettre a jour la salle de bain : " + entityBathroom.getIdLocal() + " due  à l'erreur suivante : "+ e.getMessage());
+        }
+
+        entityBathroom.setDescription(description);
+        entityBathroom.setArea(area);
+        entityBathroom.setNbWaterPoint(nbWaterPoint);
 
         return entityBathroom;
     }

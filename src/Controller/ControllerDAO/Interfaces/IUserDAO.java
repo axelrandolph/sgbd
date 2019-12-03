@@ -1,11 +1,12 @@
 package Controller.ControllerDAO.Interfaces;
 
-import Controller.ControllerDAO.Implementaion.DAO;
 import Model.EntityUser;
-
-import java.sql.SQLException;
+import Exception.UserException;
 
 public interface IUserDAO extends IDAO<EntityUser> {
 
-    EntityUser IdentifiedUser(String username, String password) throws SQLException;
+    EntityUser IdentifiedUser(String username, String password) throws UserException;
+
+    void update(EntityUser user, String firstName, String lastName, String function, String password) throws UserException;
+
 }

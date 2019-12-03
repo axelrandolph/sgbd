@@ -85,9 +85,6 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
 
     }
 
-    @Override
-    public void update(EntityConnection obj) {
-    }
 
     @Override
     public <L> EntityConnection getByPrimaryKey(L id) throws ConnectionException {
@@ -95,16 +92,20 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public void AddLocalToConnectedLocal(int idAppartment, int idLocal, String typeLocal) throws SQLException {
+    public void AddLocalToConnectedLocal(int idAppartment, int idLocal, String typeLocal) throws ConnectionException {
 
-        String sql = "INSERT INTO connectedlocal(idConnectedLocal, LocalType, idAppartment) VALUES(?, ?, ?);";
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, idLocal);
-        pst.setString(2, typeLocal);
-        pst.setInt(3, idAppartment);
-        pst.executeUpdate();
-        pst.close();
+        try {
+            String sql = "INSERT INTO connectedlocal(idConnectedLocal, LocalType, idAppartment) VALUES(?, ?, ?);";
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, idLocal);
+            pst.setString(2, typeLocal);
+            pst.setInt(3, idAppartment);
+            pst.executeUpdate();
+            pst.close();
+        }catch (SQLException e){
+            throw new ConnectionException("Ajout dans la table connected local impossible due à l'erreur suivante : " + e.getMessage());
+        }
 
     }
 
@@ -117,19 +118,23 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
      * @throws SQLException
      */
     @Override
-    public boolean IsConnectedLocal(int idAppartment, int idLocal, String typeLocal) throws SQLException {
+    public boolean IsConnectedLocal(int idAppartment, int idLocal, String typeLocal) throws ConnectionException {
 
-        String sql = "SELECT * FROM connectedlocal WHERE idAppartment = ? AND idConnectedLocal = ? AND LocalType = ?;";
-        PreparedStatement preparedStatement = null;
-        preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1,idAppartment);
-        preparedStatement.setInt(2, idLocal);
-        preparedStatement.setString(3, typeLocal);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()) {
-            resultSet.getInt("idConnectedLocal");
-            if (resultSet.wasNull())
-                return false;
+        try {
+            String sql = "SELECT * FROM connectedlocal WHERE idAppartment = ? AND idConnectedLocal = ? AND LocalType = ?;";
+            PreparedStatement preparedStatement = null;
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, idAppartment);
+            preparedStatement.setInt(2, idLocal);
+            preparedStatement.setString(3, typeLocal);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                resultSet.getInt("idConnectedLocal");
+                if (resultSet.wasNull())
+                    return false;
+            }
+        }catch (SQLException e){
+            throw new ConnectionException("Aucun résultat rendu du à l'erreur suivante : " + e.getMessage());
         }
 
         return true;
@@ -145,7 +150,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
      * @throws SQLException
      */
     @Override
-    public boolean IsConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB) {
+    public boolean IsConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB) throws ConnectionException {
         String sql = "SELECT * FROM connection WHERE idConnectedLocal = ? AND idConnectedLocal_2 = ? AND LocalType = ? AND LocalType_2 = ?;";
 
         try {
@@ -172,7 +177,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
                     return false;
             }
         }catch (SQLException e){
-
+            throw new ConnectionException("Aucun résultat rendu du à l'erreur suivante : " + e.getMessage());
         }
 
         return true;

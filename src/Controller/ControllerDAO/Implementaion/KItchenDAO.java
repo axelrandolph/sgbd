@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import Exception.LocalException;
 import Exception.AppartmentException;
+import Exception.ConnectionException;
 import Static.StaticName;
 
 public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
@@ -44,26 +45,22 @@ public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
     }
 
     @Override
-    public void delete(int idKitchen) throws LocalException {
+    public void delete(EntityKitchen entityKitchen) throws LocalException {
 
         String query = "delete from kitchen where idKitchen = ?";
         try {
             PreparedStatement preparedStmt = getConn().prepareStatement(query);
-            preparedStmt.setInt(1, idKitchen);
+            preparedStmt.setInt(1, entityKitchen.getIdLocal());
 
             preparedStmt.executeUpdate();
 
 
         } catch (SQLException e) {
-            throw new LocalException("Suppression de la cuisine numero " + idKitchen +" impossible : " + e.getMessage());
+            throw new LocalException("Suppression de la cuisine numero " + entityKitchen.getIdLocal() +" impossible : " + e.getMessage());
         }
 
     }
 
-    @Override
-    public void update(EntityKitchen obj) {
-
-    }
 
     @Override
     public <L> EntityKitchen getByPrimaryKey(L idKitchen) throws LocalException{
@@ -77,11 +74,13 @@ public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
 
             ResultSet resultSet= preparedStmt.executeQuery();
             if (resultSet.next()){
-                entityKitchen = new EntityKitchen((Integer)idKitchen, resultSet.getString("description"), resultSet.getFloat("area"), resultSet.getInt("nbGasPoint"), appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localKitchenType);
+                entityKitchen = new EntityKitchen((Integer)idKitchen, resultSet.getString("description"),
+                        resultSet.getFloat("area"), resultSet.getInt("nbGasPoint"),
+                        appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localKitchenType);
             }
 
-        } catch (SQLException | AppartmentException  e) {
-            throw new LocalException("Echec lors de l'obtention de la chambre numéro " + idKitchen +" due à l'erreur suivante : " + e.getMessage());
+        } catch (SQLException | AppartmentException | ConnectionException  e) {
+            throw new LocalException("Echec lors de l'obtention de la cuisine numéro " + idKitchen +" due à l'erreur suivante : " + e.getMessage());
         }
 
         return entityKitchen;

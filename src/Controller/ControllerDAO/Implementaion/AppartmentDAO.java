@@ -53,6 +53,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             preparedStmt.setInt(1, idAppartment);
             preparedStmt.execute();
 
+            preparedStmt.close();
 
         } catch (SQLException e) {
             throw new AppartmentException("Echec lors de la délétion de l'appartement " + entityAppartment.getIdAppartment()+ "due à l'erreur suivante  : "  + e.getMessage());
@@ -81,6 +82,8 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
                         result.getBoolean("state")
 
                 );
+            pst.close();
+            result.close();
         } catch (SQLException e){
             throw new AppartmentException("Impossible d'obtenir l'appartment numero : "+ id +"due à l'erreur suivante : " + e.getMessage());
         }
@@ -210,6 +213,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
 
             ResultSet resultSet = pst.executeQuery();
+            pst.close();
 
             return DisplayAppartmentByResulSet(resultSet);
 
@@ -234,23 +238,44 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
                 entityAppartments.add(entityAppartment);
             }
+            resultSet.close();
+
         }catch (SQLException e ){
             throw new AppartmentException("la recheche à trouvé un appartement mais a fait une erreur lors de son affichage : " + e.getMessage());
         }
-
         return entityAppartments;
     }
 
 
     @Override
-    public EntityAppartment updateAppartment(EntityAppartment appartment, String description, String adress, boolean state) {
+    public EntityAppartment updateAppartment(EntityAppartment appartment, String description, String adress, boolean state) throws AppartmentException {
 
 
         String sql = "UPDATE appartment " +
-                "SET rue = '49 Rue Ameline',\n" +
-                "  ville = 'Saint-Eustache-la-Forêt',\n" +
-                "  code_postal = '76210'\n" +
-                "WHERE id = 2";
+                "SET description = ?, " +
+                "  adress = ?, " +
+                "  state = ? " +
+                "WHERE idAppartment = ?";
+
+        try {
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, description);
+            pst.setString(2,  adress);
+            pst.setBoolean(3, state);
+            pst.setInt(4,  appartment.getIdAppartment());
+
+            pst.executeUpdate();
+
+            pst.close();
+
+        }catch (SQLException e){
+            throw new AppartmentException("Impossible de mettre a jour l'appartment : " + appartment.getIdAppartment() + " due  à l'erreur suivante : "+ e.getMessage());
+        }
+
+        appartment.setAdress(adress);
+        appartment.setState(state);
+        appartment.setDescription(description);
 
         return appartment;
     }

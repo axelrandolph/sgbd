@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Exception.AppartmentException;
+import Exception.ConnectionException;
 import Exception.LocalException;
 
 import Static.StaticName;
@@ -64,10 +65,6 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
         }
     }
 
-    @Override
-    public void update(EntityBedroom obj){
-
-    }
 
     @Override
     public <L> EntityBedroom getByPrimaryKey(L idBedroom) throws LocalException {
@@ -80,12 +77,44 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
 
             ResultSet resultSet= preparedStmt.executeQuery();
             if (resultSet.next()){
-                entityBedroom = new EntityBedroom((Integer)idBedroom, resultSet.getString("description"), resultSet.getFloat("area"), resultSet.getString("bedroomType"), appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBedroomType);
+                entityBedroom = new EntityBedroom((Integer)idBedroom, resultSet.getString("description"),
+                        resultSet.getFloat("area"), resultSet.getString("bedroomType"),
+                        appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")),
+                        StaticName.localBedroomType);
             }
 
-        } catch (SQLException | AppartmentException  e) {
+        } catch (SQLException | AppartmentException | ConnectionException e) {
             throw new LocalException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
         }
+
+        return entityBedroom;
+    }
+
+    @Override
+    public EntityBedroom updateBedroom(EntityBedroom entityBedroom, String description, float area, String bedroomType) throws LocalException {
+        String sql = "UPDATE bedroom " +
+                "SET description = ?, " +
+                "  area = ?, " +
+                "  bedroomType = ? " +
+                "WHERE idBedroom = ?";
+
+        try {
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, description);
+            pst.setFloat(2,  area);
+            pst.setString(3, bedroomType);
+            pst.setInt(4,  entityBedroom.getIdLocal());
+
+            pst.executeUpdate();
+            pst.close();
+        }catch (SQLException e){
+            throw new LocalException("Impossible de mettre a jour la chambre numero : " + entityBedroom.getIdLocal() + " due  à l'erreur suivante : "+ e.getMessage());
+        }
+
+        entityBedroom.setDescription(description);
+        entityBedroom.setArea(area);
+        entityBedroom.setTypeBedroom(bedroomType);
 
         return entityBedroom;
     }
