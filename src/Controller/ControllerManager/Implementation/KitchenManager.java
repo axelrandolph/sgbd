@@ -2,7 +2,8 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.KItchenDAO;
 import Controller.ControllerDAO.Interfaces.IKitchenDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
+import Exception.LocalException;
 import Controller.ControllerManager.Interfaces.IKitchenManager;
 import Model.EntityAppartment;
 import Model.EntityKitchen;
@@ -21,7 +22,7 @@ public class KitchenManager implements IKitchenManager {
     }
 
     @Override
-    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException {
+    public EntityKitchen CreateKitchen(EntityAppartment entityAppartment, String description, float area, int nbgaspoint) throws SQLException, LocalException, ConnectionException, AppartmentException {
 
         EntityKitchen entityKitchen = new EntityKitchen(entityAppartment, description, area, nbgaspoint);
        return kitchenDAO.insert(entityKitchen);

@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.ConnectionDAO;
 import Controller.ControllerDAO.Interfaces.IConnectionDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;

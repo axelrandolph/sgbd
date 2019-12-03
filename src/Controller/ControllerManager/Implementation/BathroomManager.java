@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.BathroomDAO;
 import Controller.ControllerDAO.Interfaces.IBathroomDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Interfaces.IBathroomManager;
 import Model.EntityAppartment;
 import Model.EntityBathroom;

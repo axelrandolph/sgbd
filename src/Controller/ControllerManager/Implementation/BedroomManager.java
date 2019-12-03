@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.BedroomDAO;
 import Controller.ControllerDAO.Interfaces.IBedroomDAO;
-import Controller.ControllerException.UserException;
+import Exception.* ;
 import Controller.ControllerManager.Interfaces.IBedroomManager;
 import Model.EntityAppartment;
 import Model.EntityBedroom;
@@ -20,7 +20,7 @@ public class BedroomManager implements IBedroomManager {
     }
 
     @Override
-    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException {
+    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws Exception {
 
         EntityBedroom entityBedroom = new EntityBedroom(entityAppartment, description, area, typeBedroom);
         return bedroomDAO.insert(entityBedroom);

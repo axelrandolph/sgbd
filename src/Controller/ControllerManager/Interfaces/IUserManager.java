@@ -1,6 +1,6 @@
 package Controller.ControllerManager.Interfaces;
 
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;
 import Model.EntityUser;
