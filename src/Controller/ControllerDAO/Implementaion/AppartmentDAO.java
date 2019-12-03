@@ -35,6 +35,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             ResultSet resultSet = pst.getGeneratedKeys();
 
             entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
+            pst.close();
 
             pst.close();
 
