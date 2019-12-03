@@ -33,9 +33,9 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
             pst.setBoolean(3, entityAppartment.getState());
             pst.executeUpdate();
             ResultSet resultSet = pst.getGeneratedKeys();
-            pst.close();
 
             entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
+            pst.close();
 
         }catch (SQLException e) {
             throw new AppartmentException("Echec lors de la l'insertion de l'appartement " + entityAppartment.getIdAppartment()+ "due à l'erreur suivante  : "  + e.getMessage());

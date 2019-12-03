@@ -1,5 +1,7 @@
 package View;
 
+import Controller.ControllerManager.Implementation.UserManager;
+import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Controller.ControllerManager.Interfaces.IUserManager;
 
 import java.awt.BorderLayout;
@@ -21,7 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import Exception.*;
 public class mainApp extends JFrame {
 
     private JPanel contentPane;
@@ -31,7 +33,7 @@ public class mainApp extends JFrame {
     private JTextField fisrtnametextField_1;
     private JTextField lastnametextField_1;
     private JTextField functiontextField_2;
-    private JPasswordField passwordField;
+    private JTextField passwordField;
     private JTextField textField_1;
     private JTextField addresstextField_2;
     private JTable table;
@@ -45,6 +47,8 @@ public class mainApp extends JFrame {
     private JTextField nbKitchentextField;
     private JTable table_2;
     private IUserManager iUserManager;
+    private IAppartmentManager iAppartmentManager;
+    private TableModel model;
 
     /**
      * Launch the application.
@@ -100,7 +104,29 @@ public class mainApp extends JFrame {
 
         JButton btnLogIn = new JButton("LOG IN");
         btnLogIn.setBounds(572, 12, 115, 29);
+        btnLogIn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    iUserManager.LogUser(usernametextField.getText(),passwordtextField.getText());
+                } catch (UserException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
         panel.add(btnLogIn);
+
+        JButton btnLogOut = new JButton("LOG OUT");
+        btnLogOut.setBounds(744, 12, 115, 29);
+        btnLogOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                    iUserManager.LogOut();
+
+            }
+
+        });
+        panel.add(btnLogOut);
 
         JLabel lblUsername_1 = new JLabel("Username : ");
         lblUsername_1.setBounds(15, 123, 87, 20);
@@ -146,13 +172,14 @@ public class mainApp extends JFrame {
         passwordField.setBounds(117, 342, 146, 26);
         panel.add(passwordField);
 
+        iUserManager = new UserManager();
         JButton btnSignIn = new JButton("SIGN IN");
         btnSignIn.setBounds(490, 220, 115, 29);
         btnSignIn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    iUserManager.CreateUser(usernameField1.getText(),lastnameField.getText(),lastnameField.getText(),functionField.getText(),passwordField2.getText());
-                } catch (SQLException e) {
+                    iUserManager.CreateUser(textField.getText(),fisrtnametextField_1.getText(),lastnametextField_1.getText(),functiontextField_2.getText(),passwordField.getText());
+                } catch ( UserException e) {
                     e.printStackTrace();
                 }
             }
@@ -195,20 +222,31 @@ public class mainApp extends JFrame {
         JRadioButton radioButton = new JRadioButton("");
         panel_1.add(radioButton);
 
+
         JButton btnAdd = new JButton("ADD");
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    iAppartmentManager.CreateAppartment(textField_1.getText(),addresstextField_2.getText());
+                    table.setValueAt(idApparttextField_2,0,0);
+                    table.setValueAt(textField_1, 1, 0);
+                    table.setValueAt(addresstextField_2, 2, 0);
+                    table.setValueAt(radioButton, 3, 0);
+
+                } catch (AppartmentException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
         panel_1.add(btnAdd);
 
         JScrollPane scrollPane_1 = new JScrollPane();
         panel_2.add(scrollPane_1, BorderLayout.CENTER);
 
         table = new JTable();
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                },
-                new String[] {
-                        "idAppartment", "description","address","state"
-                }
-        ));
+        table.setModel(model);
+        //contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
         scrollPane_1.setViewportView(table);
 
         JPanel panel_3 = new JPanel();
@@ -239,6 +277,7 @@ public class mainApp extends JFrame {
                         "idLocal", "description","type","idAppartment"
                 }
         ));
+
         scrollPane_2.setViewportView(table_1);
 
         JPanel panel_5 = new JPanel();
@@ -309,4 +348,5 @@ public class mainApp extends JFrame {
 
 
     }
+
 }

@@ -52,4 +52,18 @@ public class AppartmentManagerTest {
 
     }
 
+    @Test
+    public void createAppt() throws AppartmentException, UserException {
+        UserManager userManager = new UserManager() ;
+        userManager.LogUser("userName","firstName");
+
+        EntityAppartment appartment = new EntityAppartment(3,"2 rue moi","cette appart est moche", true);
+
+        IAppartmentManager aptman = new AppartmentManager();
+        aptman.CreateAppartment("cette appart est moche","2 rue moi");
+
+        assertEquals(appartment, aptman.CreateAppartment("cette appart est moche","2 rue moi"));
+
+    }
+
 }
