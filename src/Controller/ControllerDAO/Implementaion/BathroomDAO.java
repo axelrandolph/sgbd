@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import Exception.LocalException;
 import Exception.AppartmentException;
+import Exception.UserException;
 import Exception.ConnectionException;
 
 import Static.StaticName;
@@ -82,7 +83,7 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
                         appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
             }
 
-        } catch (SQLException | AppartmentException | ConnectionException e) {
+        } catch (SQLException | AppartmentException | ConnectionException | UserException e) {
             throw new LocalException("Echec lors de l'obtention de la salle de bain due à l'erreur suivante : " + e.getMessage());
         }
 

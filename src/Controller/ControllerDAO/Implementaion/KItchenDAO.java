@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import Exception.LocalException;
 import Exception.AppartmentException;
 import Exception.ConnectionException;
+import  Exception.UserException;
 import Static.StaticName;
 
 public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
@@ -79,7 +80,7 @@ public class KItchenDAO extends DAO<EntityKitchen> implements IKitchenDAO {
                         appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localKitchenType);
             }
 
-        } catch (SQLException | AppartmentException | ConnectionException  e) {
+        } catch (SQLException | AppartmentException | ConnectionException | UserException e) {
             throw new LocalException("Echec lors de l'obtention de la cuisine numéro " + idKitchen +" due à l'erreur suivante : " + e.getMessage());
         }
 

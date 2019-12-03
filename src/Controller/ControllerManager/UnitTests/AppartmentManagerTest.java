@@ -43,7 +43,7 @@ public class AppartmentManagerTest {
 
 
     @Test
-    public void getBy() throws SQLException, AppartmentException, ConnectionException, LocalException {
+    public void getBy() throws SQLException, AppartmentException, ConnectionException, LocalException, UserException {
 
         EntityAppartment appartment = new EntityAppartment(1,"loool","haha", true);
         IAppartmentDAO aptDAO = new AppartmentDAO();

@@ -9,9 +9,7 @@ import Model.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Exception.ConnectionException;
-import Exception.LocalException;
-import Exception.AppartmentException;
+import Exception.*;
 import Static.StaticName;
 
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
@@ -194,7 +192,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             } else if (typeLocal == StaticName.localBedroomType) {
                 return bedroomDAO.getByPrimaryKey(idLocal);
             }
-        }catch (LocalException | AppartmentException | SQLException e){
+        }catch (LocalException | AppartmentException | UserException e){
             throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : "+ e.getMessage());
         }
 

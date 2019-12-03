@@ -32,6 +32,10 @@ public class BathroomManager implements IBathroomManager {
 
     }
 
+    @Override
+    public void DeleteBathroom(int idAppartment, int idLocal) {
+
+    }
 
 
 }
