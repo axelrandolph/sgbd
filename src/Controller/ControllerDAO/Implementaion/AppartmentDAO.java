@@ -208,7 +208,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         while (resultSet.next()) {
             EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
                     resultSet.getString("adress"),
-                    resultSet.getString("descriptionAppartment"),
+                    resultSet.getString("description"),
 
                     resultSet.getBoolean("state"));
 

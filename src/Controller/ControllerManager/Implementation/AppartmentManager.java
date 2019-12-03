@@ -27,9 +27,9 @@ public class AppartmentManager implements IAppartmentManager {
     }
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException {
+    public EntityAppartment CreateAppartment(String description, String adresse,boolean state) throws SQLException {
 
-        EntityAppartment entityAppartment = new EntityAppartment(description,adresse, false);
+        EntityAppartment entityAppartment = new EntityAppartment(description,adresse,state);
         entityAppartment = appartmentDAO.insert(entityAppartment);
 
         return entityAppartment;

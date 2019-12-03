@@ -15,7 +15,9 @@ public interface IAppartmentManager {
      * @return
      * @throws SQLException
      */
-    public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
+    //public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
+
+    public EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws SQLException;
 
     /**
      *

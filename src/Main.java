@@ -4,6 +4,7 @@ import Controller.ControllerManager.Implementation.UserManager;
 import Model.EntityUser;
 import View.MainView;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 public class Main {
@@ -23,6 +24,7 @@ public class Main {
 
         MainView mainView = new MainView();
         mainView.setVisible(true);
+        mainView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
 
