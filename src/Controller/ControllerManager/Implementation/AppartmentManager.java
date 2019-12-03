@@ -2,10 +2,9 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
-import Controller.ControllerException.UserException;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Model.EntityAppartment;
-
+import Exception.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,29 +17,34 @@ public class AppartmentManager implements IAppartmentManager {
             this.appartmentDAO = new AppartmentDAO();
         }
 
-       else throw new UserException();
+        else throw new UserException("");
     }
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException {
+    public EntityAppartment CreateAppartment(String description, String adresse) throws Exception {
 
-        EntityAppartment entityAppartment = new EntityAppartment(description,adresse, false);
+        EntityAppartment entityAppartment = new EntityAppartment(description, adresse, false);
         entityAppartment = appartmentDAO.insert(entityAppartment);
 
         return entityAppartment;
     }
 
     @Override
-    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
+    public EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws SQLException {
+        return null;
+    }
 
-        return appartmentDAO.SearchAppartmentByCaracteristics(nbBathroom,nbBedroom,nbKitchen,nbWaterPointByBathroom,nbGasPointByKitchen,bedroomType);
+    @Override
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws Exception {
+
+        return appartmentDAO.SearchAppartmentByCaracteristics(nbBathroom, nbBedroom, nbKitchen, nbWaterPointByBathroom, nbGasPointByKitchen, bedroomType);
 
     }
 
 
 
     @Override
-    public void DeleteAppartment(int idAppartment){
+    public void DeleteAppartment(int idAppartment) throws Exception {
 
         appartmentDAO.delete(idAppartment);
     }

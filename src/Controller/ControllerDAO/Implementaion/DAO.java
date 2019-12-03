@@ -47,7 +47,7 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract T insert(T obj) throws AppartmentException, LocalException, ConnectionException;
+    public abstract T insert(T obj) throws AppartmentException, LocalException, ConnectionException, SQLException;
 
     /**
      * Delete Method
