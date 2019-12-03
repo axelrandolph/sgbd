@@ -19,7 +19,7 @@ public interface IBedroomManager {
      * @return
      * @throws SQLException
      */
-    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException, LocalException;
+    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws SQLException, LocalException, Exception;
 
     /**
      *

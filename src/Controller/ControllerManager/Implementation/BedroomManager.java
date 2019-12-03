@@ -16,7 +16,7 @@ public class BedroomManager implements IBedroomManager {
     public BedroomManager() throws UserException {
         if(UserManager.getCurrentUser() != null)
             this.bedroomDAO = new BedroomDAO();
-        else throw new UserException();
+        else throw new UserException("Chambre  non conforme");
     }
 
     @Override

@@ -3,6 +3,7 @@ package Controller.ControllerManager.UnitTests;
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Exception.UserException;
+import Exception.*;
 import Controller.ControllerManager.Implementation.AppartmentManager;
 import Controller.ControllerManager.Implementation.UserManager;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
@@ -37,6 +38,18 @@ public class AppartmentManagerTest {
         ArrayList<EntityAppartment> listAppart = new ArrayList<EntityAppartment>();
         listAppart.add(appartment);
 
-        assertEquals(listAppart, aptDAO.DisplayAppartmentResulSet());
+       // assertEquals(listAppart, aptDAO.DisplayAppartmentResulSet());
     }
+
+
+    @Test
+    public void getBy() throws SQLException, AppartmentException, ConnectionException, LocalException {
+
+        EntityAppartment appartment = new EntityAppartment(1,"loool","haha", true);
+        IAppartmentDAO aptDAO = new AppartmentDAO();
+        aptDAO.getByPrimaryKey(appartment.getIdAppartment());
+        assertEquals(appartment, aptDAO.getByPrimaryKey(appartment.getIdAppartment()));
+
+    }
+
 }

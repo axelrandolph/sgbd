@@ -2,7 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.ConnectionDAO;
 import Controller.ControllerDAO.Interfaces.IConnectionDAO;
-import Exception.UserException;
+import Exception.*;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;
@@ -17,11 +17,11 @@ public class ConnectionManager implements IConnectionManager {
         if (UserManager.getCurrentUser() != null){
             this.connectionDAO = new ConnectionDAO();
         }
-        else throw new UserException();
+        else throw new UserException("Connection mal faite");
     }
 
     @Override
-    public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws SQLException {
+    public EntityConnection CreateLocalConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB, int idAppartment) throws Exception {
 
         if (!connectionDAO.IsConnectedLocal(idAppartment,idLocalA,typeLocalA)) {
             connectionDAO.AddLocalToConnectedLocal(idAppartment, idLocalA, typeLocalA);

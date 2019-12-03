@@ -7,10 +7,14 @@ import Model.EntityBathroom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Exception.*;
 
+<<<<<<< HEAD
 import Exception.LocalException;
 import Exception.AppartmentException;
 import Exception.ConnectionException;
+=======
+>>>>>>> f17f947837fb38939b260831cc87412132f9d602
 import Static.StaticName;
 
 
@@ -81,7 +85,11 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
                        appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
            }
 
+<<<<<<< HEAD
         } catch (SQLException | AppartmentException | ConnectionException e) {
+=======
+        } catch (SQLException | Exception.AppartmentException | Exception.ConnectionException e) {
+>>>>>>> f17f947837fb38939b260831cc87412132f9d602
             throw new LocalException("Echec lors de l'obtention de la salle de bain due à l'erreur suivante : " + e.getMessage());
         }
 
@@ -89,6 +97,7 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     }
 
     @Override
+<<<<<<< HEAD
     public EntityBathroom updateBathroom(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) throws LocalException {
         String sql = "UPDATE bathroom " +
                 "SET description = ?, " +
@@ -115,5 +124,9 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
         entityBathroom.setNbWaterPoint(nbWaterPoint);
 
         return entityBathroom;
+=======
+    public EntityBathroom updateAppartment(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) {
+        return null;
+>>>>>>> f17f947837fb38939b260831cc87412132f9d602
     }
 }

@@ -2,14 +2,13 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.UserDAO;
 import Controller.ControllerDAO.Interfaces.IUserDAO;
-import Exception.UserException;
+import Exception.*;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
 import Controller.ControllerManager.Interfaces.IConnectionManager;
 import Controller.ControllerManager.Interfaces.IUserManager;
 import Model.AbstractEntityLocal;
 import Model.EntityConnection;
 import Model.EntityUser;
-import View.MainView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public class UserManager implements IUserManager{
 
         private static EntityUser currentUser;
         private IUserDAO userDAO;
-        private MainView mainView;
 
         public UserManager() {
                 this.userDAO = new UserDAO();
@@ -33,7 +31,7 @@ public class UserManager implements IUserManager{
         }
 
         @Override
-        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException {
+        public EntityUser CreateUser(String username, String firstname, String lastname, String function, String password) throws SQLException, LocalException, AppartmentException, ConnectionException {
 
                 EntityUser user = new EntityUser(username,firstname,lastname,function,password);
                 userDAO.insert(user);

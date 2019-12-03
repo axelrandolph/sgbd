@@ -2,8 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.KItchenDAO;
 import Controller.ControllerDAO.Interfaces.IKitchenDAO;
-import Exception.UserException;
-import Exception.LocalException;
+import Exception.*;
 import Controller.ControllerManager.Interfaces.IKitchenManager;
 import Model.EntityAppartment;
 import Model.EntityKitchen;
@@ -18,7 +17,7 @@ public class KitchenManager implements IKitchenManager {
         if (UserManager.getCurrentUser() != null){
             this.kitchenDAO = new KItchenDAO();
         }
-        else throw new UserException();
+        else throw new UserException(" Votre cuisine n'existe pas");
     }
 
     @Override

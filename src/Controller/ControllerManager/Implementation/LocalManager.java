@@ -2,8 +2,7 @@ package Controller.ControllerManager.Implementation;
 
 import Controller.ControllerDAO.Implementaion.AppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
-import Exception.UserException;
-import Exception.LocalException;
+import Exception.*;
 import Exception.AppartmentException;
 import Controller.ControllerManager.Interfaces.*;
 import Model.AbstractEntityLocal;
@@ -26,18 +25,16 @@ public class LocalManager implements ILocalManager {
             this.bedroomManager = new BedroomManager();
             this.kitchenManager = new KitchenManager();
         }
-        else throw new UserException();
+        else throw new UserException("Local non conforme");
     }
 
     @Override
-    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws SQLException {
+    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws Exception {
 
         EntityAppartment entityAppartment = null;
         try {
             entityAppartment = appartmentDAO.getByPrimaryKey(idAppartment);
-        } catch (AppartmentException e) {
-            e.printStackTrace();
-        } catch (LocalException e) {
+        } catch (AppartmentException | LocalException | ConnectionException e) {
             e.printStackTrace();
         }
         if(typeLocal == "Bathroom"){
