@@ -9,6 +9,7 @@ import Model.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Exception.ConnectionException;
 
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
 
@@ -17,24 +18,28 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     private IKitchenDAO kitchenDAO;
 
     @Override
-    public EntityConnection insert(EntityConnection entityConnection) throws SQLException {
+    public EntityConnection insert(EntityConnection entityConnection) throws ConnectionException {
 
         String sql = "INSERT INTO connection(idConnectedLocal, idConnectedLocal_2, LocalType, LocalType_2) VALUES(?, ?, ?, ?);";
         PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, entityConnection.getLocalA().getIdLocal());
-        pst.setInt(2, entityConnection.getLocalB().getIdLocal());
-        pst.setString(3, entityConnection.getTypeLocalA());
-        pst.setString(4, entityConnection.getTypeLocalB());
-        pst.executeUpdate();
-        pst.close();
+
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, entityConnection.getLocalA().getIdLocal());
+            pst.setInt(2, entityConnection.getLocalB().getIdLocal());
+            pst.setString(3, entityConnection.getTypeLocalA());
+            pst.setString(4, entityConnection.getTypeLocalB());
+            pst.executeUpdate();
+            pst.close();
+        }catch (SQLException e){
+            throw new ConnectionException("Connexion impossible due à l'erreur suivante : " + e.getMessage());
+        }
 
         return entityConnection;
     }
 
     @Override
     public void delete(int obj) {
-        return false;
     }
 
     @Override

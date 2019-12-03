@@ -7,8 +7,10 @@ import Model.EntityBedroom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Exception.BedroomException;
+
 import Exception.AppartmentException;
+import Exception.LocalException;
+
 import Static.StaticName;
 
 public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
@@ -20,7 +22,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
     }
 
     @Override
-    public EntityBedroom insert(EntityBedroom entityBedroom) throws BedroomException {
+    public EntityBedroom insert(EntityBedroom entityBedroom) throws LocalException {
 
         String sql = "INSERT INTO bedroom(description, area, bedroomType, idAppartment) VALUES(?, ?, ?, ?);";
         PreparedStatement pst = null;
@@ -38,14 +40,14 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
             if (resultSet.next())
                 entityBedroom.setIdLocal(resultSet.getInt("idBathroom"));
         } catch (SQLException e) {
-            throw new BedroomException("Impossible d'ajouter une nouvelle chambre due au message suivant " + e.getMessage());
+            throw new LocalException("Impossible d'ajouter une nouvelle chambre due au message suivant " + e.getMessage());
         }
 
         return entityBedroom;
     }
 
     @Override
-    public void delete(int idBedroom) throws BedroomException {
+    public void delete(int idBedroom) throws LocalException {
 
         String query = "delete from bedroom where idBedroom = ?";
         try {
@@ -56,7 +58,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
 
 
         } catch (SQLException e) {
-            throw new BedroomException("Suppression de la salle de bain impossible : " + e.getMessage());
+            throw new LocalException("Suppression de la chambre numero " + idBedroom +" impossible : " + e.getMessage());
         }
     }
 
@@ -66,7 +68,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
     }
 
     @Override
-    public <L> EntityBedroom getByPrimaryKey(L idBedroom) throws BedroomException {
+    public <L> EntityBedroom getByPrimaryKey(L idBedroom) throws LocalException {
 
         EntityBedroom entityBedroom = null;
         String query = "select * from bedroom where idBedroom = ?";
@@ -80,11 +82,11 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
             }
 
         } catch (SQLException | AppartmentException  e) {
-            throw new BedroomException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
+            throw new LocalException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
         }
 
         return entityBedroom;
     }
-    }
-
 }
+
+

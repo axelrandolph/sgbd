@@ -4,6 +4,7 @@ import Model.AbstractEntityLocal;
 import Model.EntityConnection;
 
 import java.sql.SQLException;
+import Exception.ConnectionException;
 
 public interface IConnectionDAO extends IDAO<EntityConnection> {
 

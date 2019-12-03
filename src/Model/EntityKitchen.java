@@ -20,7 +20,7 @@ public class EntityKitchen extends AbstractEntityLocal{
      * @param area
      * @param nbGasPoint
      */
-    public EntityKitchen(int idLocal, EntityAppartment appartment, String description, float area, int nbGasPoint,String typeLocal) {
+    public EntityKitchen(int idLocal, String description, float area, int nbGasPoint,EntityAppartment appartment, String typeLocal) {
         super(idLocal, appartment, description, area,typeLocal);
         this.nbGasPoint = nbGasPoint;
     }

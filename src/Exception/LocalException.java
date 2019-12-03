@@ -1,9 +1,10 @@
 package Exception;
 
-public class BedroomException extends Exception {
+public class LocalException extends Exception{
+
     private String message;
 
-    public BedroomException(String message) {
+    public LocalException(String message){
         this.message = message;
     }
 

@@ -6,11 +6,8 @@ import Exception.AppartmentException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import Exception.BathroomException;
-import Exception.BedroomException;
+import Exception.LocalException;
 import Exception.ConnectionException;
-import Exception.KitchenException;
-
 
 
 public abstract class DAO<T> implements IDAO<T> {
@@ -50,13 +47,13 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract T insert(T obj) throws AppartmentException, BathroomException, BedroomException, KitchenException;
+    public abstract T insert(T obj) throws AppartmentException, LocalException, ConnectionException;
 
     /**
      * Delete Method
      * @param obj
      */
-    public abstract void delete(int obj) throws AppartmentException, BathroomException, BedroomException;
+    public abstract void delete(int obj) throws AppartmentException, LocalException;
 
     /**
      * Update Method
