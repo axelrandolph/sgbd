@@ -11,9 +11,8 @@ import java.sql.SQLException;
 public interface IDAO<T> {
 
     T insert(T obj) throws AppartmentException, LocalException, ConnectionException, SQLException;
-    void delete(int obj) throws AppartmentException, LocalException;
-    void update(T obj);
-    <L> T getByPrimaryKey(L id) throws AppartmentException, LocalException, SQLException;
+    void delete(T obj) throws AppartmentException, LocalException;
+    <L> T getByPrimaryKey(L id) throws AppartmentException, LocalException, SQLException, ConnectionException;
     Connection getConn();
     void setConn(Connection conn);
 

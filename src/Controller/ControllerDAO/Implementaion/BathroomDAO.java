@@ -48,7 +48,8 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     }
 
     @Override
-    public void delete(int idBathroom) throws LocalException {
+    public void delete(EntityBathroom entityBathroom) throws LocalException {
+        int idBathroom = entityBathroom.getIdLocal();
         String query = "delete from bathroom where idBathroom = ?";
         try {
             PreparedStatement preparedStmt = getConn().prepareStatement(query);

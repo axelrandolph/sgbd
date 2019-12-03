@@ -53,15 +53,7 @@ public abstract class DAO<T> implements IDAO<T> {
      * Delete Method
      * @param obj
      */
-    public abstract void delete(int obj) throws AppartmentException, LocalException;
-
-    /**
-     * Update Method
-     * @param obj
-     * @return boolean
-     */
-    public abstract void update(T obj);
-
+    public abstract void delete(T obj) throws AppartmentException, LocalException;
 
 
     /*Getters & Setters*/

@@ -2,12 +2,13 @@ package Controller.ControllerDAO.Implementaion;
 
 import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Model.EntityAppartment;
-import Model.EntityUser;
 
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import Exception.AppartmentException;
 
 public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentDAO {
     public AppartmentDAO() {
@@ -21,26 +22,31 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
      * @return the appartment registred otherwise null
      */
     @Override
-    public EntityAppartment insert(EntityAppartment entityAppartment) throws SQLException {
+    public EntityAppartment insert(EntityAppartment entityAppartment) throws AppartmentException {
 
-        String sql = "INSERT INTO appartment(description, adress, state) VALUES(?, ?, ?);";
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
-        pst.setString(1, entityAppartment.getDescription());
-        pst.setString(2, entityAppartment.getAdress());
-        pst.setBoolean(3, entityAppartment.getState());
-        pst.executeUpdate();
-        ResultSet resultSet = pst.getGeneratedKeys();
-        pst.close();
+        try {
+            String sql = "INSERT INTO appartment(description, adress, state) VALUES(?, ?, ?);";
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, entityAppartment.getDescription());
+            pst.setString(2, entityAppartment.getAdress());
+            pst.setBoolean(3, entityAppartment.getState());
+            pst.executeUpdate();
+            ResultSet resultSet = pst.getGeneratedKeys();
+            pst.close();
 
-        entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
+            entityAppartment.setIdAppartment(resultSet.getInt("idAppartment"));
 
+        }catch (SQLException e) {
+            throw new AppartmentException("Echec lors de la l'insertion de l'appartement " + entityAppartment.getIdAppartment()+ "due à l'erreur suivante  : "  + e.getMessage());
+        }
         return entityAppartment;
     }
 
     @Override
-    public void delete(int idAppartment) {
+    public void delete(EntityAppartment entityAppartment) throws AppartmentException {
 
+        int idAppartment = entityAppartment.getIdAppartment();
         String query = "delete from appartment where idAppartment= ?";
         try {
             PreparedStatement preparedStmt = getConn().prepareStatement(query);
@@ -49,42 +55,42 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new AppartmentException("Echec lors de la délétion de l'appartement " + entityAppartment.getIdAppartment()+ "due à l'erreur suivante  : "  + e.getMessage());
         }
     }
 
-    @Override
-    public void update(EntityAppartment obj) {
 
-    }
 
     @Override
-    public <L> EntityAppartment getByPrimaryKey(L id) throws SQLException {
+    public <L> EntityAppartment getByPrimaryKey(L id) throws AppartmentException {
 
         EntityAppartment appartment = new EntityAppartment();
 
+        try {
+            String sql = "SELECT * FROM appartment WHERE idAppartment = ?;";
 
-        String sql = "SELECT * FROM appartment WHERE idAppartment = ?;";
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, (Integer) id);
+            ResultSet result = pst.executeQuery();
+            if (result.first())
+                appartment = new EntityAppartment(
+                        result.getInt("idAppartment"),
+                        result.getString("description"),
+                        result.getString("adress"),
+                        result.getBoolean("state")
 
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1, (Integer) id);
-        ResultSet result = pst.executeQuery();
-        if(result.first())
-            appartment = new EntityAppartment(
-                    result.getInt("idAppartment"),
-                    result.getString("description"),
-                    result.getString("adress"),
-                    result.getBoolean("state")
-
-            );
+                );
+        } catch (SQLException e){
+            throw new AppartmentException("Impossible d'obtenir l'appartment numero : "+ id +"due à l'erreur suivante : " + e.getMessage());
+        }
 
         return appartment;
     }
 
 
     @Override
-    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws SQLException {
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws AppartmentException {
 
 
         String sql ="SELECT * " +
@@ -171,83 +177,84 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
         sql = sql.concat(";");
 
-        PreparedStatement pst = conn.prepareStatement(sql);
+        try {
 
-        int indexParam = 0;
+            PreparedStatement pst = conn.prepareStatement(sql);
 
-        if (nbBathroom > 0) {
-            ++indexParam;
-            pst.setInt(indexParam, nbBathroom);
+            int indexParam = 0;
+
+            if (nbBathroom > 0) {
+                ++indexParam;
+                pst.setInt(indexParam, nbBathroom);
+            }
+            if (nbBedroom > 0) {
+                ++indexParam;
+                pst.setInt(indexParam, nbBedroom);
+            }
+            if (nbKitchen > 0) {
+                ++indexParam;
+                pst.setInt(indexParam, nbKitchen);
+            }
+            if (nbWaterPointByBathroom > 0) {
+                ++indexParam;
+                pst.setInt(indexParam, nbWaterPointByBathroom);
+            }
+            if (bedroomType != null) {
+                ++indexParam;
+                pst.setString(indexParam, bedroomType);
+            }
+            if (nbGasPointByKitchen > 0) {
+                ++indexParam;
+                pst.setInt(indexParam, nbGasPointByKitchen);
+            }
+
+
+            ResultSet resultSet = pst.executeQuery();
+
+            return DisplayAppartmentByResulSet(resultSet);
+
+        }catch (SQLException | AppartmentException e) {
+            throw new AppartmentException("Echec lors de la recherche de l'appartement  due à l'erreur suivante  : "  + e.getMessage());
         }
-        if (nbBedroom > 0) {
-            ++indexParam;
-            pst.setInt(indexParam, nbBedroom);
-        }
-        if (nbKitchen > 0) {
-            ++indexParam;
-            pst.setInt(indexParam , nbKitchen);
-        }
-        if (nbWaterPointByBathroom > 0) {
-            ++indexParam;
-            pst.setInt(indexParam , nbWaterPointByBathroom);
-        }
-        if (bedroomType != null) {
-            ++indexParam;
-            pst.setString(indexParam , bedroomType);
-        }
-        if (nbGasPointByKitchen > 0) {
-            ++indexParam;
-            pst.setInt(indexParam , nbGasPointByKitchen);
-        }
-
-
-        ResultSet resultSet = pst.executeQuery();
-        ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
-
-        while (resultSet.next()) {
-            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
-                    resultSet.getString("adress"),
-                    resultSet.getString("descriptionAppartment"),
-
-                    resultSet.getBoolean("state"));
-
-            entityAppartments.add(entityAppartment);
-        }
-
-        return entityAppartments;
 
 
     }
 
-    private ArrayList<EntityAppartment> DisplayAppartmentByResulSet(ResultSet resultSet) throws SQLException {
+    private ArrayList<EntityAppartment> DisplayAppartmentByResulSet(ResultSet resultSet) throws AppartmentException {
 
         ArrayList<EntityAppartment> entityAppartments = new ArrayList<EntityAppartment>();
 
-        while (resultSet.next()) {
-            EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
-                    resultSet.getString("adress"),
-                    resultSet.getString("descriptionAppartment"),
+        try {
+            while (resultSet.next()) {
+                EntityAppartment entityAppartment = new EntityAppartment(resultSet.getInt("idAppartment"),
+                        resultSet.getString("adress"),
+                        resultSet.getString("description"),
 
-                    resultSet.getBoolean("state"));
+                        resultSet.getBoolean("state"));
 
-            entityAppartments.add(entityAppartment);
+                entityAppartments.add(entityAppartment);
+            }
+        }catch (SQLException e ){
+            throw new AppartmentException("la recheche à trouvé un appartement mais a fait une erreur lors de son affichage : " + e.getMessage());
         }
 
         return entityAppartments;
     }
+
+
     @Override
-        public ArrayList<EntityAppartment> DisplayAppartmentResulSet() throws SQLException {
-            String  sql ="SELECT * " +
-                "FROM appartment" +
-                    " WHERE idAppartment = idAppartment; " ;
+    public EntityAppartment updateAppartment(EntityAppartment appartment, String description, String adress, boolean state) {
 
-        PreparedStatement pst = conn.prepareStatement(sql);
 
-        ResultSet resultSet = pst.executeQuery();
+        String sql = "UPDATE appartment " +
+                "SET rue = '49 Rue Ameline',\n" +
+                "  ville = 'Saint-Eustache-la-Forêt',\n" +
+                "  code_postal = '76210'\n" +
+                "WHERE id = 2";
 
-        return DisplayAppartmentByResulSet(resultSet);
-        }
+        return appartment;
     }
+}
 
 
 

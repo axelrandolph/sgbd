@@ -47,7 +47,9 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
     }
 
     @Override
-    public void delete(int idBedroom) throws LocalException {
+    public void delete(EntityBedroom entityBedroom) throws LocalException {
+
+        int idBedroom = entityBedroom.getIdLocal();
 
         String query = "delete from bedroom where idBedroom = ?";
         try {

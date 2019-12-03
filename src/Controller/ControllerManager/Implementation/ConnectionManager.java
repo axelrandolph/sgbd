@@ -36,6 +36,7 @@ public class ConnectionManager implements IConnectionManager {
             AbstractEntityLocal localB = connectionDAO.getByConnectedLocal(idLocalB, typeLocalB);
 
             EntityConnection entityConnection = new EntityConnection(localA,localB,typeLocalA,typeLocalB);
+
             return connectionDAO.insert(entityConnection);
         }
 

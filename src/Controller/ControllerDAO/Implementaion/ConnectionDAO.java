@@ -31,6 +31,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
 
         String sql = "INSERT INTO connection(idConnectedLocal, idConnectedLocal_2, LocalType, LocalType_2) VALUES(?, ?, ?, ?);";
         PreparedStatement pst = null;
+        PreparedStatement pst2 = null;
 
         try {
             pst = conn.prepareStatement(sql);
@@ -38,6 +39,13 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             pst.setInt(2, entityConnection.getLocalB().getIdLocal());
             pst.setString(3, entityConnection.getTypeLocalA());
             pst.setString(4, entityConnection.getTypeLocalB());
+
+            pst2 = conn.prepareStatement(sql);
+            pst2.setInt(1, entityConnection.getLocalB().getIdLocal());
+            pst.setInt(2, entityConnection.getLocalA().getIdLocal());
+            pst.setString(3, entityConnection.getTypeLocalB());
+            pst.setString(4, entityConnection.getTypeLocalA());
+
             pst.executeUpdate();
             pst.close();
         }catch (SQLException e){
@@ -48,7 +56,33 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public void delete(int obj) {
+    public void delete(EntityConnection entityConnection) throws LocalException {
+        String query = "delete from connection where idConnectedLocal = ? and idConnectedLocal_2 = ? and LocalType = ? and LocalType_2 = ?";
+        try {
+            PreparedStatement preparedStmt = getConn().prepareStatement(query);
+            preparedStmt.setInt(1, entityConnection.getLocalA().getIdLocal());
+            preparedStmt.setInt(2, entityConnection.getLocalB().getIdLocal());
+            preparedStmt.setString(3, entityConnection.getTypeLocalA());
+            preparedStmt.setString(4, entityConnection.getTypeLocalB());
+
+            preparedStmt.executeUpdate();
+
+            PreparedStatement preparedStmt2 = getConn().prepareStatement(query);
+            preparedStmt2.setInt(1, entityConnection.getLocalB().getIdLocal());
+            preparedStmt2.setInt(2, entityConnection.getLocalA().getIdLocal());
+            preparedStmt2.setString(3, entityConnection.getTypeLocalB());
+            preparedStmt2.setString(4, entityConnection.getTypeLocalA());
+
+            preparedStmt2.executeUpdate();
+
+            preparedStmt.close();
+            preparedStmt2.close();
+
+
+        } catch (SQLException e) {
+            throw new LocalException("Suppression de la connection entre le local d'id : " + entityConnection.getLocalA().getIdLocal() + " et le local d'id : " + entityConnection.getLocalB().getIdLocal() + "due au message suivant : " + e.getMessage());
+        }
+
     }
 
     @Override
@@ -56,8 +90,8 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public <L> EntityConnection getByPrimaryKey(L id) {
-        return null;
+    public <L> EntityConnection getByPrimaryKey(L id) throws ConnectionException {
+        throw new ConnectionException ("Erreur : Impossible de récupérer l'objet connection à partir d'une clef. Essayer plutôt IsConnection()");
     }
 
     @Override
@@ -138,7 +172,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
                     return false;
             }
         }catch (SQLException e){
-            
+
         }
 
         return true;
@@ -155,10 +189,12 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             } else if (typeLocal == StaticName.localBedroomType) {
                 return bedroomDAO.getByPrimaryKey(idLocal);
             }
-        }catch (LocalException | AppartmentException e){
+        }catch (LocalException | AppartmentException | SQLException e){
             throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : "+ e.getMessage());
         }
 
         return null;
     }
+
+
 }

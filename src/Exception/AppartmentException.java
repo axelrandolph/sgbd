@@ -13,6 +13,10 @@ public class AppartmentException extends Exception {
         return message;
     }
 
+    /**
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
