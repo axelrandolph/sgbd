@@ -1,5 +1,6 @@
 package Model;
 
+
 public class EntityBathroom extends AbstractEntityLocal {
 
     /* Attributes */
@@ -20,7 +21,7 @@ public class EntityBathroom extends AbstractEntityLocal {
      * @param area
      * @param nbWaterPoint
      */
-    public EntityBathroom(int idLocal, EntityAppartment appartment, String description, float area, int nbWaterPoint,String typeLocal) {
+    public EntityBathroom(int idLocal, String description, float area, int nbWaterPoint , EntityAppartment appartment, String typeLocal) {
       super(idLocal, appartment, description, area,typeLocal);
         this.nbWaterPoint = nbWaterPoint;
     }
@@ -35,11 +36,6 @@ public class EntityBathroom extends AbstractEntityLocal {
         this.nbWaterPoint = nbWaterPoint;
     }
 
-    /**
-     * Default Bathroom Constructor
-     */
-    public EntityBathroom() {
-    }
 
     public EntityBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) {
         super(entityAppartment, description, area);

@@ -10,7 +10,7 @@ public class ManagementDAO extends DAO<EntityManagement> implements IManagementD
     }
 
     @Override
-    public boolean delete(int obj) {
+    public void delete(int obj) {
         return false;
     }
 

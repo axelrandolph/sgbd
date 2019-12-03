@@ -1,10 +1,17 @@
 package Controller.ControllerDAO.Implementaion;
 
 import Controller.ControllerDAO.Interfaces.IDAO;
+import Exception.AppartmentException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import Exception.BathroomException;
+import Exception.BedroomException;
+import Exception.ConnectionException;
+import Exception.KitchenException;
+
+
 
 public abstract class DAO<T> implements IDAO<T> {
 
@@ -43,21 +50,20 @@ public abstract class DAO<T> implements IDAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract T insert(T obj) throws SQLException;
+    public abstract T insert(T obj) throws AppartmentException, BathroomException, BedroomException, KitchenException;
 
     /**
      * Delete Method
      * @param obj
-     * @return boolean
      */
-    public abstract boolean delete(int obj);
+    public abstract void delete(int obj) throws AppartmentException, BathroomException, BedroomException;
 
     /**
      * Update Method
      * @param obj
      * @return boolean
      */
-    public abstract boolean update(T obj);
+    public abstract void update(T obj);
 
 
 

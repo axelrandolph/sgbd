@@ -1,16 +1,23 @@
 package Controller.ControllerDAO.Interfaces;
 
+import Exception.AppartmentException;
+import Exception.BathroomException;
+import Exception.BedroomException;
+import Exception.ConnectionException;
+import Exception.KitchenException;
+
+
+
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public interface IDAO<T> {
 
-    public abstract T insert(T obj) throws SQLException;
-    public abstract boolean delete(int obj);
-    public abstract boolean update(T obj);
-    public abstract <L> T getByPrimaryKey(L id) throws SQLException;
-    public Connection getConn();
-    public void setConn(Connection conn);
+    T insert(T obj) throws AppartmentException, BathroomException, BedroomException, KitchenException;
+    void delete(int obj) throws AppartmentException, BathroomException, BedroomException;
+    void update(T obj);
+    <L> T getByPrimaryKey(L id) throws AppartmentException, BathroomException, BedroomException;
+    Connection getConn();
+    void setConn(Connection conn);
 
 
     }

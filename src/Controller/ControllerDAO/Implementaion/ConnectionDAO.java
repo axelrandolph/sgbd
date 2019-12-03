@@ -33,7 +33,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public boolean delete(int obj) {
+    public void delete(int obj) {
         return false;
     }
 

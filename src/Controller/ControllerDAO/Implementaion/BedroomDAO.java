@@ -1,30 +1,90 @@
 package Controller.ControllerDAO.Implementaion;
 
+import Controller.ControllerDAO.Interfaces.IAppartmentDAO;
 import Controller.ControllerDAO.Interfaces.IBedroomDAO;
 import Model.EntityBedroom;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import Exception.BedroomException;
+import Exception.AppartmentException;
+import Static.StaticName;
 
 public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
-    @Override
-    public EntityBedroom insert(EntityBedroom obj) {
-        return null;
+
+    private IAppartmentDAO appartmentDAO;
+
+    public BedroomDAO() {
+        appartmentDAO = new AppartmentDAO();
     }
 
     @Override
-    public boolean delete(int obj) {
-        return false;
+    public EntityBedroom insert(EntityBedroom entityBedroom) throws BedroomException {
+
+        String sql = "INSERT INTO bedroom(description, area, bedroomType, idAppartment) VALUES(?, ?, ?, ?);";
+        PreparedStatement pst = null;
+        try {
+            pst = getConn().prepareStatement(sql, pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, entityBedroom.getDescription());
+            pst.setFloat(2, entityBedroom.getArea());
+            pst.setString(3, entityBedroom.getTypeBedroom());
+            pst.setInt(4, entityBedroom.getAppartment().getIdAppartment());
+
+
+            pst.executeUpdate();
+            ResultSet resultSet = pst.getGeneratedKeys();
+            pst.close();
+            if (resultSet.next())
+                entityBedroom.setIdLocal(resultSet.getInt("idBathroom"));
+        } catch (SQLException e) {
+            throw new BedroomException("Impossible d'ajouter une nouvelle chambre due au message suivant " + e.getMessage());
+        }
+
+        return entityBedroom;
     }
 
     @Override
-    public boolean update(EntityBedroom obj) {
-        return false;
+    public void delete(int idBedroom) throws BedroomException {
+
+        String query = "delete from bedroom where idBedroom = ?";
+        try {
+            PreparedStatement preparedStmt = getConn().prepareStatement(query);
+            preparedStmt.setInt(1, idBedroom);
+
+            preparedStmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new BedroomException("Suppression de la salle de bain impossible : " + e.getMessage());
+        }
     }
 
     @Override
-    public <L> EntityBedroom getByPrimaryKey(L id) {
-        return null;
+    public void update(EntityBedroom obj){
+
+    }
+
+    @Override
+    public <L> EntityBedroom getByPrimaryKey(L idBedroom) throws BedroomException {
+
+        EntityBedroom entityBedroom = null;
+        String query = "select * from bedroom where idBedroom = ?";
+        try {
+            PreparedStatement preparedStmt = getConn().prepareStatement(query);
+            preparedStmt.setInt(1, (Integer) idBedroom);
+
+            ResultSet resultSet= preparedStmt.executeQuery();
+            if (resultSet.next()){
+                entityBedroom = new EntityBedroom((Integer)idBedroom, resultSet.getString("description"), resultSet.getFloat("area"), resultSet.getString("bedroomType"), appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBedroomType);
+            }
+
+        } catch (SQLException | AppartmentException  e) {
+            throw new BedroomException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
+        }
+
+        return entityBedroom;
+    }
     }
 
 }

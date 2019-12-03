@@ -9,6 +9,7 @@ public class EntityKitchen extends AbstractEntityLocal{
      */
     private int nbGasPoint;
 
+
     /* Constructor*/
 
     /**
