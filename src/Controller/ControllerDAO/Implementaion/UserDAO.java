@@ -78,26 +78,30 @@ public class UserDAO extends  DAO<EntityUser> implements IUserDAO {
 
 
     @Override
-    public <L> EntityUser getByPrimaryKey(L username) throws SQLException {
+    public <L> EntityUser getByPrimaryKey(L username) throws UserException {
 
-         EntityUser user = new EntityUser();
-         String sql = "SELECT * FROM user WHERE username = ?;";
+        try {
+            EntityUser user = new EntityUser();
+            String sql = "SELECT * FROM user WHERE username = ?;";
 
-        PreparedStatement pst = null;
-        pst = conn.prepareStatement(sql);
-        pst.setString(1, (String)username);
-        ResultSet result = pst.executeQuery();
-         if(result.first())
-            user = new EntityUser(
-                    result.getString("username"),
-                    result.getString("firstName"),
-                    result.getString("lastName"),
-                    result.getString("fonction"),
-                    result.getString("password")
+            PreparedStatement pst = null;
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, (String) username);
+            ResultSet result = pst.executeQuery();
+            if (result.first())
+                user = new EntityUser(
+                        result.getString("username"),
+                        result.getString("firstName"),
+                        result.getString("lastName"),
+                        result.getString("fonction"),
+                        result.getString("password")
 
-                    );
+                );
+            return user;
 
-        return user;
+        }catch (SQLException e){
+            throw new UserException("impossible de récupérer l'utilisateur dans la base de données : "+ e.getMessage());
+        }
     }
 
     @Override

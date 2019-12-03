@@ -7,23 +7,25 @@ import Controller.ControllerManager.Interfaces.IBedroomManager;
 import Model.EntityAppartment;
 import Model.EntityBedroom;
 
-import java.sql.SQLException;
-
 public class BedroomManager implements IBedroomManager {
 
     private IBedroomDAO bedroomDAO;
 
-    public BedroomManager() throws UserException {
+    public BedroomManager() throws LocalException {
         if(UserManager.getCurrentUser() != null)
             this.bedroomDAO = new BedroomDAO();
-        else throw new UserException("Chambre  non conforme");
+        else throw new LocalException("Veuillez Connecter un utilisateur");
     }
 
     @Override
-    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws Exception {
+    public EntityBedroom CreateBedroom(EntityAppartment entityAppartment, String description, float area, String typeBedroom) throws LocalException {
 
         EntityBedroom entityBedroom = new EntityBedroom(entityAppartment, description, area, typeBedroom);
-        return bedroomDAO.insert(entityBedroom);
+        try {
+            return bedroomDAO.insert(entityBedroom);
+        }catch (ConnectionException | AppartmentException | UserException e){
+            throw new LocalException ("Impossible de créer cette salle de bain : " + e.getMessage());
+        }
     }
 
     @Override

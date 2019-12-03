@@ -18,39 +18,34 @@ public class LocalManager implements ILocalManager {
     private IBedroomManager bedroomManager;
     private IAppartmentDAO appartmentDAO;
 
-    public LocalManager() throws UserException {
+    public LocalManager() throws LocalException {
         if (UserManager.getCurrentUser() != null){
             this.appartmentDAO = new AppartmentDAO();
             this.bathroomManager = new BathroomManager();
             this.bedroomManager = new BedroomManager();
             this.kitchenManager = new KitchenManager();
         }
-        else throw new UserException("Local non conforme");
+        else throw new LocalException("Local non conforme");
     }
 
     @Override
-    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws Exception {
+    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracterisc) throws LocalException {
 
         EntityAppartment entityAppartment = null;
         try {
             entityAppartment = appartmentDAO.getByPrimaryKey(idAppartment);
-        } catch (AppartmentException | LocalException | ConnectionException e) {
-            e.printStackTrace();
-        }
-        if(typeLocal == "Bathroom"){
-            return bathroomManager.CreateBathroom(entityAppartment, description, area, (Integer) localCaracterisc);
+            if (typeLocal == "Bathroom") {
+                return bathroomManager.CreateBathroom(entityAppartment, description, area, (Integer) localCaracterisc);
 
-        }
-        else if (typeLocal == "Bedroom"){
-            try {
+            } else if (typeLocal == "Bedroom") {
                 return bedroomManager.CreateBedroom(entityAppartment, description, area, (String) localCaracterisc);
-            } catch (LocalException e) {
-                e.printStackTrace();
-            }
 
-        }
-        else if (typeLocal == "Kitchen"){
-            return kitchenManager.CreateKitchen(entityAppartment, description, area, (Integer) localCaracterisc);
+
+            } else if (typeLocal == "Kitchen") {
+                return kitchenManager.CreateKitchen(entityAppartment, description, area, (Integer) localCaracterisc);
+            }
+        }catch (AppartmentException | ConnectionException | UserException e){
+
         }
         return null;
     }

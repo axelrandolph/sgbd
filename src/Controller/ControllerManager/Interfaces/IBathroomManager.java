@@ -20,4 +20,5 @@ public interface IBathroomManager {
      */
     public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws LocalException;
 
+    void DeleteBathroom(int idAppartment, int idLocal);
 }

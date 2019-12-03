@@ -13,11 +13,11 @@ public class KitchenManager implements IKitchenManager {
 
     private IKitchenDAO kitchenDAO;
 
-    public KitchenManager() throws UserException {
+    public KitchenManager() throws LocalException {
         if (UserManager.getCurrentUser() != null){
             this.kitchenDAO = new KItchenDAO();
         }
-        else throw new UserException(" Votre cuisine n'existe pas");
+        else throw new LocalException(" Votre cuisine n'existe pas");
     }
 
     @Override
