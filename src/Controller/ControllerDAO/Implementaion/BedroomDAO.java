@@ -8,10 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Exception.AppartmentException;
-import Exception.ConnectionException;
-import Exception.LocalException;
-import Exception.UserException;
+import Exception.*;
 
 import Static.StaticName;
 
@@ -84,7 +81,7 @@ public class BedroomDAO extends DAO<EntityBedroom> implements IBedroomDAO {
                         StaticName.localBedroomType);
             }
 
-        } catch (UserException | AppartmentException | ConnectionException | SQLException e) {
+        } catch (UserException | AppartmentException | ConnectionException | SQLException | ManagementException e) {
             throw new LocalException("Echec lors de l'obtention de la chambre numéro " + idBedroom +" due à l'erreur suivante : " + e.getMessage());
         }
 

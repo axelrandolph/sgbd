@@ -50,6 +50,12 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         try {
 
             int idAppartment = entityAppartment.getIdAppartment();
+
+            deleteConnectionDependencies(idAppartment);
+            deleteBathroomDependencies(idAppartment);
+            deleteBedroomDependencies(idAppartment);
+            deleteKitchenDependencies(idAppartment);
+
             String query = "delete from appartment where idAppartment= ?";
 
             PreparedStatement preparedStmt = getConn().prepareStatement(query);
@@ -63,6 +69,69 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         }
     }
 
+    private void deleteBathroomDependencies (int idAppartment) throws SQLException {
+        String query = "delete from bathroom where idAppartment= ?";
+
+        PreparedStatement preparedStmt = getConn().prepareStatement(query);
+        preparedStmt.setInt(1, idAppartment);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+    }
+
+    private void deleteKitchenDependencies (int idAppartment) throws SQLException {
+        String query = "delete from kitchen where idAppartment= ?";
+
+        PreparedStatement preparedStmt = getConn().prepareStatement(query);
+        preparedStmt.setInt(1, idAppartment);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+    }
+
+    private void deleteBedroomDependencies (int idAppartment) throws SQLException {
+        String query = "delete from bedroom where idAppartment= ?;";
+
+        PreparedStatement preparedStmt = getConn().prepareStatement(query);
+        preparedStmt.setInt(1, idAppartment);
+        preparedStmt.executeUpdate();
+
+        preparedStmt.close();
+    }
+
+    private void deleteConnectionDependencies (int idAppartment) throws SQLException {
+        String query = "select * from connectedlocal where idAppartment = ?;";
+        PreparedStatement preparedStmt = getConn().prepareStatement(query);
+        preparedStmt.setInt(1, idAppartment);
+
+        ResultSet resultSet = preparedStmt.executeQuery();
+
+        ArrayList<PreparedStatement> statements = new ArrayList<>();
+        int i = 0;
+        while (resultSet.next()) {
+
+            query = "delete from connection where idConnectedLocal = ? AND LocalType = ?;";
+            statements.set(i, getConn().prepareStatement(query));
+
+            statements.get(i).setInt(1, resultSet.getInt("idConnectedLocal"));
+            statements.get(i).setInt(2, resultSet.getInt("LocalType"));
+            statements.get(i).executeUpdate();
+        }
+
+    }
+
+    private void deleteConnectedLocalDependencies (int idAppartment) throws SQLException {
+
+        deleteConnectionDependencies(idAppartment);
+
+        String query = "delete from connectedlocal where idAppartment= ?;";
+
+        PreparedStatement preparedStmt = getConn().prepareStatement(query);
+        preparedStmt.setInt(1, idAppartment);
+        preparedStmt.execute();
+
+        preparedStmt.close();
+    }
 
 
     @Override
@@ -226,6 +295,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
 
     }
+
 
     private ArrayList<EntityAppartment> DisplayAppartmentByResulSet(ResultSet resultSet) throws AppartmentException {
 

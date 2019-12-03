@@ -192,7 +192,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
             } else if (typeLocal == StaticName.localBedroomType) {
                 return bedroomDAO.getByPrimaryKey(idLocal);
             }
-        }catch (LocalException | AppartmentException | UserException e){
+        }catch (LocalException | AppartmentException | UserException | ManagementException e){
             throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : "+ e.getMessage());
         }
 
