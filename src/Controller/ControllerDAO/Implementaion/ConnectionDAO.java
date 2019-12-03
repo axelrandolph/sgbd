@@ -10,12 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Exception.ConnectionException;
+import Exception.LocalException;
 
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
 
     private IBathroomDAO bathroomDAO;
     private IBedroomDAO bedroomDAO;
     private IKitchenDAO kitchenDAO;
+
+    public ConnectionDAO() {
+        this.kitchenDAO = new KItchenDAO();
+        this.bathroomDAO = new BathroomDAO();
+        this.bedroomDAO = new BedroomDAO();
+    }
 
     @Override
     public EntityConnection insert(EntityConnection entityConnection) throws ConnectionException {
@@ -43,8 +50,7 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public boolean update(EntityConnection obj) {
-        return false;
+    public void update(EntityConnection obj) {
     }
 
     @Override
@@ -126,16 +132,18 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
     }
 
     @Override
-    public AbstractEntityLocal getByConnectedLocal(int idLocal, String typeLocal) throws SQLException {
+    public AbstractEntityLocal getByConnectedLocal(int idLocal, String typeLocal) {
 
-        if (typeLocal == "Kitchen"){
-            return kitchenDAO.getByPrimaryKey(idLocal);
-        }
-        else if (typeLocal == "Bathroom"){
-            return bathroomDAO.getByPrimaryKey(idLocal);
-        }
-        else if (typeLocal == "Bedroom"){
-            return bedroomDAO.getByPrimaryKey(idLocal);
+        try {
+            if (typeLocal == "Kitchen") {
+                return kitchenDAO.getByPrimaryKey(idLocal);
+            } else if (typeLocal == "Bathroom") {
+                return bathroomDAO.getByPrimaryKey(idLocal);
+            } else if (typeLocal == "Bedroom") {
+                return bedroomDAO.getByPrimaryKey(idLocal);
+            }
+        }catch (SQLException | LocalException e){
+
         }
 
         return null;
