@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import Exception.ConnectionException;
 import Exception.LocalException;
+import Exception.AppartmentException;
+import Static.StaticName;
 
 public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionDAO {
 
@@ -90,10 +92,13 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
         preparedStatement.setInt(2, idLocal);
         preparedStatement.setString(3, typeLocal);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.first())
-           return true;
+        if(resultSet.next()) {
+            resultSet.getInt("idConnectedLocal");
+            if (resultSet.wasNull())
+                return false;
+        }
 
-        return false;
+        return true;
     }
 
     /**
@@ -106,44 +111,52 @@ public class ConnectionDAO extends DAO<EntityConnection> implements IConnectionD
      * @throws SQLException
      */
     @Override
-    public boolean IsConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB) throws SQLException {
+    public boolean IsConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB) {
         String sql = "SELECT * FROM connection WHERE idConnectedLocal = ? AND idConnectedLocal_2 = ? AND LocalType = ? AND LocalType_2 = ?;";
 
-        PreparedStatement preparedStatement = null;
-        preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1,idLocalA);
-        preparedStatement.setInt(2, idLocalB);
-        preparedStatement.setString(3, typeLocalA);
-        preparedStatement.setString(4, typeLocalB);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            PreparedStatement preparedStatement = null;
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, idLocalA);
+            preparedStatement.setInt(2, idLocalB);
+            preparedStatement.setString(3, typeLocalA);
+            preparedStatement.setString(4, typeLocalB);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        PreparedStatement preparedStatement2 = null;
-        preparedStatement2 = conn.prepareStatement(sql);
-        preparedStatement2.setInt(1,idLocalB);
-        preparedStatement2.setInt(2, idLocalA);
-        preparedStatement2.setString(3, typeLocalB);
-        preparedStatement2.setString(4, typeLocalA);
-        ResultSet resultSet2 = preparedStatement2.executeQuery();
+            PreparedStatement preparedStatement2 = null;
+            preparedStatement2 = conn.prepareStatement(sql);
+            preparedStatement2.setInt(1, idLocalB);
+            preparedStatement2.setInt(2, idLocalA);
+            preparedStatement2.setString(3, typeLocalB);
+            preparedStatement2.setString(4, typeLocalA);
+            ResultSet resultSet2 = preparedStatement2.executeQuery();
 
-        if(resultSet.first() && resultSet2.first())
-            return true;
+            if (resultSet.next() && resultSet2.next()) {
+                resultSet.getInt("idConnectedLocal");
+                resultSet2.getInt("idConnectedLocal");
+                if (resultSet.wasNull() || resultSet2.wasNull())
+                    return false;
+            }
+        }catch (SQLException e){
+            
+        }
 
-        return false;
+        return true;
     }
 
     @Override
-    public AbstractEntityLocal getByConnectedLocal(int idLocal, String typeLocal) {
+    public AbstractEntityLocal getByConnectedLocal(int idLocal, String typeLocal) throws ConnectionException {
 
         try {
-            if (typeLocal == "Kitchen") {
+            if (typeLocal == StaticName.localKitchenType) {
                 return kitchenDAO.getByPrimaryKey(idLocal);
-            } else if (typeLocal == "Bathroom") {
+            } else if (typeLocal == StaticName.localBathroomType) {
                 return bathroomDAO.getByPrimaryKey(idLocal);
-            } else if (typeLocal == "Bedroom") {
+            } else if (typeLocal == StaticName.localBedroomType) {
                 return bedroomDAO.getByPrimaryKey(idLocal);
             }
-        }catch (SQLException | LocalException e){
-
+        }catch (LocalException | AppartmentException e){
+            throw new ConnectionException("Impossible d'obtenir notre local par la table conencted local. \n Erreur : "+ e.getMessage());
         }
 
         return null;

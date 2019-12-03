@@ -15,5 +15,5 @@ public interface IConnectionDAO extends IDAO<EntityConnection> {
 
     boolean IsConnection(int idLocalA, int idLocalB, String typeLocalA, String typeLocalB) throws SQLException;
 
-    AbstractEntityLocal getByConnectedLocal(int idLocalA, String typeLocalA) throws SQLException;
+    AbstractEntityLocal getByConnectedLocal(int idLocalA, String typeLocalA) throws SQLException, ConnectionException;
 }
