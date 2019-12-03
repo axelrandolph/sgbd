@@ -7,14 +7,11 @@ import Model.EntityBathroom;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Exception.*;
 
-<<<<<<< HEAD
 import Exception.LocalException;
 import Exception.AppartmentException;
 import Exception.ConnectionException;
-=======
->>>>>>> f17f947837fb38939b260831cc87412132f9d602
+
 import Static.StaticName;
 
 
@@ -72,24 +69,20 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     @Override
     public <L> EntityBathroom getByPrimaryKey(L idBathroom) throws LocalException {
 
-         EntityBathroom entityBathroom = null;
+        EntityBathroom entityBathroom = null;
         String query = "select * from bathroom where idBathroom = ?";
         try {
             PreparedStatement preparedStmt = getConn().prepareStatement(query);
             preparedStmt.setInt(1, (Integer) idBathroom);
 
-           ResultSet resultSet= preparedStmt.executeQuery();
-           if (resultSet.next()){
-               entityBathroom = new EntityBathroom((Integer)idBathroom, resultSet.getString("description"),
-                       resultSet.getFloat("area"), resultSet.getInt("nbWaterPoint"),
-                       appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
-           }
+            ResultSet resultSet = preparedStmt.executeQuery();
+            if (resultSet.next()) {
+                entityBathroom = new EntityBathroom((Integer) idBathroom, resultSet.getString("description"),
+                        resultSet.getFloat("area"), resultSet.getInt("nbWaterPoint"),
+                        appartmentDAO.getByPrimaryKey(resultSet.getInt("idAppartment")), StaticName.localBathroomType);
+            }
 
-<<<<<<< HEAD
         } catch (SQLException | AppartmentException | ConnectionException e) {
-=======
-        } catch (SQLException | Exception.AppartmentException | Exception.ConnectionException e) {
->>>>>>> f17f947837fb38939b260831cc87412132f9d602
             throw new LocalException("Echec lors de l'obtention de la salle de bain due à l'erreur suivante : " + e.getMessage());
         }
 
@@ -97,7 +90,6 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
     }
 
     @Override
-<<<<<<< HEAD
     public EntityBathroom updateBathroom(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) throws LocalException {
         String sql = "UPDATE bathroom " +
                 "SET description = ?, " +
@@ -109,14 +101,14 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
             PreparedStatement pst = null;
             pst = conn.prepareStatement(sql);
             pst.setString(1, description);
-            pst.setFloat(2,  area);
+            pst.setFloat(2, area);
             pst.setInt(3, nbWaterPoint);
-            pst.setInt(4,  entityBathroom.getIdLocal());
+            pst.setInt(4, entityBathroom.getIdLocal());
 
             pst.executeUpdate();
             pst.close();
-        }catch (SQLException e){
-            throw new LocalException("Impossible de mettre a jour la salle de bain : " + entityBathroom.getIdLocal() + " due  à l'erreur suivante : "+ e.getMessage());
+        } catch (SQLException e) {
+            throw new LocalException("Impossible de mettre a jour la salle de bain : " + entityBathroom.getIdLocal() + " due  à l'erreur suivante : " + e.getMessage());
         }
 
         entityBathroom.setDescription(description);
@@ -124,9 +116,6 @@ public class BathroomDAO extends DAO<EntityBathroom> implements IBathroomDAO {
         entityBathroom.setNbWaterPoint(nbWaterPoint);
 
         return entityBathroom;
-=======
-    public EntityBathroom updateAppartment(EntityBathroom entityBathroom, String description, float area, int nbWaterPoint) {
-        return null;
->>>>>>> f17f947837fb38939b260831cc87412132f9d602
+
     }
 }
