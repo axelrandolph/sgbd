@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public interface IAppartmentManager {
 
+    EntityAppartment CreateAppartment(String description, String adresse) throws SQLException, LocalException, AppartmentException, ConnectionException, Exception.LocalException, Exception;
+
     /**
      *
      * @param description
@@ -35,11 +37,11 @@ public interface IAppartmentManager {
                                                                         int nbKitchen,
                                                                         int nbWaterPointByBathroom,
                                                                         int nbGasPointByKitchen,
-                                                                        String bedroomType) throws SQLException, AppartmentException;
+                                                                        String bedroomType) throws SQLException, AppartmentException, AppartmentException, Exception;
 
     /**
      *
      * @param idAppartment
      */
-    void DeleteAppartment(int idAppartment);
+    void DeleteAppartment(int idAppartment) throws LocalException, AppartmentException, Exception.LocalException, Exception;
 }

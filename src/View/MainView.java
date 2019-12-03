@@ -1,7 +1,7 @@
 package View;
 
 import Controller.ControllerDAO.Interfaces.IUserDAO;
-import Controller.ControllerException.UserException;
+import Exception.UserException;
 import Controller.ControllerManager.Implementation.AppartmentManager;
 import Controller.ControllerManager.Implementation.UserManager;
 import Controller.ControllerManager.Interfaces.IAppartmentManager;
@@ -90,13 +90,14 @@ public class MainView extends  JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 try {
                     iUserManager.LogUser(usernameField.getText(),passwordField1.getText());
-                } catch (SQLException | UserException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
 
         });
     }
+
 
 
 }

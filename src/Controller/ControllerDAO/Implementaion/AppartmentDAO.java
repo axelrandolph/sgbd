@@ -39,7 +39,7 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
     }
 
     @Override
-    public boolean delete(int idAppartment) {
+    public void delete(int idAppartment) {
 
         String query = "delete from appartment where idAppartment= ?";
         try {
@@ -51,13 +51,11 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
-
     }
 
     @Override
-    public boolean update(EntityAppartment obj) {
-        return false;
+    public void update(EntityAppartment obj) {
+
     }
 
     @Override
