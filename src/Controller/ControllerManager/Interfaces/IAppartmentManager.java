@@ -8,18 +8,15 @@ import java.util.ArrayList;
 import Exception.*;
 public interface IAppartmentManager {
 
-    EntityAppartment CreateAppartment(String description, String adresse) throws SQLException, LocalException, AppartmentException, ConnectionException, Exception;
+    EntityAppartment CreateAppartment(String description, String adresse) throws  AppartmentException;
 
     /**
      *
      * @param description
      * @param adresse
      * @return
-     * @throws SQLException
      */
-    //public EntityAppartment CreateAppartment(String description, String adresse) throws SQLException;
-
-    public EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws SQLException;
+    EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws AppartmentException;
 
     /**
      *
@@ -30,18 +27,17 @@ public interface IAppartmentManager {
      * @param nbGasPointByKitchen
      * @param bedroomType
      * @return
-     * @throws SQLException
      */
     public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom,
                                                                         int nbBedroom,
                                                                         int nbKitchen,
                                                                         int nbWaterPointByBathroom,
                                                                         int nbGasPointByKitchen,
-                                                                        String bedroomType) throws SQLException, AppartmentException, AppartmentException, Exception;
+                                                                        String bedroomType) throws AppartmentException, SQLException;
 
     /**
      *
      * @param idAppartment
      */
-    void DeleteAppartment(int idAppartment) throws LocalException, AppartmentException, Exception;
+    void DeleteAppartment(int idAppartment) throws AppartmentException;
 }

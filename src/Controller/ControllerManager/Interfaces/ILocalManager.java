@@ -8,10 +8,10 @@ import Exception.*;
 
 public interface ILocalManager {
 
-    public <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws Exception, LocalException, AppartmentException, ConnectionException;
+     <L> AbstractEntityLocal CreateLocal(int idAppartment, String description, float area, String typeLocal, L localCaracteristic) throws LocalException;
 
-    public void DeleteLocal(int idAppartment, int idLocal, String typeLocal);
+     void DeleteLocal(int idAppartment, int idLocal, String typeLocal);
 
-    public ArrayList<AbstractEntityLocal> DisplayLocalByAppartment (int idAppartment);
+     ArrayList<AbstractEntityLocal> DisplayLocalByAppartment (int idAppartment);
 
     }

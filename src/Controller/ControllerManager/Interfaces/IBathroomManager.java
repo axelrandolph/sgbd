@@ -17,7 +17,7 @@ public interface IBathroomManager {
      * @return
      * @throws SQLException
      */
-    public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint) throws SQLException;
+    public EntityBathroom CreateBathroom(EntityAppartment entityAppartment, String description, float area, int nbwaterpoint);
 
     void DeleteBathroom(int idAppartment, int idLocal);
 }

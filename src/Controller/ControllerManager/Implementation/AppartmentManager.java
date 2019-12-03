@@ -11,33 +11,47 @@ import java.util.ArrayList;
 public class AppartmentManager implements IAppartmentManager {
 
     private IAppartmentDAO appartmentDAO;
-    public AppartmentManager() throws UserException {
+
+    public AppartmentManager() throws AppartmentException {
 
         if(UserManager.getCurrentUser() != null) {
             this.appartmentDAO = new AppartmentDAO();
         }
 
-        else throw new UserException("");
+        else throw new AppartmentException("Veuillez connecter un utilisateur : ");
     }
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse) throws Exception {
+    public EntityAppartment CreateAppartment(String description, String adresse) throws AppartmentException {
 
         EntityAppartment entityAppartment = new EntityAppartment(description, adresse, false);
-        entityAppartment = appartmentDAO.insert(entityAppartment);
+        try {
+            entityAppartment = appartmentDAO.insert(entityAppartment);
+        } catch (LocalException | ConnectionException | UserException e) {
+            throw new AppartmentException("Création de l'apparmtement impossible : " + e.getMessage());
+        }
 
         return entityAppartment;
     }
 
     @Override
-    public EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws SQLException {
-        return null;
+    public EntityAppartment CreateAppartment(String description, String adresse, boolean state) throws AppartmentException{
+        EntityAppartment entityAppartment = new EntityAppartment(description, adresse, state);
+        try {
+            entityAppartment = appartmentDAO.insert(entityAppartment);
+        } catch (LocalException | ConnectionException | UserException e) {
+            throw new AppartmentException("Création de l'apparmtement impossible : " + e.getMessage());
+        }
+
+        return entityAppartment;
     }
 
     @Override
-    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws Exception {
+    public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom,
+                                                                        int nbKitchen, int nbWaterPointByBathroom,
+                                                                        int nbGasPointByKitchen, String bedroomType) throws AppartmentException {
 
-        return appartmentDAO.SearchAppartmentByCaracteristics(nbBathroom, nbBedroom, nbKitchen, nbWaterPointByBathroom, nbGasPointByKitchen, bedroomType);
+            return appartmentDAO.SearchAppartmentByCaracteristics(nbBathroom, nbBedroom, nbKitchen, nbWaterPointByBathroom, nbGasPointByKitchen, bedroomType);
 
     }
 
@@ -48,9 +62,10 @@ public class AppartmentManager implements IAppartmentManager {
 
         try {
             appartmentDAO.delete(appartmentDAO.getByPrimaryKey(idAppartment));
-        } catch (LocalException | SQLException | ConnectionException e) {
+        } catch (LocalException | ConnectionException e) {
             e.printStackTrace();
         }
+
     }
 
 }
