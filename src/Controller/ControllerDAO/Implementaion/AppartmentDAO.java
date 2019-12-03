@@ -170,8 +170,6 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
                         result.getBoolean("state")
 
                 );
-            pst.close();
-            result.close();
         } catch (SQLException e){
             throw new AppartmentException("Impossible d'obtenir l'appartment numero : "+ id +"due à l'erreur suivante : " + e.getMessage());
         }
@@ -179,8 +177,36 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
         return appartment;
     }
 
-
     @Override
+    public ArrayList<EntityAppartment>  get() throws AppartmentException {
+        try {
+            String sql = "SELECT * " +
+                    "FROM appartment " +
+                    "WHERE idAppartment ";
+
+            EntityAppartment appartment = new EntityAppartment();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("idAppartment");
+                int age = rs.getInt("description");
+                String first = rs.getString("adress");
+                String last = rs.getString("state");
+
+            }
+
+
+
+            return DisplayAppartmentByResulSet(rs);
+        }catch (SQLException e ){
+            throw new AppartmentException("Pas d'appartment");
+
+        }
+
+    }
+        @Override
     public ArrayList<EntityAppartment> SearchAppartmentByCaracteristics(int nbBathroom, int nbBedroom, int nbKitchen, int nbWaterPointByBathroom, int nbGasPointByKitchen, String bedroomType) throws AppartmentException {
 
 
@@ -301,7 +327,6 @@ public class AppartmentDAO extends DAO<EntityAppartment> implements IAppartmentD
 
 
             ResultSet resultSet = pst.executeQuery();
-            pst.close();
 
             return DisplayAppartmentByResulSet(resultSet);
 
